@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="description" content="OpServ is Black Widow Company's Operations Server">
+    <meta name="author" content="Black Widow Company">
+    <meta name="keywords" content="Black Widow Company, BWC, OpServ, Operations Server">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="canonical" href="{{ CANONICAL_URL }}">
+    <title>
+        {% block title %}{% endblock %}
+        | OpServ
+    </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    {% block content %}{% endblock %}
+    <script src="{{ url_for('static', filename='assets/js/flowbite-2.4.1.min.js') }}"></script>
+    {% block script %}{% endblock %}
+</body>
+</html>
