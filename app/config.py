@@ -2,7 +2,74 @@ import os
 
 if os.environ.get("FLASK_ENV") == "development":
     from dotenv import load_dotenv
+
     load_dotenv()
+
+Socials = [
+    {
+        "name": "Discord",
+        "icon": "discord",
+        "color": "#7289DA",
+        "tooltip": "Join our Discord server!",
+        "url": "https://discord.the-bwc.com",
+    },
+    {
+        "name": "Twitter",
+        "icon": "twitter",
+        "color": "#1DA1F2",
+        "tooltip": "Follow us on Twitter!",
+        "url": "https://twitter.com/bwc_gaming",
+    },
+    {
+        "name": "Facebook",
+        "icon": "facebook",
+        "color": "#1877F2",
+        "tooltip": "Like us on Facebook!",
+        "url": "https://www.facebook.com/theblackwidowcompany",
+    },
+    {
+        "name": "YouTube",
+        "icon": "youtube",
+        "color": "#FF0000",
+        "tooltip": "Subscribe to our YouTube channel!",
+        "url": "https://www.youtube.com/@BlackWidowCompanyBroadcasting",
+    },
+    {
+        "name": "Twitch",
+        "icon": "twitch",
+        "color": "#6441A5",
+        "tooltip": "Follow us on Twitch!",
+        "url": "https://www.twitch.tv/blackwidowcompany",
+    },
+    {
+        "name": "Instagram",
+        "icon": "instagram",
+        "color": "#C13584",
+        "tooltip": "Follow us on Instagram!",
+        "url": "https://www.instagram.com/theblackwidowcompany",
+    },
+    {
+        "name": "GitHub",
+        "icon": "github",
+        "color": "#181717",
+        "tooltip": "Check out our GitHub!",
+        "url": "https://www.github.com/THE-BWC",
+    }
+]
+
+
+class ImagePaths:
+    BADGES = "badges"
+    MEDALS = "medals"
+    RIBBONS = "ribbons"
+    RANKS = "ranks"
+    FORUM = "forum"
+    COMMUNITY = "community"
+    GAMES = "games"
+    ROLES = "roles"
+    SQUADS = "squads"
+    TASKFORCES = "taskforces"
+    UTILITIES = "utilities"
 
 
 class BaseConfig:
@@ -19,6 +86,7 @@ class BaseConfig:
     MINIO_SECRET_KEY = os.environ.get("MINIO_SECRET_KEY")
     MINIO_SECURE = os.environ.get("MINIO_SECURE", False)
     MINIO_BUCKET = os.environ.get("MINIO_BUCKET")
+    MINIO_URL = "http://"+MINIO_ENDPOINT+"/"+MINIO_BUCKET
 
     # Database
     DB_HOST = os.environ.get("DB_HOST", "localhost")
@@ -34,16 +102,11 @@ class BaseConfig:
     OAUTH2_METADATA_URL = os.environ.get("OAUTH2_METADATA_URL")
     OAUTH2_SCOPE = os.environ.get("OAUTH2_CLIENT_SCOPE", "openid profile email")
 
+    # Image paths
+    IMAGE_PATHS = ImagePaths
+    IMAGE_URL = MINIO_URL
+    if MINIO_SECURE:
+        IMAGE_URL = IMAGE_URL.replace("http", "https")
 
-class ImagePaths:
-    BADGES = "badges"
-    MEDALS = "medals"
-    RIBBONS = "ribbons"
-    RANKS = "ranks"
-    FORUM = "forum"
-    COMMUNITY = "community"
-    GAMES = "games"
-    ROLES = "roles"
-    SQUADS = "squads"
-    TASKFORCES = "taskforces"
-    UTILITIES = "utilities"
+    # Socials
+    SOCIALS = Socials

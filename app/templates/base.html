@@ -15,6 +15,9 @@
         {% block title %}{% endblock %}
         | OpServ
     </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/fontawesome/css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/fontawesome/css/brands.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/fontawesome/css/solid.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
     {% block head %}{% endblock %}
 </head>

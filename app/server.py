@@ -69,6 +69,9 @@ def jinja2_filter(app):
             CANONICAL_URL=f"{BaseConfig.URL}{request.path}",
             BRAND_NAME=BaseConfig.BRAND_NAME,
             BRAND_URL=BaseConfig.BRAND_URL,
+            SOCIALS=BaseConfig.SOCIALS,
+            IMAGE_URL=BaseConfig.IMAGE_URL,
+            IMAGE_PATHS=BaseConfig.IMAGE_PATHS,
         )
 
 
