@@ -3,7 +3,7 @@ import arrow
 from flask import Flask, request
 from flask_cors import CORS
 from app.config import BaseConfig
-from storage.minio import storage_client
+from app.storage.minio import storage_client
 from flask_migrate import Migrate
 from app.database.db import db
 from app.auth import login_manager, auth_bp, oauth

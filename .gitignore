@@ -246,3 +246,6 @@ docker-compose.yaml
 
 # Ruff
 ruff-report.json
+
+# Local Files
+local_data/
