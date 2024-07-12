@@ -24,6 +24,29 @@
 <body>
     {% block content %}{% endblock %}
     <script src="{{ url_for('static', filename='assets/js/flowbite-2.4.1.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        const backdrop = document.createElement('div');
+        backdrop.classList.add('fixed', 'inset-0', 'bg-black', 'bg-opacity-50', 'z-30');
+
+        // JQuery toggle navigation drawer
+        $(document).ready(function() {
+            $('#drawer-navigation-toggle').click(function() {
+                $('#drawer-navigation').toggleClass('transform-none');
+                $('body').append(backdrop);
+            });
+            // If you click the backdrop, close the drawer
+            $(backdrop).click(function() {
+                $('#drawer-navigation').toggleClass('transform-none');
+                backdrop.remove();
+                // if drawer doesn't have -translate-x-full then add it
+                if (!$('#drawer-navigation').hasClass('-translate-x-full')) {
+                    $('#drawer-navigation').addClass('-translate-x-full');
+                }
+            });
+        });
+
+    </script>
     {% block script %}{% endblock %}
 </body>
 </html>

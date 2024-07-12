@@ -12,6 +12,7 @@
         </div>
     {% endfor %}
 </div>
+
 <header class="relative px-5 md:my-0 md:mx-auto w-full bg-forum-header bg-fixed bg-no-repeat bg-top bg-cover">
     <div class="py-5 flex flex-wrap justify-between items-center max-w-full">
         <a href="{{ CANONICAL_URL }}" class="">
@@ -19,10 +20,20 @@
         </a>
     </div>
 </header>
-<nav class="sticky top-0 bg-gradient-to-b from-gradient-dark to-gradient-light border-t border-gray-200 dark:border-gradient-border z-50">
+
+<nav class="sticky top-0 bg-gradient-to-b from-gradient-dark to-gradient-light border-t border-gray-200 dark:border-gradient-border z-20">
     <div class="flex items-end px-5 m-0 mr-auto text-sm">
         <div>
             <ul class="flex flex-row uppercase">
+                <li>
+                    <button id="drawer-navigation-toggle" class="p-2 mr-2 text-white cursor-pointer lg:hidden hover:bg-secondary focus:bg-secondary dark:focus:bg-secondary focus:ring-2 focus:ring-gray-100">
+                    <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+
+                    <span class="sr-only">Toggle sidebar</span>
+                  </button>
+                </li>
                 <li class="align-bottom text-white leading-10">
                     <a class="inline-block h-10 px-4 hover:bg-secondary hover:px-4" href="">
                         <i class="fa-solid fa-house"></i>
