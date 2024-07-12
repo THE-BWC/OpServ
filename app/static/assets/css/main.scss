@@ -2,3 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;
+
+* {
+  scrollbar-color: theme('colors.primary') theme('colors.dark');
+}
+
+::-webkit-scrollbar {
+    width: 12px
+}
+
+::-webkit-scrollbar-button {
+    display: none
+}
+
+::-webkit-scrollbar-track {
+    background: #2d2d2d
+}
+
+::-webkit-scrollbar-track-piece {
+    background: #2d2d2d
+}
+
+::-webkit-scrollbar-thumb {
+    background: #810900
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ab0900
+}
+
+::-webkit-scrollbar-corner {
+    background: #2d2d2d
+}
+
+::-webkit-resizer {
+    background: #2d2d2d
+}
