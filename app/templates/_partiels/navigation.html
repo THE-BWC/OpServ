@@ -1,151 +1,208 @@
-<aside class="-mr-80 flex-shrink-0 z-40 w-80 py-4 transition-transform -translate-x-full lg:translate-x-0 lg:mr-0" aria-label="Sidenav" id="drawer-navigation">
-    <div class="overflow-y-auto h-auto">
-        {#  Card for user information  #}
-        <div class="flex items-center p-4">
-            <div class="flex flex-col min-w-full rounded-lg bg-dark">
-                <div class="flex flex-row my-2 p-2">
-                    <img class="w-24 h-24 mr-2" src="{{ IMAGE_URL+'/'+IMAGE_PATHS.FORUM+'/[FORUM]-O-2.png' }}" alt="avatar">
-                    <div>
-                        <p class="text-sm font-bold text-gray-500 dark:text-gray-400" style="color: #0276FD">{{ current_user.username }}</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">BWC S-1 2IC</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">Last Active: 14 May 2019</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">Rank: E-4</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">Billeted Rank: O-5</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">Primary: ARMA 3</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">Command: Infantry Platoon</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">Taskforce: Standard Infantry</p>
-                    </div>
-                </div>
-            </div>
+<aside class="-mr-80 flex-shrink-0 z-40 w-80 py-4 transition-transform -translate-x-full lg:translate-x-0 lg:mr-0"
+       aria-label="Sidenav"
+       id="drawer-navigation">
+  <div class="overflow-y-auto h-auto">
+    {#  Card for user information  #}
+    <div class="flex items-center p-4">
+      <div class="flex flex-col min-w-full rounded-lg bg-dark">
+        <div class="flex flex-row my-2 p-2">
+          <img class="w-24 h-24 mr-2"
+               src="{{ IMAGE_URL+'/'+IMAGE_PATHS.FORUM+'/[FORUM]-O-2.png' }}"
+               alt="avatar">
+          <div>
+            <p class="text-sm font-bold text-gray-500 dark:text-gray-400"
+               style="color: #0276FD">{{ current_user.username }}</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">BWC S-1 2IC</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">Last Active: 14 May 2019</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">Rank: E-4</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">Billeted Rank: O-5</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">Primary: ARMA 3</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">Command: Infantry Platoon</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">Taskforce: Standard Infantry</p>
+          </div>
         </div>
-
-        {#  Card for navigation  #}
-        <div class="flex items-center p-4">
-            <div class="flex flex-col min-w-full rounded-lg bg-dark">
-                <ul class="space-y-2 p-1">
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-base font-medium text-white rounded-lg dark:text-white hover:bg-secondary group">
-                            <span class="ml-3">Home</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-base font-medium text-white rounded-lg dark:text-white hover:bg-secondary group">
-                            <span class="ml-3">My Jacket</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-base font-medium text-white rounded-lg dark:text-white hover:bg-secondary group">
-                            <span class="ml-3">Create Operation</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-base font-medium text-white rounded-lg dark:text-white hover:bg-secondary group">
-                            <span class="ml-3">Past Operations</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-base font-medium text-white rounded-lg dark:text-white hover:bg-secondary group">
-                            <span class="ml-3">Ranks</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-base font-medium text-white rounded-lg dark:text-white hover:bg-secondary group">
-                            <span class="ml-3">Awards</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-base font-medium text-white rounded-lg dark:text-white hover:bg-secondary group">
-                            <span class="ml-3">Taskforces</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-base font-medium text-white rounded-lg dark:text-white hover:bg-secondary group">
-                            <span class="ml-3">C.O.C.</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-base font-medium text-white rounded-lg dark:text-white hover:bg-secondary group">
-                            <span class="ml-3">Billets</span>
-                        </a>
-                    </li>
-                    <li>
-                        <button type="button" class="flex items-center p-2 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary" aria-controls="dropdown-account" data-collapse-toggle="dropdown-account">
-                            <span class="flex-1 ml-3 text-left whitespace-nowrap">Account</span>
-                            <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                            </svg>
-                        </button>
-                        <ul id="dropdown-account" class="hidden py-2 space-y-2">
-                            <li>
-                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Settings</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Kanban</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Calendar</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <button type="button" class="flex items-center p-2 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary" aria-controls="dropdown-reports" data-collapse-toggle="dropdown-reports">
-                            <span class="flex-1 ml-3 text-left whitespace-nowrap">Reports</span>
-                            <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                            </svg>
-                        </button>
-                        <ul id="dropdown-reports" class="hidden py-2 space-y-2">
-                            <li>
-                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Products</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Billing</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Invoice</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <button type="button" class="flex items-center p-2 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary" aria-controls="dropdown-game-dashboard" data-collapse-toggle="dropdown-game-dashboard">
-                            <span class="flex-1 ml-3 text-left whitespace-nowrap">Game Dashboard</span>
-                            <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                            </svg>
-                        </button>
-                        <ul id="dropdown-game-dashboard" class="hidden py-2 space-y-2">
-                            <li>
-                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Sign In</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Sign Up</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Forgot Password</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <button type="button" class="flex items-center p-2 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary" aria-controls="dropdown-game-administration" data-collapse-toggle="dropdown-game-administration">
-                            <span class="flex-1 ml-3 text-left whitespace-nowrap">Game Administration</span>
-                            <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                            </svg>
-                        </button>
-                        <ul id="dropdown-game-administration" class="hidden py-2 space-y-2">
-                            <li>
-                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Sign In</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Sign Up</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Forgot Password</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
+      </div>
     </div>
+    {#  Card for navigation  #}
+    <div class="flex items-center p-4">
+      <div class="flex flex-col min-w-full rounded-lg bg-dark">
+        <ul class="space-y-2 p-1">
+          <li>
+            <a href="{{ url_for("auth.index") }}"
+               class="flex items-center p-2 text-base font-medium text-white rounded-lg dark:text-white hover:bg-secondary group">
+              <span class="ml-3">Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="#"
+               class="flex items-center p-2 text-base font-medium text-white rounded-lg dark:text-white hover:bg-secondary group">
+              <span class="ml-3">My Jacket</span>
+            </a>
+          </li>
+          <li>
+            <a href="#"
+               class="flex items-center p-2 text-base font-medium text-white rounded-lg dark:text-white hover:bg-secondary group">
+              <span class="ml-3">Create Operation</span>
+            </a>
+          </li>
+          <li>
+            <a href="#"
+               class="flex items-center p-2 text-base font-medium text-white rounded-lg dark:text-white hover:bg-secondary group">
+              <span class="ml-3">Past Operations</span>
+            </a>
+          </li>
+          <li>
+            <a href="#"
+               class="flex items-center p-2 text-base font-medium text-white rounded-lg dark:text-white hover:bg-secondary group">
+              <span class="ml-3">Ranks</span>
+            </a>
+          </li>
+          <li>
+            <a href="#"
+               class="flex items-center p-2 text-base font-medium text-white rounded-lg dark:text-white hover:bg-secondary group">
+              <span class="ml-3">Awards</span>
+            </a>
+          </li>
+          <li>
+            <a href="#"
+               class="flex items-center p-2 text-base font-medium text-white rounded-lg dark:text-white hover:bg-secondary group">
+              <span class="ml-3">Taskforces</span>
+            </a>
+          </li>
+          <li>
+            <a href="#"
+               class="flex items-center p-2 text-base font-medium text-white rounded-lg dark:text-white hover:bg-secondary group">
+              <span class="ml-3">C.O.C.</span>
+            </a>
+          </li>
+          <li>
+            <a href="#"
+               class="flex items-center p-2 text-base font-medium text-white rounded-lg dark:text-white hover:bg-secondary group">
+              <span class="ml-3">Billets</span>
+            </a>
+          </li>
+          <li>
+            <button type="button"
+                    class="flex items-center p-2 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary"
+                    aria-controls="dropdown-account"
+                    data-collapse-toggle="dropdown-account">
+              <span class="flex-1 ml-3 text-left whitespace-nowrap">Account</span>
+              <svg aria-hidden="true"
+                   class="w-6 h-6"
+                   fill="currentColor"
+                   viewBox="0 0 20 20"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd">
+                </path>
+              </svg>
+            </button>
+            <ul id="dropdown-account" class="hidden py-2 space-y-2">
+              <li>
+                <a href="#"
+                   class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Settings</a>
+              </li>
+              <li>
+                <a href="#"
+                   class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Kanban</a>
+              </li>
+              <li>
+                <a href="#"
+                   class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Calendar</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <button type="button"
+                    class="flex items-center p-2 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary"
+                    aria-controls="dropdown-reports"
+                    data-collapse-toggle="dropdown-reports">
+              <span class="flex-1 ml-3 text-left whitespace-nowrap">Reports</span>
+              <svg aria-hidden="true"
+                   class="w-6 h-6"
+                   fill="currentColor"
+                   viewBox="0 0 20 20"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd">
+                </path>
+              </svg>
+            </button>
+            <ul id="dropdown-reports" class="hidden py-2 space-y-2">
+              <li>
+                <a href="#"
+                   class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Products</a>
+              </li>
+              <li>
+                <a href="#"
+                   class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Billing</a>
+              </li>
+              <li>
+                <a href="#"
+                   class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Invoice</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <button type="button"
+                    class="flex items-center p-2 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary"
+                    aria-controls="dropdown-game-dashboard"
+                    data-collapse-toggle="dropdown-game-dashboard">
+              <span class="flex-1 ml-3 text-left whitespace-nowrap">Game Dashboard</span>
+              <svg aria-hidden="true"
+                   class="w-6 h-6"
+                   fill="currentColor"
+                   viewBox="0 0 20 20"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd">
+                </path>
+              </svg>
+            </button>
+            <ul id="dropdown-game-dashboard" class="hidden py-2 space-y-2">
+              <li>
+                <a href="#"
+                   class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Sign In</a>
+              </li>
+              <li>
+                <a href="#"
+                   class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Sign Up</a>
+              </li>
+              <li>
+                <a href="#"
+                   class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Forgot Password</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <button type="button"
+                    class="flex items-center p-2 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary"
+                    aria-controls="dropdown-game-administration"
+                    data-collapse-toggle="dropdown-game-administration">
+              <span class="flex-1 ml-3 text-left whitespace-nowrap">Game Administration</span>
+              <svg aria-hidden="true"
+                   class="w-6 h-6"
+                   fill="currentColor"
+                   viewBox="0 0 20 20"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd">
+                </path>
+              </svg>
+            </button>
+            <ul id="dropdown-game-administration" class="hidden py-2 space-y-2">
+              <li>
+                <a href="#"
+                   class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Sign In</a>
+              </li>
+              <li>
+                <a href="#"
+                   class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Sign Up</a>
+              </li>
+              <li>
+                <a href="#"
+                   class="flex items-center p-2 pl-11 w-full text-base font-medium text-white rounded-lg transition duration-75 group hover:bg-secondary">Forgot Password</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </aside>

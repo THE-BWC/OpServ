@@ -1,30 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr" class="dark">
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Language" content="en">
-    <meta name="description" content="OpServ is Black Widow Company's Operations Server">
+    <meta name="description"
+          content="OpServ is Black Widow Company's Operations Server">
     <meta name="author" content="Black Widow Company">
-    <meta name="keywords" content="Black Widow Company, BWC, OpServ, Operations Server">
-    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <meta name="keywords"
+          content="Black Widow Company, BWC, OpServ, Operations Server">
+    <link rel="icon"
+          href="{{ url_for('static', filename='favicon.ico') }}"
+          type="image/x-icon">
+    <link rel="shortcut icon"
+          href="{{ url_for('static', filename='favicon.ico') }}"
+          type="image/x-icon">
     <link rel="canonical" href="{{ CANONICAL_URL }}">
     <title>
-        {% block title %}{% endblock %}
-        | OpServ
+      {% block title %}{% endblock %}
+      | OpServ
     </title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/fontawesome/css/fontawesome.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/fontawesome/css/brands.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/fontawesome/css/solid.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='assets/fontawesome/css/fontawesome.min.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='assets/fontawesome/css/brands.min.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='assets/fontawesome/css/solid.min.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='assets/css/main.css') }}">
     {% block head %}{% endblock %}
-</head>
-<body>
+  </head>
+  <body>
     {% block content %}{% endblock %}
     <script src="{{ url_for('static', filename='assets/js/flowbite-2.4.1.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
     <script>
         const backdrop = document.createElement('div');
         backdrop.classList.add('fixed', 'inset-0', 'bg-black', 'bg-opacity-50', 'z-30');
@@ -48,5 +62,5 @@
 
     </script>
     {% block script %}{% endblock %}
-</body>
+  </body>
 </html>

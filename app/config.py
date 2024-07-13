@@ -54,7 +54,7 @@ Socials = [
         "color": "#181717",
         "tooltip": "Check out our GitHub!",
         "url": "https://www.github.com/THE-BWC",
-    }
+    },
 ]
 
 
@@ -86,7 +86,7 @@ class BaseConfig:
     MINIO_SECRET_KEY = os.environ.get("MINIO_SECRET_KEY")
     MINIO_SECURE = os.environ.get("MINIO_SECURE", True)
     MINIO_BUCKET = os.environ.get("MINIO_BUCKET")
-    MINIO_URL = "http://"+MINIO_ENDPOINT+"/"+MINIO_BUCKET
+    MINIO_URL = f"http://{MINIO_ENDPOINT}/{MINIO_BUCKET}"
 
     # Database
     DB_HOST = os.environ.get("DB_HOST", "localhost")
@@ -94,7 +94,9 @@ class BaseConfig:
     DB_USER = os.environ.get("DB_USER")
     DB_PASS = os.environ.get("DB_PASS")
     DB_NAME = os.environ.get("DB_NAME")
-    DB_URI = os.environ.get("DB_URI", f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
+    DB_URI = os.environ.get(
+        "DB_URI", f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    )
 
     # OAuth2 providers
     OAUTH2_CLIENT_ID = os.environ.get("OAUTH2_CLIENT_ID")

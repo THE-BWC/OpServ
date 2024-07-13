@@ -1,14 +1,18 @@
 {% extends "_partiels/base.html" %}
 
 {% block content %}
-<div class="antialiased bg-honeycomb min-h-screen flex flex-col">
+
+  <div class="antialiased bg-honeycomb min-h-screen flex flex-col">
     {% include '_partiels/header.html' %}
+
     <div class="flex flex-row flex-grow">
-        {% include '_partiels/navigation.html' %}
-        <main class="p-4 h-auto w-full">
-            {% block default_content %}{% endblock %}
-        </main>
+      {% include '_partiels/navigation.html' %}
+
+      <main class="p-4 h-auto w-full">
+        {% block default_content %}{% endblock %}
+      </main>
     </div>
     {% include '_partiels/footer.html' %}
-</div>
+
+  </div>
 {% endblock %}

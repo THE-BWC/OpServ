@@ -1,23 +1,10 @@
 import requests
 
-from flask import (
-    render_template,
-    Blueprint,
-    flash,
-    redirect,
-    url_for,
-    abort,
-    session
-)
-from flask_login import (
-    LoginManager,
-    login_user,
-    logout_user,
-    current_user
-)
+from flask import render_template, Blueprint, flash, redirect, url_for, abort, session
+from flask_login import LoginManager, login_user, logout_user, current_user
 from authlib.integrations.flask_client import OAuth
 from app.database.db import db
-from app.database.models import User
+from app.database.user_model import User
 from app.config import BaseConfig
 
 auth_bp = Blueprint(name="auth", import_name=__name__, template_folder="templates")
@@ -30,9 +17,7 @@ oauth.register(
     client_id=BaseConfig.OAUTH2_CLIENT_ID,
     client_secret=BaseConfig.OAUTH2_CLIENT_SECRET,
     server_metadata_url=discovery_url,
-    client_kwargs={
-        "scope": BaseConfig.OAUTH2_SCOPE
-    }
+    client_kwargs={"scope": BaseConfig.OAUTH2_SCOPE},
 )
 
 
@@ -68,11 +53,13 @@ def authorize():
     user_info = token.get("userinfo")
 
     # Find or create the user in the database
-    user = db.session.query(User).filter_by(email=user_info['email']).first()
+    user = db.session.query(User).filter_by(email=user_info["email"]).first()
     if user is None:
         user = User(
-            email=user_info['email'],
-            username=user_info.get('name', user_info.get('preferred_username', user_info['email']))
+            email=user_info["email"],
+            username=user_info.get(
+                "name", user_info.get("preferred_username", user_info["email"])
+            ),
         )
         db.session.add(user)
         db.session.commit()
@@ -80,7 +67,7 @@ def authorize():
     # Log the user in
     login_user(user)
 
-    return redirect('/')
+    return redirect("/")
 
 
 @auth_bp.route("/logout")
@@ -90,13 +77,24 @@ def logout():
     if token_response is not None:
         # Propagate logout to Keycloak
         refresh_token = token_response["refresh_token"]
-        end_session_endpoint = f"{BaseConfig.OAUTH2_METADATA_URL}/protocol/openid-connect/logout"
+        end_session_endpoint = (
+            f"{BaseConfig.OAUTH2_METADATA_URL}/protocol/openid-connect/logout"
+        )
 
-        requests.post(end_session_endpoint, data={
-            "client_id": BaseConfig.OAUTH2_CLIENT_ID,
-            "client_secret": BaseConfig.OAUTH2_CLIENT_SECRET,
-            "refresh_token": refresh_token
-        })
+        try:
+            requests.post(
+                end_session_endpoint,
+                data={
+                    "client_id": BaseConfig.OAUTH2_CLIENT_ID,
+                    "client_secret": BaseConfig.OAUTH2_CLIENT_SECRET,
+                    "refresh_token": refresh_token,
+                },
+                timeout=5,
+            )
+        except requests.exceptions.Timeout:
+            flash("Failed to log out of Keycloak.", "error")
+        except requests.exceptions.RequestException as e:
+            flash(f"Failed to log out of Keycloak: {e}", "error")
 
     session.pop("tokenResponse", None)
     logout_user()
