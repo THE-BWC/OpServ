@@ -25,6 +25,9 @@ blank_line_after_tag = "if,for,include,load,extends,block,endcall"
 # H031: Consider adding meta keywords
 ignore = "H030,H031"
 
+[tool.bandit]
+exclude = ["node_modules", "migrations", "tests", "docs"] # For some reason .venv won't work
+
 [tool.poetry]
 name = "opserv"
 version = "0.1.0"
@@ -63,9 +66,9 @@ authlib = "^1.3.1"
 minio = "^7.2.7"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.2.2"
-coverage = "^7.5.4"
 pytest-cov = "^5.0.0"
+pre-commit = "^3.7.1"
+djlint = "^1.34.1"
 ruff = "^0.5.1"
 python-dotenv = "^1.0.1"
 

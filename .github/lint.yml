@@ -1,0 +1,30 @@
+Name: Lint
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install poetry
+        run: pipx install poetry
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+          cache: 'poetry'
+
+      - name: Install OS dependcies
+        run: |
+          sudo apt update
+          sudo apt install -y libre2-dev libpq-dev
+
+      - name: Install dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction
+
+      - name: Check formatting & linting
+        run: poetry run pre-commit run --all-files
