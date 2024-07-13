@@ -57,7 +57,7 @@ def jinja2_filter(app):
         dt = arrow.get(value)
         return dt.humanize()
 
-    app.jinja_env.filters['dt'] = format_datetime
+    app.jinja_env.filters["dt"] = format_datetime
 
     @app.context_processor
     def inject_stage_and_region():
@@ -78,3 +78,13 @@ def jinja2_filter(app):
 def init_minio():
     if not storage_client.bucket_exists(BaseConfig.MINIO_BUCKET):
         storage_client.make_bucket(BaseConfig.MINIO_BUCKET)
+
+
+def local_main():
+    app = create_app()
+    app.debug = True
+    app.run(debug=True, port=5000)
+
+
+if __name__ == "__main__":
+    local_main()
