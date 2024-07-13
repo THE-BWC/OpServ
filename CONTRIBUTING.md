@@ -1,6 +1,6 @@
-> [!WARNING]  
-> This document is a **Work In Progress**.  
-> Currently, login is implemented with an openid flow back to auth.sw.patrickpedersen.tech.  
+> [!WARNING]\
+> This document is a **Work In Progress**.\
+> Currently, login is implemented with an openid flow back to auth.sw.patrickpedersen.tech.\
 > This document is also missing minio setup and configuration.
 
 ## Install dependencies
