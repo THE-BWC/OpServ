@@ -40,24 +40,40 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"></script>
     <script>
-        const backdrop = document.createElement('div');
-        backdrop.classList.add('fixed', 'inset-0', 'bg-black', 'bg-opacity-50', 'z-30');
+        const navigationBackdrop = document.createElement('div');
+        navigationBackdrop.classList.add('fixed', 'inset-0', 'bg-black', 'bg-opacity-50', 'z-10');
 
         // JQuery toggle navigation drawer
         $(document).ready(function() {
             $('#drawer-navigation-toggle').click(function() {
                 $('#drawer-navigation').toggleClass('transform-none');
-                $('body').append(backdrop);
+                $('body').append(navigationBackdrop);
             });
+
             // If you click the backdrop, close the drawer
-            $(backdrop).click(function() {
+            $(navigationBackdrop).click(function() {
                 $('#drawer-navigation').toggleClass('transform-none');
-                backdrop.remove();
+                navigationBackdrop.remove();
                 // if drawer doesn't have -translate-x-full then add it
                 if (!$('#drawer-navigation').hasClass('-translate-x-full')) {
                     $('#drawer-navigation').addClass('-translate-x-full');
                 }
             });
+
+            // JQuery toggle search modal
+            $('#search-modal-toggle').click(function() {
+                $('#search-modal').toggleClass('hidden');
+                $('#search-modal').toggleClass('flex');
+            });
+
+            // If you click anything outside the first child of the search modal, close the search modal
+            $('#search-modal').click(function(event) {
+                if (event.target === this) {
+                    $('#search-modal').toggleClass('hidden');
+                    $('#search-modal').toggleClass('flex');
+                }
+            });
+
         });
 
     </script>

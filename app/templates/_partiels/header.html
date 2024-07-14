@@ -24,7 +24,7 @@
     </a>
   </div>
 </header>
-<nav class="sticky top-0 bg-gradient-to-b from-gradient-dark to-gradient-light border-t border-gray-200 dark:border-gradient-border z-20">
+<nav class="sticky top-0 bg-gradient-to-b from-gradient-dark to-gradient-light border-t border-gray-200 dark:border-gradient-border">
   <div class="flex items-end px-5 m-0 mr-auto text-sm">
     <div>
       <ul class="flex flex-row uppercase">
@@ -126,40 +126,34 @@
       {# Search #}
       <div class="align-bottom text-white leading-10">
         <button class="inline-block h-10 px-2.5 hover:bg-secondary hover:px-2.5"
-                data-modal-target="successModal"
-                data-modal-toggle="successModal">
+                data-dropdown-toggle="search-dropdown">
           <span class="sr-only">Search</span>
           <i class="fa-solid fa-search fa-lg"></i>
         </button>
       </div>
-      <div id="successModal"
-           tabindex="-1"
-           aria-hidden="true"
-           class="hidden backdrop-blur overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
-        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-          <!-- Modal content -->
-          <form class="max-w-md mx-auto">
-            <label for="default-search"
-                   class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-            <div class="relative">
-              <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                     aria-hidden="true"
-                     xmlns="http://www.w3.org/2000/svg"
-                     fill="none"
-                     viewBox="0 0 20 20">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z">
-                  </path>
-                </svg>
-              </div>
-              <input type="search"
-                     id="default-search"
-                     class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                     placeholder="Search"
-                     required />
+      <div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white divide-y divide-gray-100 shadow-lg dark:divide-gray-600 dark:bg-gray-700 rounded-xl"
+           id="search-dropdown">
+        <form class="max-w-md mx-auto">
+          <label for="default-search"
+                 class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                   aria-hidden="true"
+                   xmlns="http://www.w3.org/2000/svg"
+                   fill="none"
+                   viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z">
+                </path>
+              </svg>
             </div>
-          </form>
-        </div>
+            <input type="search"
+                   id="default-search"
+                   class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                   placeholder="Search"
+                   required />
+          </div>
+        </form>
       </div>
     </div>
   </div>
