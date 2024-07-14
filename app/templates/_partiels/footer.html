@@ -1,11 +1,11 @@
 <footer class="w-full p-4 bg-dark shadow md:flex md:items-center md:justify-between">
-  <span class="text-sm text-gray-500 sm:text-center">&copy; 2003-{{ YEAR }} <a href="{{ URL }}" class="hover:underline" target="_blank">{{ BRAND_NAME }}</a>. All rights reserved.</span>
+  <span class="text-sm text-gray-200 sm:text-center">&copy; 2003-{{ YEAR }} <a href="{{ URL }}" class="hover:underline" target="_blank">{{ BRAND_NAME }}</a>. All rights reserved.</span>
   <div class="flex justify-center items-center space-x-1">
     {% for social in SOCIALS %}
 
       <a href="{{ social.url }}"
          data-tooltip-target="tooltip-{{ social.icon }}"
-         class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer dark:text-gray-400 dark:hover:text-white hover:text-gray-900 hover:bg-secondary">
+         class="inline-flex justify-center p-2 text-gray-200 rounded-lg cursor-pointer dark:hover:text-white hover:text-gray-900 hover:bg-secondary">
         <i class="fa-brands fa-{{ social.icon }}"></i>
         <span class="sr-only">{{ social.name }}</span>
       </a>

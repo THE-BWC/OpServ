@@ -35,7 +35,18 @@ module.exports = {
             backgroundImage: {
                 'honeycomb': "url('/static/honeycomb.png')",
                 'forum-header': "url('/static/Forum_Header_Background.png')",
-            }
+            },
+            colors: {
+                'gray-100': '#dadada',
+                'gray-200': '#999',
+                'gray-300': '#7F7F7F',
+                'gray-400': '#666',
+                'gray-500': '#323232FF',
+                'gray-600': '#2d2d2d',
+                'gray-700': '#292929',
+                'gray-800': '#252525',
+                'gray-900': '#212529',
+            },
         },
     },
     fontFamily: {
