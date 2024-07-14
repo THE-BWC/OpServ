@@ -19,4 +19,8 @@ repos:
       - id: ruff
         args: ['--fix']
       - id: ruff-format
-        args: ['--diff']
+        # This may be redundant if prior ruff-format stops the action.
+        # But if it doesn't then this will if there are any files that need to be formatted.
+      - id: ruff-format
+        args: ['--check']
+        always_run: true

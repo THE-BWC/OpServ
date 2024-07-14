@@ -1,4 +1,4 @@
 from flask_sqlalchemy import SQLAlchemy
-from app.database.models import Base
+from app.database.main import ModelBase
 
-db = SQLAlchemy(model_class=Base)
+db = SQLAlchemy(model_class=ModelBase)
