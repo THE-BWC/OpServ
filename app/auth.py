@@ -26,24 +26,24 @@ def load_user(id):
     return db.session.query(User).get(id)
 
 
-@auth_bp.route("/")
-def index():
+@auth_bp.route("/login")
+def login():
     if not current_user.is_anonymous:
-        return render_template("dashboard/dashboard.html")
+        return redirect(url_for("dashboard.index"))
 
     return render_template("auth/login.html")
 
 
-@auth_bp.route("/login")
-def login():
-    redirect_uri = url_for("auth.authorize", _external=True)
+@auth_bp.route("/auth")
+def authorize():
+    redirect_uri = url_for("auth.callback", _external=True)
     return oauth.keycloak.authorize_redirect(redirect_uri)
 
 
-@auth_bp.route("/auth")
-def authorize():
+@auth_bp.route("/callback")
+def callback():
     if not current_user.is_anonymous:
-        return redirect(url_for("auth.index"))
+        return redirect(url_for("dashboard.index"))
 
     token = oauth.keycloak.authorize_access_token()
     if token is None:

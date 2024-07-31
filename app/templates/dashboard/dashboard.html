@@ -10,422 +10,125 @@
         <h5 class="p-4 text-base font-bold tracking-tight text-gray-900 dark:text-white">Operations Games List</h5>
       </div>
       <div class="p-4" id="accordion-collapse" data-accordion="collapse">
-        <h2 id="accordion-collapse-heading-1" class="pb-2">
-          <button type="button"
-                  class="flex items-center justify-between w-full py-3 pl-3 pr-5 font-medium rounded-lg gap-3 bg-primary text-white dark:bg-primary dark:text-white"
-                  data-accordion-target="#accordion-collapse-body-1"
-                  aria-expanded="true"
-                  aria-controls="accordion-collapse-body-1">
-            <span class="text-white">Game 1</span>
-            <svg data-accordion-icon
-                 class="w-3 h-3 rotate-180 shrink-0 text-white"
-                 aria-hidden="true"
-                 xmlns="http://www.w3.org/2000/svg"
-                 fill="none"
-                 viewBox="0 0 10 6">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"></path>
-            </svg>
-          </button>
-        </h2>
-        <div id="accordion-collapse-body-1"
-             class="hidden pt-2"
-             aria-labelledby="accordion-collapse-heading-1">
-          <div class="px-1 pb-4">
-            {# Insert game operation list here #}
-            <div class="bg-secondary p-3 mb-3 rounded-lg">
-              <span class="font-bold text-white mb-1 text-lg">Operation title</span>
-              <div class="p-0.5 bg-[#008000]"></div>
-              <div class="flex flex-col">
-                <div class="flex flex-row justify-between flex-wrap my-3 mx-6 text-sm">
-                  <ul class="flex[1_1_196px]">
-                    <li class="flex flex-row text-white">
-                      <span class="w-11">Start:</span>
-                      <span class="ml-0.5 text-gray-200">2026-03-01 11:46 CET
-                        <br>
-                      2026-03-01 05:46 EST</span>
-                    </li>
-                    <li class="flex flex-row text-white mb-2">
-                      <span class="w-11">End:</span>
-                      <span class="ml-0.5 text-gray-200">2026-03-01 13:46 CET
-                        <br>
-                      2026-03-01 07:46 EST</span>
-                    </li>
-                    <li class="text-white text-sm">
-                      <a href="#"
-                         title="Clone this operation"
-                         class="mr-0.5 hover:text-gray-200">Clone</a>
-                      <a href="#"
-                         title="Clone this operation"
-                         class="mr-0.5 hover:text-gray-200">Edit</a>
-                      <a href="#"
-                         title="Clone this operation"
-                         class="mr-0.5 hover:text-gray-200">Squads</a>
-                      <a href="#"
-                         title="Clone this operation"
-                         class="mr-0.5 hover:text-gray-200"
-                         onclick="return confirm('Please confirm deletion');">Delete</a>
-                    </li>
-                  </ul>
-                  <ul class="flex flex-col min-w-14 flex[1_1_196px] text-white">
-                    <li class="ml-auto">
-                      <span class="text-[#FFA500]">KH Slaine</span>
-                      -
-                      <strong>Op Leader</strong>
-                    </li>
-                    <li class="ml-auto mb-3">
-                      <form class="flex flex-row mt-2 justify-center"
-                            name="attendance38649"
-                            method="post">
-                        <div class="ml-2 flex items-center">
-                          <input id="radio-1-38649"
-                                 type="radio"
-                                 name="status"
-                                 onclick="attend('38649',1,'9768');"
-                                 class="focus:ring-primary focus:ring-2 text-primary">
-                          <label class="ml-1" for="radio-1-38649">Yes</label>
-                        </div>
-                        <div class="ml-2 flex items-center">
-                          <input id="radio-2-38649"
-                                 type="radio"
-                                 name="status"
-                                 onclick="attend('38649',2,'9768');"
-                                 class="focus:ring-primary focus:ring-2 text-primary">
-                          <label class="ml-1" for="radio-2-38649">Maybe</label>
-                        </div>
-                        <div class="ml-2 flex items-center">
-                          <input id="radio-3-38649"
-                                 type="radio"
-                                 name="status"
-                                 onclick="attend('38649',3,'9768');"
-                                 class="focus:ring-primary focus:ring-2 text-primary">
-                          <label class="ml-1" for="radio-3-38649">No</label>
-                        </div>
-                      </form>
-                    </li>
-                    <li class="ml-auto mb-2">
-                      <a onclick="clip('Link to operation add member attendance page')"
-                         href="#"
-                         title="Click to copy the link to your clipboard"
-                         class="hover:text-gray-200">Attendance Link</a>
-                    </li>
-                    <script></script>
-                    <li class="flex flex-col ml-auto">
-                      <p class="ml-0 ml-auto"
-                         id="viewAttending38649"
-                         onclick="return toggleAttending('38649');">
-                        <a class="decoration-0 cursor-pointer hover:text-gray-200"
-                           onclick="return false;">View Member Attendance</a>
-                      </p>
-                      <div id="attending38649" class="hidden"></div>
-                    </li>
-                  </ul>
+        {% for game in games %}
+
+          <h2 id="accordion-collapse-heading-1" class="pb-2">
+            <button type="button"
+                    class="flex items-center justify-between w-full py-3 pl-3 pr-5 font-medium rounded-lg gap-3 bg-primary text-white dark:bg-primary dark:text-white"
+                    data-accordion-target="#accordion-collapse-body-1"
+                    aria-expanded="true"
+                    aria-controls="accordion-collapse-body-1">
+              <span class="text-white">{{ game.name }}</span>
+              <svg data-accordion-icon
+                   class="w-3 h-3 rotate-180 shrink-0 text-white"
+                   aria-hidden="true"
+                   xmlns="http://www.w3.org/2000/svg"
+                   fill="none"
+                   viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"></path>
+              </svg>
+            </button>
+          </h2>
+          <div id="accordion-collapse-body-1"
+               class="hidden pt-2"
+               aria-labelledby="accordion-collapse-heading-1">
+            <div class="px-1 pb-4">
+              {# Insert game operation list here #}
+              {% for operation in game.operations %}
+
+                <div class="bg-secondary p-3 mb-3 rounded-lg">
+                  <span class="font-bold text-white mb-1 text-lg">{{ operation.name }}</span>
+                  <div class="p-0.5"
+                       style="background-color: {{ operation.type.color_hex }}"></div>
+                  <div class="flex flex-col">
+                    <div class="flex flex-row justify-between flex-wrap my-3 mx-6 text-sm">
+                      <ul class="flex[1_1_196px]">
+                        <li class="flex flex-row text-white">
+                          <span class="w-11">Start:</span>
+                          <span class="ml-0.5 text-gray-200">{{ operation.date_start }}</span>
+                        </li>
+                        <li class="flex flex-row text-white mb-2">
+                          <span class="w-11">End:</span>
+                          <span class="ml-0.5 text-gray-200">{{ operation.date_end }}</span>
+                        </li>
+                        <li class="text-white text-sm">
+                          <a href="#"
+                             title="Clone this operation"
+                             class="mr-0.5 hover:text-gray-200">Clone</a>
+                          <a href="#"
+                             title="Edit this operation"
+                             class="mr-0.5 hover:text-gray-200">Edit</a>
+                          <a href="#"
+                             title="Add Squads to this operation"
+                             class="mr-0.5 hover:text-gray-200">Squads</a>
+                          <a href="#"
+                             title="Delete this operation"
+                             class="mr-0.5 hover:text-gray-200"
+                             onclick="return confirm('Please confirm deletion');">Delete</a>
+                        </li>
+                      </ul>
+                      <ul class="flex flex-col min-w-14 flex[1_1_196px] text-white">
+                        <li class="ml-auto">
+                          <span style="color: {{ operation.leader }}">{{ operation.leader.username }}</span>
+                          -
+                          <strong>Op Leader</strong>
+                        </li>
+                        <li class="ml-auto mb-3">
+                          <form class="flex flex-row mt-2 justify-center"
+                                name="attendance38649"
+                                method="post">
+                            <div class="ml-2 flex items-center">
+                              <input id="radio-1-38649"
+                                     type="radio"
+                                     name="status"
+                                     onclick="attend('38649',1,'9768');"
+                                     class="focus:ring-primary focus:ring-2 text-primary">
+                              <label class="ml-1" for="radio-1-38649">Yes</label>
+                            </div>
+                            <div class="ml-2 flex items-center">
+                              <input id="radio-2-38649"
+                                     type="radio"
+                                     name="status"
+                                     onclick="attend('38649',2,'9768');"
+                                     class="focus:ring-primary focus:ring-2 text-primary">
+                              <label class="ml-1" for="radio-2-38649">Maybe</label>
+                            </div>
+                            <div class="ml-2 flex items-center">
+                              <input id="radio-3-38649"
+                                     type="radio"
+                                     name="status"
+                                     onclick="attend('38649',3,'9768');"
+                                     class="focus:ring-primary focus:ring-2 text-primary">
+                              <label class="ml-1" for="radio-3-38649">No</label>
+                            </div>
+                          </form>
+                        </li>
+                        <li class="ml-auto mb-2">
+                          <a onclick="clip('Link to operation add member attendance page')"
+                             href="#"
+                             title="Click to copy the link to your clipboard"
+                             class="hover:text-gray-200">Attendance Link</a>
+                        </li>
+                        <script></script>
+                        <li class="flex flex-col ml-auto">
+                          <p class="ml-0"
+                             id="viewAttending38649"
+                             onclick="return toggleAttending('38649');">
+                            <a class="decoration-0 cursor-pointer hover:text-gray-200"
+                               onclick="return false;">View Member Attendance</a>
+                          </p>
+                          <div id="attending38649" class="hidden"></div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="relative flex flex-wrap pl-0 list-none justify-center"></div>
+                    <div class="bg-dark border rounded"></div>
+                  </div>
                 </div>
-                <div class="relative flex flex-wrap pl-0 list-none justify-center"></div>
-                <div class="bg-dark border rounded"></div>
-              </div>
-            </div>
-            <div class="bg-secondary p-3 rounded-lg">
-              <span class="font-bold text-white mb-1 text-lg">Operation title</span>
-              <div class="p-0.5 bg-[#008000]"></div>
-              <div class="flex flex-col">
-                <div class="flex flex-row justify-between flex-wrap my-3 mx-6 text-sm">
-                  <ul class="flex[1_1_196px]">
-                    <li class="flex flex-row text-white">
-                      <span class="w-11">Start:</span>
-                      <span class="ml-0.5 text-gray-200">2026-03-01 11:46 CET
-                        <br>
-                      2026-03-01 05:46 EST</span>
-                    </li>
-                    <li class="flex flex-row text-white mb-2">
-                      <span class="w-11">End:</span>
-                      <span class="ml-0.5 text-gray-200">2026-03-01 13:46 CET
-                        <br>
-                      2026-03-01 07:46 EST</span>
-                    </li>
-                    <li class="text-white text-sm">
-                      <a href="#"
-                         title="Clone this operation"
-                         class="mr-0.5 hover:text-gray-200">Clone</a>
-                      <a href="#"
-                         title="Clone this operation"
-                         class="mr-0.5 hover:text-gray-200">Edit</a>
-                      <a href="#"
-                         title="Clone this operation"
-                         class="mr-0.5 hover:text-gray-200">Squads</a>
-                      <a href="#"
-                         title="Clone this operation"
-                         class="mr-0.5 hover:text-gray-200"
-                         onclick="return confirm('Please confirm deletion');">Delete</a>
-                    </li>
-                  </ul>
-                  <ul class="flex flex-col min-w-14 flex[1_1_196px] text-white">
-                    <li class="ml-auto">
-                      <span class="text-[#FFA500]">KH Slaine</span>
-                      -
-                      <strong>Op Leader</strong>
-                    </li>
-                    <li class="ml-auto mb-3">
-                      <form class="flex flex-row mt-2 justify-center"
-                            name="attendance38649"
-                            method="post">
-                        <div class="ml-2 flex items-center">
-                          <input id="radio-1-38649"
-                                 type="radio"
-                                 name="status"
-                                 onclick="attend('38649',1,'9768');"
-                                 class="focus:ring-primary focus:ring-2 text-primary">
-                          <label class="ml-1" for="radio-1-38649">Yes</label>
-                        </div>
-                        <div class="ml-2 flex items-center">
-                          <input id="radio-2-38649"
-                                 type="radio"
-                                 name="status"
-                                 onclick="attend('38649',2,'9768');"
-                                 class="focus:ring-primary focus:ring-2 text-primary">
-                          <label class="ml-1" for="radio-2-38649">Maybe</label>
-                        </div>
-                        <div class="ml-2 flex items-center">
-                          <input id="radio-3-38649"
-                                 type="radio"
-                                 name="status"
-                                 onclick="attend('38649',3,'9768');"
-                                 class="focus:ring-primary focus:ring-2 text-primary">
-                          <label class="ml-1" for="radio-3-38649">No</label>
-                        </div>
-                      </form>
-                    </li>
-                    <li class="ml-auto mb-2">
-                      <a onclick="clip('Link to operation add member attendance page')"
-                         href="#"
-                         title="Click to copy the link to your clipboard"
-                         class="hover:text-gray-200">Attendance Link</a>
-                    </li>
-                    <script></script>
-                    <li class="flex flex-col ml-auto">
-                      <p class="ml-0 ml-auto"
-                         id="viewAttending38649"
-                         onclick="return toggleAttending('38649');">
-                        <a class="decoration-0 cursor-pointer hover:text-gray-200"
-                           onclick="return false;">View Member Attendance</a>
-                      </p>
-                      <div id="attending38649" class="hidden"></div>
-                    </li>
-                  </ul>
-                </div>
-                <div class="relative flex flex-wrap pl-0 list-none justify-center"></div>
-                <div class="bg-dark border rounded"></div>
-              </div>
+              {% endfor %}
             </div>
           </div>
-        </div>
-        <h2 id="accordion-collapse-heading-2" class="pb-2">
-          <button type="button"
-                  class="flex items-center justify-between w-full py-3 pl-3 pr-5 font-medium rounded-lg gap-3 bg-primary text-white dark:bg-primary dark:text-white"
-                  data-accordion-target="#accordion-collapse-body-2"
-                  aria-expanded="false"
-                  aria-controls="accordion-collapse-body-2">
-            <span class="text-white">Game 2</span>
-            <svg data-accordion-icon
-                 class="w-3 h-3 rotate-180 shrink-0 text-white"
-                 aria-hidden="true"
-                 xmlns="http://www.w3.org/2000/svg"
-                 fill="none"
-                 viewBox="0 0 10 6">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"></path>
-            </svg>
-          </button>
-        </h2>
-        <div id="accordion-collapse-body-2"
-             class="hidden pt-2"
-             aria-labelledby="accordion-collapse-heading-2">
-          <div class="px-1 pb-4">
-            {# Insert game operation list here #}
-            <div class="bg-secondary p-3 mb-3 rounded-lg">
-              <span class="font-bold text-white mb-1 text-lg">Operation title</span>
-              <div class="p-0.5 bg-[#008000]"></div>
-              <div class="flex flex-col">
-                <div class="flex flex-row justify-between flex-wrap my-3 mx-6 text-sm">
-                  <ul class="flex[1_1_196px]">
-                    <li class="flex flex-row text-white">
-                      <span class="w-11">Start:</span>
-                      <span class="ml-0.5 text-gray-200">2026-03-01 11:46 CET
-                        <br>
-                      2026-03-01 05:46 EST</span>
-                    </li>
-                    <li class="flex flex-row text-white mb-2">
-                      <span class="w-11">End:</span>
-                      <span class="ml-0.5 text-gray-200">2026-03-01 13:46 CET
-                        <br>
-                      2026-03-01 07:46 EST</span>
-                    </li>
-                    <li class="text-white text-sm">
-                      <a href="#"
-                         title="Clone this operation"
-                         class="mr-0.5 hover:text-gray-200">Clone</a>
-                      <a href="#"
-                         title="Clone this operation"
-                         class="mr-0.5 hover:text-gray-200">Edit</a>
-                      <a href="#"
-                         title="Clone this operation"
-                         class="mr-0.5 hover:text-gray-200">Squads</a>
-                      <a href="#"
-                         title="Clone this operation"
-                         class="mr-0.5 hover:text-gray-200"
-                         onclick="return confirm('Please confirm deletion');">Delete</a>
-                    </li>
-                  </ul>
-                  <ul class="flex flex-col min-w-14 flex[1_1_196px] text-white">
-                    <li class="ml-auto">
-                      <span class="text-[#FFA500]">KH Slaine</span>
-                      -
-                      <strong>Op Leader</strong>
-                    </li>
-                    <li class="ml-auto mb-3">
-                      <form class="flex flex-row mt-2 justify-center"
-                            name="attendance38649"
-                            method="post">
-                        <div class="ml-2 flex items-center">
-                          <input id="radio-1-38649"
-                                 type="radio"
-                                 name="status"
-                                 onclick="attend('38649',1,'9768');"
-                                 class="focus:ring-primary focus:ring-2 text-primary">
-                          <label class="ml-1" for="radio-1-38649">Yes</label>
-                        </div>
-                        <div class="ml-2 flex items-center">
-                          <input id="radio-2-38649"
-                                 type="radio"
-                                 name="status"
-                                 onclick="attend('38649',2,'9768');"
-                                 class="focus:ring-primary focus:ring-2 text-primary">
-                          <label class="ml-1" for="radio-2-38649">Maybe</label>
-                        </div>
-                        <div class="ml-2 flex items-center">
-                          <input id="radio-3-38649"
-                                 type="radio"
-                                 name="status"
-                                 onclick="attend('38649',3,'9768');"
-                                 class="focus:ring-primary focus:ring-2 text-primary">
-                          <label class="ml-1" for="radio-3-38649">No</label>
-                        </div>
-                      </form>
-                    </li>
-                    <li class="ml-auto mb-2">
-                      <a onclick="clip('Link to operation add member attendance page')"
-                         href="#"
-                         title="Click to copy the link to your clipboard"
-                         class="hover:text-gray-200">Attendance Link</a>
-                    </li>
-                    <script></script>
-                    <li class="flex flex-col ml-auto">
-                      <p class="ml-0 ml-auto"
-                         id="viewAttending38649"
-                         onclick="return toggleAttending('38649');">
-                        <a class="decoration-0 cursor-pointer hover:text-gray-200"
-                           onclick="return false;">View Member Attendance</a>
-                      </p>
-                      <div id="attending38649" class="hidden"></div>
-                    </li>
-                  </ul>
-                </div>
-                <div class="relative flex flex-wrap pl-0 list-none justify-center"></div>
-                <div class="bg-dark border rounded"></div>
-              </div>
-            </div>
-            <div class="bg-secondary p-3 rounded-lg">
-              <span class="font-bold text-white mb-1 text-lg">Operation title</span>
-              <div class="p-0.5 bg-[#008000]"></div>
-              <div class="flex flex-col">
-                <div class="flex flex-row justify-between flex-wrap my-3 mx-6 text-sm">
-                  <ul class="flex[1_1_196px]">
-                    <li class="flex flex-row text-white">
-                      <span class="w-11">Start:</span>
-                      <span class="ml-0.5 text-gray-200">2026-03-01 11:46 CET
-                        <br>
-                      2026-03-01 05:46 EST</span>
-                    </li>
-                    <li class="flex flex-row text-white mb-2">
-                      <span class="w-11">End:</span>
-                      <span class="ml-0.5 text-gray-200">2026-03-01 13:46 CET
-                        <br>
-                      2026-03-01 07:46 EST</span>
-                    </li>
-                    <li class="text-white text-sm">
-                      <a href="#"
-                         title="Clone this operation"
-                         class="mr-0.5 hover:text-gray-200">Clone</a>
-                      <a href="#"
-                         title="Clone this operation"
-                         class="mr-0.5 hover:text-gray-200">Edit</a>
-                      <a href="#"
-                         title="Clone this operation"
-                         class="mr-0.5 hover:text-gray-200">Squads</a>
-                      <a href="#"
-                         title="Clone this operation"
-                         class="mr-0.5 hover:text-gray-200"
-                         onclick="return confirm('Please confirm deletion');">Delete</a>
-                    </li>
-                  </ul>
-                  <ul class="flex flex-col min-w-14 flex[1_1_196px] text-white">
-                    <li class="ml-auto">
-                      <span class="text-[#FFA500]">KH Slaine</span>
-                      -
-                      <strong>Op Leader</strong>
-                    </li>
-                    <li class="ml-auto mb-3">
-                      <form class="flex flex-row mt-2 justify-center"
-                            name="attendance38649"
-                            method="post">
-                        <div class="ml-2 flex items-center">
-                          <input id="radio-1-38649"
-                                 type="radio"
-                                 name="status"
-                                 onclick="attend('38649',1,'9768');"
-                                 class="focus:ring-primary focus:ring-2 text-primary">
-                          <label class="ml-1" for="radio-1-38649">Yes</label>
-                        </div>
-                        <div class="ml-2 flex items-center">
-                          <input id="radio-2-38649"
-                                 type="radio"
-                                 name="status"
-                                 onclick="attend('38649',2,'9768');"
-                                 class="focus:ring-primary focus:ring-2 text-primary">
-                          <label class="ml-1" for="radio-2-38649">Maybe</label>
-                        </div>
-                        <div class="ml-2 flex items-center">
-                          <input id="radio-3-38649"
-                                 type="radio"
-                                 name="status"
-                                 onclick="attend('38649',3,'9768');"
-                                 class="focus:ring-primary focus:ring-2 text-primary">
-                          <label class="ml-1" for="radio-3-38649">No</label>
-                        </div>
-                      </form>
-                    </li>
-                    <li class="ml-auto mb-2">
-                      <a onclick="clip('Link to operation add member attendance page')"
-                         href="#"
-                         title="Click to copy the link to your clipboard"
-                         class="hover:text-gray-200">Attendance Link</a>
-                    </li>
-                    <script></script>
-                    <li class="flex flex-col ml-auto">
-                      <p class="ml-0 ml-auto"
-                         id="viewAttending38649"
-                         onclick="return toggleAttending('38649');">
-                        <a class="decoration-0 cursor-pointer hover:text-gray-200"
-                           onclick="return false;">View Member Attendance</a>
-                      </p>
-                      <div id="attending38649" class="hidden"></div>
-                    </li>
-                  </ul>
-                </div>
-                <div class="relative flex flex-wrap pl-0 list-none justify-center"></div>
-                <div class="bg-dark border rounded"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
     {# Insert upcoming operations here #}

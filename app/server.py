@@ -7,6 +7,7 @@ from app.storage.minio import storage_client
 from flask_migrate import Migrate
 from app.database.db import db
 from app.auth import login_manager, auth_bp, oauth
+from app.dashboard import dashboard_bp
 
 
 def create_app() -> Flask:
@@ -55,6 +56,7 @@ def init_login_manager(app: Flask):
 
 def register_blueprints(app: Flask):
     app.register_blueprint(auth_bp)
+    app.register_blueprint(dashboard_bp)
 
 
 def init_database(app, database):
