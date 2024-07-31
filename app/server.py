@@ -34,6 +34,17 @@ def create_app() -> Flask:
     def cleanup(resp_or_exc):
         db.session.remove()
 
+    @app.cli.command()
+    def seed():
+        from seeders import ranks, users, games, operations
+
+        ranks.seed_ranks()
+        users.seed_users()
+        games.seed_games()
+        games.seed_member_games()
+        operations.seed_operation_types()
+        operations.seed_operations()
+
     return app
 
 

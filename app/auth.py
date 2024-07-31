@@ -4,7 +4,7 @@ from flask import render_template, Blueprint, flash, redirect, url_for, abort, s
 from flask_login import LoginManager, login_user, logout_user, current_user
 from authlib.integrations.flask_client import OAuth
 from app.database.db import db
-from app.database.user_model import User
+from app.database.main import User
 from app.config import BaseConfig
 
 auth_bp = Blueprint(name="auth", import_name=__name__, template_folder="templates")
