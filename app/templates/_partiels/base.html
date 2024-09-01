@@ -1,3 +1,4 @@
+{% from "_partiels/_formhelpers.html" import render_field, render_field_errors %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr" class="dark">
   <head>
@@ -32,51 +33,14 @@
           href="{{ url_for('static', filename='assets/css/main.css') }}">
     {% block head %}{% endblock %}
   </head>
-  <body>
+  <body class="bg-dark">
     {% block content %}{% endblock %}
     <script src="{{ url_for('static', filename='assets/js/flowbite-2.4.1.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
             integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"></script>
-    <script>
-        const navigationBackdrop = document.createElement('div');
-        navigationBackdrop.classList.add('fixed', 'inset-0', 'bg-black', 'bg-opacity-50', 'z-10');
-
-        // JQuery toggle navigation drawer
-        $(document).ready(function() {
-            $('#drawer-navigation-toggle').click(function() {
-                $('#drawer-navigation').toggleClass('transform-none');
-                $('body').append(navigationBackdrop);
-            });
-
-            // If you click the backdrop, close the drawer
-            $(navigationBackdrop).click(function() {
-                $('#drawer-navigation').toggleClass('transform-none');
-                navigationBackdrop.remove();
-                // if drawer doesn't have -translate-x-full then add it
-                if (!$('#drawer-navigation').hasClass('-translate-x-full')) {
-                    $('#drawer-navigation').addClass('-translate-x-full');
-                }
-            });
-
-            // JQuery toggle search modal
-            $('#search-modal-toggle').click(function() {
-                $('#search-modal').toggleClass('hidden');
-                $('#search-modal').toggleClass('flex');
-            });
-
-            // If you click anything outside the first child of the search modal, close the search modal
-            $('#search-modal').click(function(event) {
-                if (event.target === this) {
-                    $('#search-modal').toggleClass('hidden');
-                    $('#search-modal').toggleClass('flex');
-                }
-            });
-
-        });
-
-    </script>
+    <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
     {% block script %}{% endblock %}
   </body>
 </html>

@@ -37,7 +37,7 @@ module.exports = {
                 'forum-header': "url('/static/Forum_Header_Background.png')",
             },
             colors: {
-                'gray-100': '#dadada',
+                'gray-100': '#bababa',
                 'gray-200': '#999',
                 'gray-300': '#7F7F7F',
                 'gray-400': '#666',

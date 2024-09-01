@@ -67,8 +67,8 @@ def init_database(app, database):
 
 def jinja2_filter(app):
     def format_datetime(value):
-        dt = arrow.get(value)
-        return dt.humanize()
+        dt = arrow.get(value).to("America/New_York")
+        return dt.format("YYYY-MM-DD HH:mm ZZZ")
 
     app.jinja_env.filters["dt"] = format_datetime
 

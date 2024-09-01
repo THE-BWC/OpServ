@@ -3,7 +3,7 @@
 {% block title %}Dashboard{% endblock %}
 {% block default_content %}
 
-  <section class="gap-16 py-8 px-4 grid grid-cols-1 2xl:grid-cols-2">
+  <section class="gap-4 py-8 pr-4 grid grid-cols-1 2xl:grid-cols-2">
     {# Insert game dropdown here #}
     <div class="bg-dark rounded-lg shadow h-fit">
       <div class="bg-gradient-to-b from-gradient-dark to-gradient-light rounded-t-lg">
@@ -18,7 +18,12 @@
                     data-accordion-target="#accordion-collapse-body-1"
                     aria-expanded="true"
                     aria-controls="accordion-collapse-body-1">
-              <span class="text-white">{{ game.name }}</span>
+              <span class="flex items-center">
+                <img src="{{ IMAGE_URL }}/{{ IMAGE_PATHS.GAMES }}/{{ game.icon }}"
+                     alt="{{ game.tag }}"
+                     class="w-8 h-8 rounded-lg mr-2">
+                <span class="text-white">{{ game.name }}</span>
+              </span>
               <svg data-accordion-icon
                    class="w-3 h-3 rotate-180 shrink-0 text-white"
                    aria-hidden="true"
@@ -37,19 +42,19 @@
               {% for operation in game.operations %}
 
                 <div class="bg-secondary p-3 mb-3 rounded-lg">
-                  <span class="font-bold text-white mb-1 text-lg">{{ operation.name }}</span>
+                  <span class="font-bold text-white mb-1 text-lg">{{ operation.id }} - {{ operation.name }}</span>
                   <div class="p-0.5"
                        style="background-color: {{ operation.type.color_hex }}"></div>
                   <div class="flex flex-col">
                     <div class="flex flex-row justify-between flex-wrap my-3 mx-6 text-sm">
                       <ul class="flex[1_1_196px]">
                         <li class="flex flex-row text-white">
-                          <span class="w-11">Start:</span>
-                          <span class="ml-0.5 text-gray-200">{{ operation.date_start }}</span>
+                          <span class="w-9">Start:</span>
+                          <span class="ml-0.5 text-gray-100">{{ operation.date_start | dt }}</span>
                         </li>
                         <li class="flex flex-row text-white mb-2">
-                          <span class="w-11">End:</span>
-                          <span class="ml-0.5 text-gray-200">{{ operation.date_end }}</span>
+                          <span class="w-9">End:</span>
+                          <span class="ml-0.5 text-gray-100">{{ operation.date_end | dt }}</span>
                         </li>
                         <li class="text-white text-sm">
                           <a href="#"
@@ -69,60 +74,80 @@
                       </ul>
                       <ul class="flex flex-col min-w-14 flex[1_1_196px] text-white">
                         <li class="ml-auto">
-                          <span style="color: {{ operation.leader }}">{{ operation.leader.username }}</span>
+                          <span style="color: {{ operation.leader.rank.color_hex }}">{{ operation.leader.username }}</span>
                           -
                           <strong>Op Leader</strong>
                         </li>
                         <li class="ml-auto mb-3">
                           <form class="flex flex-row mt-2 justify-center"
-                                name="attendance38649"
+                                name="attendance{{ operation.id }}"
                                 method="post">
                             <div class="ml-2 flex items-center">
-                              <input id="radio-1-38649"
+                              <input id="radio-1-{{ operation.id }}"
                                      type="radio"
                                      name="status"
-                                     onclick="attend('38649',1,'9768');"
+                                     onclick="attend('{{ operation.id }}',1,'{{ operation.leader_user_id }}');"
                                      class="focus:ring-primary focus:ring-2 text-primary">
-                              <label class="ml-1" for="radio-1-38649">Yes</label>
+                              <label class="ml-1" for="radio-1-{{ operation.id }}">Yes</label>
                             </div>
                             <div class="ml-2 flex items-center">
-                              <input id="radio-2-38649"
+                              <input id="radio-2-{{ operation.id }}"
                                      type="radio"
                                      name="status"
-                                     onclick="attend('38649',2,'9768');"
+                                     onclick="attend('{{ operation.id }}',2,'{{ operation.leader_user_id }}');"
                                      class="focus:ring-primary focus:ring-2 text-primary">
-                              <label class="ml-1" for="radio-2-38649">Maybe</label>
+                              <label class="ml-1" for="radio-2-{{ operation.id }}">Maybe</label>
                             </div>
                             <div class="ml-2 flex items-center">
-                              <input id="radio-3-38649"
+                              <input id="radio-3-{{ operation.id }}"
                                      type="radio"
                                      name="status"
-                                     onclick="attend('38649',3,'9768');"
+                                     onclick="attend('{{ operation.id }}',3,'{{ operation.leader_user_id }}');"
                                      class="focus:ring-primary focus:ring-2 text-primary">
-                              <label class="ml-1" for="radio-3-38649">No</label>
+                              <label class="ml-1" for="radio-3-{{ operation.id }}">No</label>
                             </div>
                           </form>
                         </li>
                         <li class="ml-auto mb-2">
-                          <a onclick="clip('Link to operation add member attendance page')"
-                             href="#"
+                          <a onclick="copyToClipboard('{{ URL }}/operation/{{ operation.id }}');"
                              title="Click to copy the link to your clipboard"
-                             class="hover:text-gray-200">Attendance Link</a>
+                             class="hover:text-gray-200 hover:cursor-pointer">Attendance Link</a>
                         </li>
                         <script></script>
                         <li class="flex flex-col ml-auto">
-                          <p class="ml-0"
-                             id="viewAttending38649"
-                             onclick="return toggleAttending('38649');">
-                            <a class="decoration-0 cursor-pointer hover:text-gray-200"
-                               onclick="return false;">View Member Attendance</a>
-                          </p>
-                          <div id="attending38649" class="hidden"></div>
+                          <a class="ml-0 decoration-0 cursor-pointer hover:text-gray-200"
+                             id="viewAttending{{ operation.id }}"
+                             onclick="return toggleAttending('{{ operation.id }}');">View Member Attendance</a>
+                          <div id="attending{{ operation.id }}" class="hidden"></div>
                         </li>
                       </ul>
                     </div>
-                    <div class="relative flex flex-wrap pl-0 list-none justify-center"></div>
-                    <div class="bg-dark border rounded"></div>
+                    <div class="relative flex flex-wrap pl-0 list-none justify-center">
+                      <ul class="flex flex-wrap -mb-px text-sm font-medium text-center"
+                          data-tabs-wrapper="true">
+                        <li class="me-2" role="presentation">
+                          <button class="flex px-4 py-2 items-center justify-center w-auto border-0 border-solid border-transparent overflow-hidden text-white hover:cursor-pointer hover:text-gray-200 rounded-t-lg"
+                                  type="button"
+                                  onclick="openTab(this, 'desc{{ operation.id }}')">Description</button>
+                        </li>
+                        {% if operation.is_completed %}
+
+                          <li class="me-2" role="presentation">
+                            <button class="flex px-4 py-2 items-center justify-center w-auto border-0 border-solid border-transparent overflow-hidden text-white hover:cursor-pointer hover:text-gray-200 rounded-t-lg"
+                                    type="button"
+                                    onclick="openTab(this, 'aar{{ operation.id }}')">AAR</button>
+                          </li>
+                        {% endif %}
+                      </ul>
+                    </div>
+                    <div class="bg-dark rounded-lg text-[14px]"
+                         data-tabs-contents-wrapper="true">
+                      <div class="hidden p-4 text-white" id="desc{{ operation.id }}">{{ operation.description|safe }}</div>
+                      {% if operation.is_completed %}
+
+                        <div class="hidden p-4 text-white" id="aar{{ operation.id }}">{{ operation.aar_notes|safe }}</div>
+                      {% endif %}
+                    </div>
                   </div>
                 </div>
               {% endfor %}
