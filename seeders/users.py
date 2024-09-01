@@ -1,11 +1,17 @@
-from app.database.main import User
-from app.database.db import db
+from app.database.main import db, User
 
 
 def seed_users():
     users = [
-        User(id=1, username="Black Widow Company", email="admin@example.com"),
-        User(id=7519, username="Patrick", email="patrick@example.com"),
+        User(
+            id=1,
+            username="Black Widow Company",
+            email="admin@example.com",
+            password="admin",
+        ),
+        User(
+            id=7519, username="Patrick", email="patrick@example.com", password="patrick"
+        ),
     ]
 
     for user in users:

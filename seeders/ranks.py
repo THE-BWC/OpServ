@@ -1,5 +1,4 @@
-from app.database.main import Rank
-from app.database.db import Session
+from app.database.main import Session, Rank
 from sqlalchemy.sql import text
 
 
