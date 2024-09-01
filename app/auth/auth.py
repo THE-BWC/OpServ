@@ -1,13 +1,15 @@
 import requests
 
-from flask import render_template, Blueprint, flash, redirect, url_for, abort, session
+from flask import Blueprint, flash, redirect, url_for, abort, session
 from flask_login import LoginManager, login_user, logout_user, current_user
 from authlib.integrations.flask_client import OAuth
-from app.database.db import db
+from app.database.main import db
 from app.database.main import User
 from app.config import BaseConfig
 
-auth_bp = Blueprint(name="auth", import_name=__name__, template_folder="templates")
+auth_bp = Blueprint(
+    name="auth", import_name=__name__, url_prefix="/auth", template_folder="templates"
+)
 login_manager = LoginManager()
 
 oauth = OAuth()
@@ -26,12 +28,12 @@ def load_user(id):
     return db.session.query(User).get(id)
 
 
-@auth_bp.route("/login")
-def login():
-    if not current_user.is_anonymous:
-        return redirect(url_for("dashboard.index"))
-
-    return render_template("auth/login.html")
+# @auth_bp.route("/login")
+# def login():
+#     if not current_user.is_anonymous:
+#         return redirect(url_for("dashboard.index"))
+#
+#     return render_template("auth/login.html")
 
 
 @auth_bp.route("/auth")

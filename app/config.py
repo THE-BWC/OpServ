@@ -79,6 +79,7 @@ class BaseConfig:
     URL = os.environ.get("URL", "http://127.0.0.1:5000")
     BRAND_NAME = os.environ.get("BRAND_NAME", "Black Widow Company")
     BRAND_URL = os.environ.get("BRAND_URL", "https://www.the-bwc.com")
+    COLOR_LOG = "COLOR_LOG" in os.environ
 
     # Minio
     MINIO_ENDPOINT = os.environ.get("MINIO_ENDPOINT")
@@ -97,6 +98,13 @@ class BaseConfig:
     DB_URI = os.environ.get(
         "DB_URI", f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
     )
+
+    # domains that can be present in the &next= section when using absolute urls
+    ALLOWED_REDIRECT_DOMAINS = []
+
+    # Auth
+    SESSION_COOKIE_NAME = os.environ.get("SESSION_COOKIE_NAME", "bwc_opserv")
+    DISABLE_RATE_LIMIT = os.environ.get("DISABLE_RATE_LIMIT", False)
 
     # OAuth2 providers
     OAUTH2_CLIENT_ID = os.environ.get("OAUTH2_CLIENT_ID")
