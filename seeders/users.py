@@ -1,4 +1,14 @@
-from app.database.main import db, User
+import unicodedata
+import bcrypt
+from app.database.models import db, User
+
+_NORMALIZATION_FORM = "NFKC"
+
+
+def create_password(password):
+    password = unicodedata.normalize(_NORMALIZATION_FORM, password)
+    salt = bcrypt.gensalt()
+    return bcrypt.hashpw(password.encode(), salt).decode()
 
 
 def seed_users():
@@ -7,10 +17,13 @@ def seed_users():
             id=1,
             username="Black Widow Company",
             email="admin@example.com",
-            password="admin",
+            password=create_password("admin"),
         ),
         User(
-            id=7519, username="Patrick", email="patrick@example.com", password="patrick"
+            id=7519,
+            username="Patrick",
+            email="patrick@example.com",
+            password=create_password("patrick"),
         ),
     ]
 

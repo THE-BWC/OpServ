@@ -167,10 +167,11 @@ class User(UserMixin, ModelBase):
     timezone: Mapped[str] = mapped_column(
         String(255), nullable=False, default="America/New_York"
     )
-
     rank: Mapped["Rank"] = relationship(
         back_populates="users", foreign_keys="User.rank_id"
     )
+    date_activated: Mapped[arrow.Arrow] = mapped_column(ArrowType, nullable=True)
+    date_discharged: Mapped[arrow.Arrow] = mapped_column(ArrowType, nullable=True)
 
     def colorhex(self):
         return self.rank.color_hex
