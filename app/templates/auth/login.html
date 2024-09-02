@@ -1,7 +1,7 @@
-{% extends '_partiels/base.html' %}
+{% extends 'single.html' %}
 
 {% block title %}Login{% endblock %}
-{% block content %}
+{% block single_content %}
 
   {% if show_resend_activation %}
 
@@ -10,51 +10,39 @@
     {#      <a href="{{ url_for('auth.resend_activation') }}">Resend</a>#}
     {#    </div>#}
   {% endif %}
-  <section class="bg-gray-50 dark:bg-gray-900">
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      <div class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white ">
-        <img class="w-60 h-60 mr-2"
-             src="https://pao.the-bwc.com/BWC_Logo.png"
-             alt="Black Widow Company">
-      </div>
-      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <h1 class="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-            Sign in to your account
-          </h1>
-          <div class="flex justify-center">
-            <a href=""
-               class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 me-2 mb-2">
-              <img class="w-5 h-5 me-2"
-                   src="https://pao.the-bwc.com/BWC_Logo.png"
-                   alt="bwc_logo">
-              Sign in with BWC Auth
-            </a>
-          </div>
-          <form method="post">
-            {{ form.csrf_token }}
-            <div class="form-group">
-              <label class="form-label">Email Address</label>
-              {{ form.email(class="form-control", type="email", autofocus=true) }}
-              {{ render_field_errors(form.email) }}
-            </div>
-            <div class="form-group">
-              <label class="form-label">Password</label>
-              {{ form.password(class="form-control", type="password") }}
-              {{ render_field_errors(form.password) }}
-              <div class="text-current/75">
-                <a href="">Forgot password?</a>
-              </div>
-            </div>
-            <div class="form-group">
-              <button type="submit"
-                      class="w-full px-4 py-2 text-sm font-medium tracking-wider text-white uppercase bg-gray-900 rounded-lg focus:outline-none focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 dark:bg-gray-800">
-                Sign in
-              </button>
-            </div>
-          </form>
+  <div class="card">
+    <div class="card-body p-5">
+      <h4 class="card-title">Sign in to your account</h4>
+      {% if connect_with_oidc %}
+
+        <a class="btn btn-primary btn-block mt-2 w-100" href="/">Sign in with BWC Auth</a>
+        <div class="text-center my-2 text-gray">
+          <span>or</span>
         </div>
-      </div>
+      {% endif %}
+      <form method="post">
+        {{ form.csrf_token }}
+        <div class="mb-3">
+          <label class="form-label">Email Address</label>
+          {{ form.email(class="form-control", type="email", autofocus=true) }}
+          {{ render_field_errors(form.email) }}
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          {{ form.password(class="form-control", type="password") }}
+          {{ render_field_errors(form.password) }}
+          <div class="text-muted">
+            <a href="{{ url_for("auth.forgot_password") }}" class="small">Forgot password?</a>
+          </div>
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary btn-block">Log In</button>
+        </div>
+      </form>
     </div>
-  </section>
+  </div>
+  <div class="text-center text-muted mt-2">
+    Don't have an account yet?
+    <a href="{{ url_for("auth.register") }}">Sign up</a>
+  </div>
 {% endblock %}

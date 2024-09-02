@@ -1,0 +1,10 @@
+{% extends "error.html" %}
+
+{% block error_name %}400{% endblock %}
+{% block error_description %}The request could not be understood by the server due to malformed syntax.{% endblock %}
+{% block suggestion %}
+
+  <a class="btn btn-primary" href="/">
+    <i class="fe fe-home mr-2"></i>Dashboard
+  </a>
+{% endblock %}

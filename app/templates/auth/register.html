@@ -1,0 +1,31 @@
+{% extends "single.html" %}
+
+{% block title %}Register{% endblock %}
+{% block single_content %}
+
+  <form class="card" method="post">
+    {{ form.csrf_token }}
+    <div class="card-body p-5">
+      <h1 class="card-title">Create new Account</h1>
+      <div>
+        <label class="form-label">Username</label>
+        {{ form.username(class="form-control", placeholder="Enter username") }}
+        {{ render_field_errors(form.username) }}
+      </div>
+      <div>
+        <label class="form-label">Email address</label>
+        {{ form.email(class="form-control", type="email", placeholder="Enter email") }}
+        {{ render_field_errors(form.email) }}
+      </div>
+      <div>
+        <label class="form-label">Password</label>
+        {{ form.password(class="form-control", type="password", placeholder="Password") }}
+        {{ render_field_errors(form.password) }}
+      </div>
+    </div>
+  </form>
+  <div class="text-center text-muted mb-6">
+    Already have account?
+    <a href="{{ url_for("auth.login") }}">Sign in</a>
+  </div>
+{% endblock %}

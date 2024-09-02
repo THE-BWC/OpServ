@@ -77,6 +77,8 @@ class BaseConfig:
     ENVIRONMENT = os.environ.get("FLASK_ENV", "development")
     FLASK_SECRET = os.environ.get("FLASK_SECRET", "my-secret-key")
     URL = os.environ.get("URL", "http://127.0.0.1:5000")
+    LANDING_PAGE_URL = os.environ.get("LANDING_PAGE_URL") or "https://the-bwc.com"
+    STATUS_PAGE_URL = os.environ.get("STATUS_PAGE_URL") or "https://status.the-bwc.com"
     BRAND_NAME = os.environ.get("BRAND_NAME", "Black Widow Company")
     BRAND_URL = os.environ.get("BRAND_URL", "https://www.the-bwc.com")
     COLOR_LOG = "COLOR_LOG" in os.environ
@@ -103,6 +105,7 @@ class BaseConfig:
     ALLOWED_REDIRECT_DOMAINS = []
 
     # Auth
+    DISABLE_REGISTRATION = os.environ.get("DISABLE_REGISTRATION", False)
     SESSION_COOKIE_NAME = os.environ.get("SESSION_COOKIE_NAME", "bwc_opserv")
     DISABLE_RATE_LIMIT = os.environ.get("DISABLE_RATE_LIMIT", False)
 

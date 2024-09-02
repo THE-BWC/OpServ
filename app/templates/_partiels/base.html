@@ -1,6 +1,6 @@
 {% from "_partiels/_formhelpers.html" import render_field, render_field_errors %}
 <!DOCTYPE html>
-<html lang="en" dir="ltr" class="dark">
+<html lang="en" dir="ltr" class="dark" data-bs-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport"
@@ -24,17 +24,37 @@
       | OpServ
     </title>
     <link rel="stylesheet"
-          href="{{ url_for('static', filename='assets/fontawesome/css/fontawesome.min.css') }}">
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='assets/fontawesome/css/brands.min.css') }}">
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='assets/fontawesome/css/solid.min.css') }}">
+          href="{{ url_for('static', filename='node_modules/font-awesome/css/font-awesome.css') }}">
     <link rel="stylesheet"
           href="{{ url_for('static', filename='assets/css/main.css') }}">
+    <!-- IntroJS -->
+    <link rel="stylesheet"
+          type="text/css"
+          href="{{ url_for('static', filename='node_modules/intro.js/minified/introjs.min.css') }}">
+    <script src="{{ url_for('static', filename='node_modules/intro.js/minified/intro.min.js') }}"></script>
+    <!-- Toastr -->
+    <link rel="stylesheet"
+          type="text/css"
+          href="{{ url_for('static', filename='node_modules/toastr/build/toastr.min.css') }}">
+    <script src="{{ url_for('static', filename='node_modules/toastr/build/toastr.min.js') }}"></script>
+    <script>toastr.options.closeButton = true;</script>
     {% block head %}{% endblock %}
   </head>
-  <body class="bg-dark">
-    {% block content %}{% endblock %}
+  <body>
+    <div class="page">
+      <div class="container">
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+          {% if messages %}
+
+            {% for category, message in messages %}<script>toastr.{{category}}("{{message}}");</script>{% endfor %}
+          {% endif %}
+        {% endwith %}
+      </div>
+      {% block content %}{% endblock %}
+    </div>
+    <script src="{{ url_for('static', filename='vendor/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/flowbite-2.4.1.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
             integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
