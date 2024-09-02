@@ -9,7 +9,7 @@ from app.config import BaseConfig
 from app.events.auth_event import LoginEvent
 from app.limiter import limiter
 from app.log import LOG
-from app.database.main import User
+from app.database.models import User
 from app.utils import sanitize_email, sanitize_next_url
 
 
@@ -47,13 +47,13 @@ def login():
             form.password.data = None
             flash("Invalid email or password", "error")
             LoginEvent(LoginEvent.ActionType.failed).send()
-        elif user.disabled:
+        elif user.date_discharged:
             flash(
                 "Your account is disabled. Please contact your COC or S-1 for assistance.",
                 "error",
             )
             LoginEvent(LoginEvent.ActionType.disabled_login).send()
-        elif not user.activated:
+        elif not user.date_activated:
             show_resend_activation = True
             flash(
                 "Your account is not activated. Please check your email for activation instructions.",

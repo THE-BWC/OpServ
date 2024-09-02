@@ -9,7 +9,7 @@ from app.config import BaseConfig
 # this format allows clickable link to code source in PyCharm
 _log_format = (
     "%(asctime)s - %(name)s - %(levelname)s - %(process)d - "
-    '"%(pathname)s:%(lineno)d" - %(funcName)s() - %(message_id)s - %(message)s'
+    '"%(pathname)s:%(lineno)d" - %(funcName)s() - %(message)s'
 )
 _log_formatter = logging.Formatter(_log_format)
 
@@ -17,7 +17,7 @@ _log_formatter = logging.Formatter(_log_format)
 def _get_console_handler():
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setFormatter(_log_formatter)
-    console_handler.formatter.converter = time.gmtime()
+    console_handler.formatter.converter = time.gmtime
 
     return console_handler
 
@@ -49,4 +49,4 @@ logging.Logger.w = logging.Logger.warning
 logging.Logger.e = logging.Logger.error
 logging.Logger.c = logging.Logger.critical
 
-LOG = _get_logger("SL")
+LOG = _get_logger("BWC")

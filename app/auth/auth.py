@@ -3,8 +3,8 @@ import requests
 from flask import Blueprint, flash, redirect, url_for, abort, session
 from flask_login import LoginManager, login_user, logout_user, current_user
 from authlib.integrations.flask_client import OAuth
-from app.database.main import db
-from app.database.main import User
+from app.database.models import db
+from app.database.models import User
 from app.config import BaseConfig
 
 auth_bp = Blueprint(
