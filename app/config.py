@@ -83,13 +83,17 @@ class BaseConfig:
     BRAND_URL = os.environ.get("BRAND_URL", "https://www.the-bwc.com")
     COLOR_LOG = "COLOR_LOG" in os.environ
 
-    # Minio
-    MINIO_ENDPOINT = os.environ.get("MINIO_ENDPOINT")
-    MINIO_ACCESS_KEY = os.environ.get("MINIO_ACCESS_KEY")
-    MINIO_SECRET_KEY = os.environ.get("MINIO_SECRET_KEY")
-    MINIO_SECURE = os.environ.get("MINIO_SECURE", True)
-    MINIO_BUCKET = os.environ.get("MINIO_BUCKET")
-    MINIO_URL = f"http://{MINIO_ENDPOINT}/{MINIO_BUCKET}"
+    # Storage
+    STORAGE_TYPE = "minio"
+    # Local Storage
+    LOCAL_STORAGE_PATH = ""
+    # Minio/S3 Storage
+    S3_ENDPOINT = os.environ.get("S3_ENDPOINT")
+    S3_ACCESS_KEY = os.environ.get("S3_ACCESS_KEY")
+    S3_SECRET_KEY = os.environ.get("S3_SECRET_KEY")
+    S3_SECURE = os.environ.get("S3_SECURE", True)
+    S3_BUCKET = os.environ.get("S3_BUCKET")
+    S3_URL = f"http://{S3_ENDPOINT}/{S3_BUCKET}"
 
     # Database
     DB_HOST = os.environ.get("DB_HOST", "localhost")
@@ -117,8 +121,8 @@ class BaseConfig:
 
     # Image paths
     IMAGE_PATHS = ImagePaths
-    IMAGE_URL = MINIO_URL
-    if MINIO_SECURE:
+    IMAGE_URL = S3_URL
+    if S3_SECURE:
         IMAGE_URL = IMAGE_URL.replace("http", "https")
 
     # Socials
