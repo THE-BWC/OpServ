@@ -23,6 +23,18 @@ Install npm packages
 npm install
 ```
 
+Install pre-commit hooks
+
+```bash
+poetry run pre-commit install
+```
+
+To run the pre-commit checks manually, run:
+
+```bash
+poetry run pre-commit run --all-files -v
+```
+
 ## Run the code locally
 
 To run the code locally, please create a local setting file based on `.env-example`:
