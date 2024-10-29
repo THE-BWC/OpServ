@@ -21,7 +21,7 @@ from app.auth.base import auth_bp
 from app.config import BaseConfig
 from app.dashboard import dashboard_bp
 from app.database.models import Session, db
-from app.storage.minio import storage_client
+from app.storage.storage import storage
 from flask_migrate import Migrate
 from app.auth.auth import login_manager, oauth
 from app.limiter import limiter
@@ -60,7 +60,7 @@ def create_app() -> Flask:
 
     setup_favicon_route(app)
 
-    init_minio()
+    init_storage()
     init_database(app, db)
     register_custom_commands(app)
 
@@ -181,9 +181,9 @@ def jinja2_filter(app):
         )
 
 
-def init_minio():
-    if not storage_client.bucket_exists(BaseConfig.MINIO_BUCKET):
-        storage_client.make_bucket(BaseConfig.MINIO_BUCKET)
+def init_storage():
+    stor = storage(BaseConfig.STORAGE_TYPE)
+    stor.init()
 
 
 def init_extensions(app: Flask):
@@ -210,13 +210,13 @@ def local_main():
 
     app.debug = True
 
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5000, host="0.0.0.0")
 
     # LOG.d("Enable HTTPS")
     # import ssl
     # context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
     # context.load_cert_chain("local_date/cert.pem", "local_data/key.pem")
-    # app.run(debug=True, port=5000, ssl_context=context)
+    # app.run(debug=True, port=5000, host="0.0.0.0", ssl_context=context)
 
 
 if __name__ == "__main__":
