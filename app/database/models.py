@@ -4,7 +4,7 @@ import arrow
 import bcrypt
 import unicodedata
 
-from typing import List, Optional
+from typing import List, Optional, Final, Literal
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Integer, ForeignKey, String, Boolean, SmallInteger
@@ -14,7 +14,7 @@ from sqlalchemy_utils import ArrowType
 
 from app.utils import sanitize_email
 
-_NORMALIZATION_FORM = "NFKC"
+_NORMALIZATION_FORM: Final[Literal["NFKC"]] = "NFKC"
 
 
 class Base(DeclarativeBase):

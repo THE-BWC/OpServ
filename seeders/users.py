@@ -1,8 +1,10 @@
 import unicodedata
 import bcrypt
+from typing import Literal, Final
+
 from app.database.models import db, User
 
-_NORMALIZATION_FORM = "NFKC"
+_NORMALIZATION_FORM: Final[Literal["NFKC"]] = "NFKC"
 
 
 def create_password(password):
