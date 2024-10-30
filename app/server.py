@@ -208,9 +208,12 @@ def local_main():
     BaseConfig.COLOR_LOG = True
     app = create_app()
 
-    app.debug = True
+    debug = False
+    if BaseConfig.ENVIRONMENT == "development":
+        debug = True
 
-    app.run(debug=True, port=5000, host="0.0.0.0")
+    app.debug = debug
+    app.run(debug=debug, port=5000, host="0.0.0.0")
 
     # LOG.d("Enable HTTPS")
     # import ssl
