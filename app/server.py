@@ -14,6 +14,7 @@ from flask import (
     g,
 )
 
+from app.mail.mail_sender import mail
 from flask_cors import CORS
 from flask_login import current_user
 from sentry_sdk.integrations.flask import FlaskIntegration
@@ -74,6 +75,7 @@ def create_app() -> Flask:
 
     init_storage()
     init_database(app, db)
+    setup_mail(app)
     register_custom_commands(app)
 
     # Enable CORS on /api endpoints
@@ -203,6 +205,18 @@ def init_extensions(app: Flask):
     oauth.init_app(app)
 
 
+def setup_mail(app):
+    app.config["MAIL_DEBUG"] = False
+    app.config["MAIL_SERVER"] = BaseConfig.POSTFIX_SERVER
+    app.config["MAIL_PORT"] = BaseConfig.POSTFIX_PORT
+    app.config["MAIL_USERNAME"] = BaseConfig.POSTFIX_USER
+    app.config["MAIL_PASSWORD"] = BaseConfig.POSTFIX_PASS
+    app.config["MAIL_USE_TLS"] = False
+    app.config["MAIL_DEFAULT_SENDER"] = BaseConfig.NOREPLY_EMAIL
+
+    mail.init_app(app)
+
+
 def register_custom_commands(app):
     @app.cli.command("seed")
     def seed():
@@ -214,6 +228,24 @@ def register_custom_commands(app):
         games.seed_member_games()
         operations.seed_operation_types()
         operations.seed_operations()
+
+    @app.cli.command("email")
+    def email():
+        from flask_mail import Message
+        from app.mail.mail_sender import mail
+
+        msg = Message(
+            subject="Test",
+            recipients=["test@localhost"],
+            body="Hello",
+            html="<h1>Hello</h1>",
+        )
+
+        try:
+            mail.send(msg)
+            LOG.d("Email sent")
+        except Exception as e:
+            LOG.e("Failed to send email", e)
 
 
 def local_main():
