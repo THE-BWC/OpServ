@@ -13,6 +13,7 @@
   },
   "homepage": "https://github.com/THE-BWC/opserv#readme",
   "dependencies": {
+    "@sentry/browser": "^8.36.0",
     "bootstrap": "^5.3.3",
     "font-awesome": "^4.7.0",
     "intro.js": "^8.0.0-beta.1",

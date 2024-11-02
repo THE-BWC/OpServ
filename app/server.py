@@ -2,6 +2,7 @@ import time
 from datetime import timedelta
 
 import arrow
+import sentry_sdk
 from flask import (
     Flask,
     redirect,
@@ -15,17 +16,28 @@ from flask import (
 
 from flask_cors import CORS
 from flask_login import current_user
+from sentry_sdk.integrations.flask import FlaskIntegration
+from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from app.auth.base import auth_bp
 from app.config import BaseConfig
 from app.dashboard import dashboard_bp
 from app.database.models import Session, db
+from app.sentry_utils import sentry_before_send
 from app.storage.storage import storage
 from flask_migrate import Migrate
 from app.auth.auth import login_manager, oauth
 from app.limiter import limiter
 from app.log import LOG
+
+if BaseConfig.SENTRY_DSN:
+    LOG.d("Enable Sentry")
+    sentry_sdk.init(
+        dsn=BaseConfig.SENTRY_DSN,
+        integrations=[FlaskIntegration(), SqlalchemyIntegration()],
+        before_send=sentry_before_send,
+    )
 
 
 def create_app() -> Flask:

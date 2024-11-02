@@ -82,6 +82,7 @@ class BaseConfig:
     BRAND_NAME = os.environ.get("BRAND_NAME", "Black Widow Company")
     BRAND_URL = os.environ.get("BRAND_URL", "https://www.the-bwc.com")
     COLOR_LOG = "COLOR_LOG" in os.environ
+    SENTRY_DSN = os.environ.get("SENTRY_DSN")
 
     # Storage
     STORAGE_TYPE = "minio"
