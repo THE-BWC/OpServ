@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <base href="{{ URL }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <title>{{ subject }}</title>
+    <style type="text/css" rel="stylesheet" media="all">
+      body {
+        margin: 0;
+        padding: 0;
+        word-wrap: break-word;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+
+        background-color: #1f2021;
+        font-size: 15px;
+        font-family: 'Roboto','Helvetica Neue',Helvetica,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans',sans-serif;
+        line-height: 1.7;
+        color: #999999;
+      }
+      table {
+        border-spacing: 0;
+        mso-table-lspace: 0;
+        mso-table-rspace: 0;
+      }
+      table, td {
+        border-collapse: collapse;
+      }
+      a {
+        color: #999999;
+        text-decoration: none;
+      }
+      #bodyTable {
+        height: 100% !important;
+        width: 100% !important;
+        margin: 0;
+        padding: 0;
+        background-color: #1f2021;
+      }
+      #bodyTableContainer {
+        background-color: #1f2021;
+      }
+      .container {
+        width: 100%;
+        max-width: 600px;
+      }
+      .header {
+        color: #999999;
+        padding: 10px 14px;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        font-family: 'Roboto','Helvetica Neue',Helvetica,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans',sans-serif;
+        font-size: 2em;
+        line-height: 1.7;
+      }
+      .header a {
+        color: #999999
+      }
+      .content {
+        background-color: #2d2d2d;
+        border-radius: 2px;
+        color: #999999;
+        padding: 14px;
+        font-size: 15px;
+        font-family: 'Roboto','Helvetica Neue',Helvetica,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans',sans-serif;
+        line-height: 1.7;
+      }
+      .content > p:first-child {
+        margin-top: 0;
+      }
+      .content > p:last-child {
+        margin-bottom: 0;
+      }
+      .footer {
+        padding: 10px 14px;
+        text-align: center;
+        color: #5c5c5c;
+        font-size: 14px;
+        font-family: 'Roboto','Helvetica Neue',Helvetica,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans',sans-serif;
+        line-height: 1.7;
+      }
+      .footer a {
+        color: #5c5c5c;
+        text-decoration: underline;
+      }
+      .linkBar {
+        padding: 10px;
+        background-color: #323232;
+        border-top: 1px solid #2d2d2d;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="bodyTable"
+           border="0"
+           width="100%"
+           cellpadding="0"
+           cellspacing="0">
+      <tr>
+        <td align="center" valign="top" id="bodyTableContainer">
+          <table border="0"
+                 width="600"
+                 cellpadding="0"
+                 cellspacing="0"
+                 class="container">
+            <tr>
+              <td class="header" align="center" valign="top">
+                <a href="{{ URL }}">{{ BRAND_NAME }}</a>
+              </td>
+            </tr>
+            <tr>
+              <td class="content" align="left" valign="top">
+                {% block content %}{% endblock %}
+              </td>
+            </tr>
+            <tr>
+              <td class="footer" align="center" valign="top">
+                {% block footer %}{% endblock %}
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

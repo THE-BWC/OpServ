@@ -60,6 +60,7 @@ def login():
                 "error",
             )
             LoginEvent(LoginEvent.ActionType.not_activated).send()
+            # send_activation_email(user, )
         else:
             LoginEvent(LoginEvent.ActionType.success).send()
             return after_login(user, next_url)

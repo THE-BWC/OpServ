@@ -1,0 +1,38 @@
+{% extends "emails/base.html" %}
+
+{% block content %}
+
+  <p style="margin-top: 0;">
+    To get started, please confirm that <b>{{ email }}</b> is your email address by clicking on the button below within 1 hour.
+  </p>
+  <p style="margin-top: 0;">If you did not sign up for an account, you can safely ignore this email.</p>
+  <p style="margin-top: 0;">
+    Thanks,
+    <br>
+    The {{ BRAND_NAME }} Team.
+  </p>
+  <table class="linkBar">
+    <tr>
+      <td style="border-collapse: collapse;">
+        <a href="{{ activation_url }}"
+           class="button"
+           style="display: inline-block;
+                  padding: 5px 10px;
+                  background-color: #8c0902;
+                  border: none;
+                  border-radius: 4px;
+                  font-size: 14px;
+                  color: #dd0b00;
+                  text-decoration: none">Verify email</a>
+      </td>
+    </tr>
+  </table>
+{% endblock %}
+{% block footer %}
+
+  <small>
+    If you’re having trouble clicking the "Verify email" button, copy and paste the URL below into your web browser:
+    <br>
+    <a href="{{ activation_url }}">{{ activation_url }}</a>
+  </small>
+{% endblock %}

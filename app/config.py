@@ -75,6 +75,7 @@ class ImagePaths:
 class BaseConfig:
     # Base
     ENVIRONMENT = os.environ.get("FLASK_ENV", "development")
+    ROOT_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
     FLASK_SECRET = os.environ.get("FLASK_SECRET", "my-secret-key")
     URL = os.environ.get("URL", "http://127.0.0.1:5000")
     LANDING_PAGE_URL = os.environ.get("LANDING_PAGE_URL") or "https://the-bwc.com"
@@ -83,6 +84,10 @@ class BaseConfig:
     BRAND_URL = os.environ.get("BRAND_URL", "https://www.the-bwc.com")
     COLOR_LOG = "COLOR_LOG" in os.environ
     SENTRY_DSN = os.environ.get("SENTRY_DSN")
+
+    # Turnstile
+    TURNSTILE_SECRET = os.environ.get("TURNSTILE_SECRET")
+    TURNSTILE_SITEKEY = os.environ.get("TURNSTILE_SITEKEY")
 
     # Storage
     STORAGE_TYPE = "minio"
@@ -111,7 +116,7 @@ class BaseConfig:
 
     # Auth
     DISABLE_REGISTRATION = os.environ.get("DISABLE_REGISTRATION", False)
-    SESSION_COOKIE_NAME = os.environ.get("SESSION_COOKIE_NAME", "bwc_opserv")
+    SESSION_COOKIE_NAME = os.environ.get("SESSION_COOKIE_NAME", "opserv")
     DISABLE_RATE_LIMIT = os.environ.get("DISABLE_RATE_LIMIT", False)
 
     # OAuth2 providers
@@ -128,3 +133,11 @@ class BaseConfig:
 
     # Socials
     SOCIALS = Socials
+
+    # Email
+    POSTFIX_SERVER = os.environ.get("POSTFIX_SERVER")
+    POSTFIX_PORT = os.environ.get("POSTFIX_PORT")
+    POSTFIX_USER = os.environ.get("POSTFIX_USER")
+    POSTFIX_PASS = os.environ.get("POSTFIX_PASS")
+    POSTFIX_USE_TLS = os.environ.get("POSTFIX_USE_TLS", True)
+    NOREPLY_EMAIL = os.environ.get("NOREPLY_EMAIL")

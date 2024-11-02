@@ -26,6 +26,7 @@ class RegisterEvent:
         success = 0
         failed = 1
         invalid_email = 2
+        captcha_failed = 3
 
     class Source(EnumE):
         web = 0

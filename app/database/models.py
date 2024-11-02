@@ -7,7 +7,7 @@ import unicodedata
 from typing import List, Optional, Final, Literal
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Integer, ForeignKey, String, Boolean, SmallInteger
+from sqlalchemy import Integer, ForeignKey, String, Boolean, SmallInteger, Index
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy.dialects.mysql import LONGTEXT
 from sqlalchemy_utils import ArrowType
@@ -158,8 +158,8 @@ class EnumE(enum.Enum):
 class User(UserMixin, ModelBase):
     __tablename__ = "users"
 
-    username: Mapped[str] = mapped_column(String(255), nullable=False)
-    email: Mapped[str] = mapped_column(String(255), nullable=False)
+    username: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
+    email: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     password: Mapped[str] = mapped_column(String(128), nullable=True)
     rank_id: Mapped[int] = mapped_column(
         Integer, ForeignKey("ranks.id"), nullable=False, default=19
@@ -197,6 +197,40 @@ class User(UserMixin, ModelBase):
             user.set_password(password)
 
         return user
+
+
+def _expiration_1h():
+    return arrow.now().shift(hours=1)
+
+
+def _expiration_12h():
+    return arrow.now().shift(hours=12)
+
+
+def _expiration_5m():
+    return arrow.now().shift(minutes=5)
+
+
+def _expiration_7d():
+    return arrow.now().shift(days=7)
+
+
+class ActivationCode(ModelBase):
+    __tablename__ = "activation_code"
+
+    user_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey(User.id, ondelete="cascade"), nullable=False
+    )
+    code: Mapped[str] = mapped_column(String(128), unique=True, nullable=False)
+
+    user: Mapped["User"] = relationship("User", foreign_keys="ActivationCode.user_id")
+
+    expired: Mapped[arrow.Arrow] = mapped_column(
+        ArrowType, nullable=False, default=_expiration_1h
+    )
+
+    def is_expired(self):
+        return self.expired < arrow.now()
 
 
 class Game(ModelBase):
@@ -291,3 +325,18 @@ class Billet(ModelBase):
     retired: Mapped[bool] = mapped_column(SmallInteger, default=0)
 
     rank: Mapped["Rank"] = relationship(back_populates="billets")
+
+
+class UserAuditLog(ModelBase):
+    __tablename__ = "user_audit_log"
+
+    user_id: Mapped[int] = mapped_column(Integer, nullable=False)
+    username: Mapped[str] = mapped_column(String(255), nullable=False)
+    action: Mapped[str] = mapped_column(String(255), nullable=False)
+    message: Mapped[str] = mapped_column(LONGTEXT, nullable=True)
+
+    __table_args__ = (
+        Index("ix_user_audit_log_user_id", "user_id"),
+        Index("ix_user_audit_log_username", "username"),
+        Index("ix_user_audit_log_created_at", "created_at"),
+    )
