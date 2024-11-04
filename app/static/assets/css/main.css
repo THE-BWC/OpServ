@@ -8401,4 +8401,30 @@ body {
   margin-bottom: 1rem;
 }
 
+.horizontal-line {
+  overflow: hidden;
+  text-align: center;
+}
+
+.horizontal-line::before,
+.horizontal-line::after {
+  content: "";
+  background-color: var(--bs-border-color-translucent);
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+
+.horizontal-line::before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+
+.horizontal-line::after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+
 /*# sourceMappingURL=main.css.map */

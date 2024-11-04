@@ -13,13 +13,6 @@
   <div class="card">
     <div class="card-body p-5">
       <h4 class="card-title">Sign in to your account</h4>
-      {% if connect_with_oidc %}
-
-        <a class="btn btn-primary btn-block mt-2 w-100" href="/">Sign in with BWC Auth</a>
-        <div class="text-center my-2 text-gray">
-          <span>or</span>
-        </div>
-      {% endif %}
       <form method="post">
         {{ form.csrf_token }}
         <div class="mb-3">
@@ -39,6 +32,13 @@
           <button type="submit" class="btn btn-primary btn-block">Log In</button>
         </div>
       </form>
+      {% if connect_with_oidc %}
+
+        <div class="text-center my-2 text-gray">
+          <span class="horizontal-line">or</span>
+        </div>
+        <a class="btn btn-primary btn-block mt-2 w-100" href="/">Sign in with BWC Auth</a>
+      {% endif %}
     </div>
   </div>
   <div class="text-center text-muted mt-2">

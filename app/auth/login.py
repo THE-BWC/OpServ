@@ -53,14 +53,13 @@ def login():
                 "error",
             )
             LoginEvent(LoginEvent.ActionType.disabled_login).send()
-        elif not user.date_activated:
+        elif not user.email_verified:
             show_resend_activation = True
             flash(
-                "Your account is not activated. Please check your email for activation instructions.",
+                "Your email is not verified. Please check your email for verification instructions.",
                 "error",
             )
             LoginEvent(LoginEvent.ActionType.not_activated).send()
-            # send_activation_email(user, )
         else:
             LoginEvent(LoginEvent.ActionType.success).send()
             return after_login(user, next_url)

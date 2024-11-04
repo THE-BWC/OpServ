@@ -50,39 +50,30 @@ $xs: 416px;
 * {
   scrollbar-color: #901919 #212121;
 }
-
 ::-webkit-scrollbar {
     width: 12px
 }
-
 ::-webkit-scrollbar-button {
     display: none
 }
-
 ::-webkit-scrollbar-track {
     background: #2d2d2d
 }
-
 ::-webkit-scrollbar-track-piece {
     background: #2d2d2d
 }
-
 ::-webkit-scrollbar-thumb {
     background: #810900
 }
-
 ::-webkit-scrollbar-thumb:hover {
     background: #ab0900
 }
-
 ::-webkit-scrollbar-corner {
     background: #2d2d2d
 }
-
 ::-webkit-resizer {
     background: #2d2d2d
 }
-
 html {
     font-size: 16px;
     height: 100%;
@@ -94,14 +85,12 @@ body {
     overflow-y: scroll;
     position: relative;
 }
-
 .page {
     display: flex;
     flex-direction: column;
     justify-content: center;
     min-height: 100%;
 }
-
 .page-single {
     flex: 1 1 auto;
     display: flex;
@@ -109,7 +98,28 @@ body {
     justify-content: center;
     padding: 1rem 0;
 }
-
 .form-group {
     margin-bottom: 1rem;
+}
+.horizontal-line {
+    overflow: hidden;
+    text-align: center;
+}
+.horizontal-line::before,
+.horizontal-line::after {
+    content: "";
+    background-color: var(--bs-border-color-translucent);
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+}
+.horizontal-line::before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+.horizontal-line::after {
+  left: 0.5em;
+  margin-right: -50%;
 }

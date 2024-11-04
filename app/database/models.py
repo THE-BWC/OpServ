@@ -170,6 +170,7 @@ class User(UserMixin, ModelBase):
     rank: Mapped["Rank"] = relationship(
         back_populates="users", foreign_keys="User.rank_id"
     )
+    email_verified: Mapped[bool] = mapped_column(Boolean, default=0)
     date_activated: Mapped[arrow.Arrow] = mapped_column(ArrowType, nullable=True)
     date_discharged: Mapped[arrow.Arrow] = mapped_column(ArrowType, nullable=True)
 
@@ -224,6 +225,26 @@ class ActivationCode(ModelBase):
     code: Mapped[str] = mapped_column(String(128), unique=True, nullable=False)
 
     user: Mapped["User"] = relationship("User", foreign_keys="ActivationCode.user_id")
+
+    expired: Mapped[arrow.Arrow] = mapped_column(
+        ArrowType, nullable=False, default=_expiration_1h
+    )
+
+    def is_expired(self):
+        return self.expired < arrow.now()
+
+
+class ResetPasswordCode(ModelBase):
+    __tablename__ = "reset_password_code"
+
+    user_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey(User.id, ondelete="cascade"), nullable=False
+    )
+    code: Mapped[str] = mapped_column(String(128), unique=True, nullable=False)
+
+    user: Mapped["User"] = relationship(
+        "User", foreign_keys="ResetPasswordCode.user_id"
+    )
 
     expired: Mapped[arrow.Arrow] = mapped_column(
         ArrowType, nullable=False, default=_expiration_1h

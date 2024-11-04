@@ -45,18 +45,18 @@ def activate():
         )
 
     user = activation_code.user
-    user.date_activated = arrow.utcnow()
+    user.email_verified = arrow.utcnow()
     emit_user_audit_log(
         user=user,
-        action=UserAuditLogAction.ActivateUser,
-        message=f"User has been activated: {user.username}",
+        action=UserAuditLogAction.EmailVerified,
+        message=f"User has verified their email: {user.username} ({user.email})",
     )
     login_user(user)
 
     ActivationCode.delete(activation_code.id)
     Session.commit()
 
-    flash("Your account has been activated", "success")
+    flash("Your email has been verified", "success")
 
     mail_sender.send_welcome_email(user)
 

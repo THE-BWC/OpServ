@@ -23,7 +23,7 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 from app.auth.base import auth_bp
 from app.config import BaseConfig
-from app.dashboard import dashboard_bp
+from app.dashboard.base import dashboard_bp
 from app.database.models import Session, db
 from app.sentry_utils import sentry_before_send
 from app.storage.storage import storage

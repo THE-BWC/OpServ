@@ -3,6 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, validators
 
 from app.auth.base import auth_bp
+from app.dashboard.account_setting import send_reset_password_email
 from app.limiter import limiter
 from app.log import LOG
 from app.database.models import User
@@ -33,6 +34,6 @@ def forgot_password():
 
         if user:
             LOG.d("Send forgot password email to %s", user)
-            # send_reset_password_email(user)
+            send_reset_password_email(user)
 
     return render_template("auth/forgot_password.html", form=form)

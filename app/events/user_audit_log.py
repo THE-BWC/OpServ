@@ -4,9 +4,10 @@ from app.database.models import User, UserAuditLog
 
 
 class UserAuditLogAction(Enum):
-    CreateUser = "craete_user"
+    CreateUser = "create_user"
     ActivateUser = "activate_user"
     ResetPassword = "reset_password"
+    EmailVerified = "email_verified"
 
 
 def emit_user_audit_log(

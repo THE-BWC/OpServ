@@ -27,13 +27,13 @@ def resend_activation():
             flash("There is no such email", "warning")
             return render_template("auth/resend_activation.html", form=form)
 
-        if user.date_activated:
-            flash("This account is already activated, please login", "success")
+        if user.email_verified:
+            flash("This email is already verified, please login", "success")
             return redirect(url_for("auth.login"))
 
         LOG.d("User %s is not activated", user)
         flash(
-            "An activation email has been sent to you. Please check your inbox/spam folder",
+            "An email verification has been sent to you. Please check your inbox/spam folder",
             "warning",
         )
         send_activation_email(user, request.args.get("next"))
