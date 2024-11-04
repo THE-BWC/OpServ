@@ -8,6 +8,7 @@ class LoginEvent:
         failed = 1
         disabled_login = 2
         not_activated = 3
+        email_not_verified = 4
 
     class Source(EnumE):
         web = 0

@@ -1,3 +1,5 @@
+import smtplib
+
 import requests
 from flask import request, flash, render_template, redirect, url_for
 from flask_login import current_user
@@ -71,7 +73,7 @@ def register():
             send_activation_email(user, next_url)
             RegisterEvent(RegisterEvent.ActionType.success).send()
             Session.commit()
-        except Exception:
+        except smtplib.SMTPException:
             Session.query(User).filter(User.id == user.id).delete()
             Session.commit()
             flash(

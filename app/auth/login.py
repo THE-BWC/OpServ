@@ -59,7 +59,7 @@ def login():
                 "Your email is not verified. Please check your email for verification instructions.",
                 "error",
             )
-            LoginEvent(LoginEvent.ActionType.not_activated).send()
+            LoginEvent(LoginEvent.ActionType.email_not_verified).send()
         else:
             LoginEvent(LoginEvent.ActionType.success).send()
             return after_login(user, next_url)

@@ -1,13 +1,11 @@
-import arrow
-
-from flask import g, render_template, request, flash, redirect, url_for
-from flask_login import current_user, login_user
+from flask import g, render_template, request, flash
+from flask_login import current_user
 
 from app.auth.base import auth_bp
+from app.auth.login_utils import after_login
 from app.database.models import ActivationCode, Session
 from app.events.user_audit_log import UserAuditLogAction, emit_user_audit_log
 from app.limiter import limiter
-from app.log import LOG
 from app.mail import mail_sender
 from app.utils import sanitize_next_url
 
@@ -45,13 +43,12 @@ def activate():
         )
 
     user = activation_code.user
-    user.email_verified = arrow.utcnow()
+    user.email_verified = True
     emit_user_audit_log(
         user=user,
         action=UserAuditLogAction.EmailVerified,
         message=f"User has verified their email: {user.username} ({user.email})",
     )
-    login_user(user)
 
     ActivationCode.delete(activation_code.id)
     Session.commit()
@@ -60,10 +57,5 @@ def activate():
 
     mail_sender.send_welcome_email(user)
 
-    if "next" in request.args:
-        next_url = sanitize_next_url(request.args.get("next"))
-        LOG.d("Redirecting to next URL: %s", next_url)
-        return redirect(next_url)
-    else:
-        LOG.d("Redirecting to dashboard")
-        return redirect(url_for("dashboard.index"))
+    next_url = sanitize_next_url(request.args.get("next"))
+    after_login(user, next_url)

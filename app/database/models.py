@@ -260,8 +260,8 @@ class Game(ModelBase):
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     tag: Mapped[str] = mapped_column(String(10), nullable=False)
     icon: Mapped[str] = mapped_column(String(255), nullable=False)
-    retired: Mapped[bool] = mapped_column(Integer, default=0)
-    opsec: Mapped[bool] = mapped_column(Integer, default=0)
+    retired: Mapped[bool] = mapped_column(Boolean, default=0)
+    opsec: Mapped[bool] = mapped_column(Boolean, default=0)
     opsec_user_group: Mapped[int] = mapped_column(Integer, nullable=True)
     opsec_discord_role: Mapped[str] = mapped_column(String(255), nullable=True)
 
@@ -283,8 +283,8 @@ class OperationType(ModelBase):
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     tag: Mapped[str] = mapped_column(String(10), nullable=False)
     color_hex: Mapped[str] = mapped_column(String(7), nullable=False)
-    live_fire: Mapped[bool] = mapped_column(Integer, default=0)
-    retired: Mapped[bool] = mapped_column(Integer, default=0)
+    live_fire: Mapped[bool] = mapped_column(Boolean, default=0)
+    retired: Mapped[bool] = mapped_column(Boolean, default=0)
 
     operations: Mapped[List["Operation"]] = relationship(back_populates="type")
 
@@ -294,7 +294,7 @@ class Operation(ModelBase):
 
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     description: Mapped[str] = mapped_column(LONGTEXT, nullable=True)
-    is_completed: Mapped[bool] = mapped_column(Integer, default=0)
+    is_completed: Mapped[bool] = mapped_column(Boolean, default=0)
     type_id: Mapped[int] = mapped_column(
         Integer, ForeignKey(OperationType.id), nullable=False
     )
@@ -306,7 +306,7 @@ class Operation(ModelBase):
     game_id: Mapped[int] = mapped_column(Integer, ForeignKey(Game.id), nullable=False)
     # training_id: Mapped[int] = mapped_column(Integer, ForeignKey("trainings.id"), nullable=True)
     aar_notes: Mapped[str] = mapped_column(LONGTEXT, nullable=True)
-    is_opsec: Mapped[bool] = mapped_column(Integer, default=0)
+    is_opsec: Mapped[bool] = mapped_column(Boolean, default=0)
     discord_voice_channel: Mapped[str] = mapped_column(String(255), nullable=True)
     discord_event_location: Mapped[str] = mapped_column(String(255), nullable=True)
 
@@ -343,7 +343,7 @@ class Billet(ModelBase):
     rank_id: Mapped[int] = mapped_column(Integer, ForeignKey(Rank.id), nullable=False)
     last_filled_date = mapped_column(ArrowType, nullable=True)
     # ts3_perms: Mapped[str] = mapped_column(String(255), nullable=True)
-    retired: Mapped[bool] = mapped_column(SmallInteger, default=0)
+    retired: Mapped[bool] = mapped_column(Boolean, default=0)
 
     rank: Mapped["Rank"] = relationship(back_populates="billets")
 
