@@ -101,6 +101,20 @@ def create_app() -> Flask:
     def healthcheck():
         return "success", 200
 
+    def has_no_empty_params(rule):
+        defaults = rule.defaults if rule.defaults is not None else ()
+        arguments = rule.arguments if rule.arguments is not None else ()
+        return len(defaults) >= len(arguments)
+
+    @app.route("/site-map", methods=["GET"])
+    def site_map():
+        links = []
+        for rule in app.url_map.iter_rules():
+            if "GET" in rule.methods and has_no_empty_params(rule):
+                url = url_for(rule.endpoint, **(rule.defaults or {}))
+                links.append((url, rule.endpoint))
+        return jsonify(links)
+
     return app
 
 
