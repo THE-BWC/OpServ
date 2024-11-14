@@ -12,6 +12,7 @@ from flask import (
     jsonify,
     session,
     g,
+    flash,
 )
 
 from app.mail.mail_sender import mail
@@ -165,6 +166,55 @@ def setup_error_page(app):
             return jsonify(error="Bad Request"), 400
         else:
             return render_template("error/400.html"), 400
+
+    @app.errorhandler(401)
+    def unauthorized(e):
+        if request.path.startswith("/api/"):
+            return jsonify(error="Unauthorized"), 401
+        else:
+            flash("You need to login to access this page", "error")
+            return redirect(url_for("auth.login", next=request.full_path))
+
+    @app.errorhandler(403)
+    def forbidden(e):
+        if request.path.startswith("/api/"):
+            return jsonify(error="Forbidden"), 403
+        else:
+            return render_template("error/403.html"), 403
+
+    @app.errorhandler(404)
+    def page_not_found(e):
+        if request.path.startswith("/api/"):
+            return jsonify(error="No such endpoint"), 404
+        else:
+            return render_template("error/404.html"), 404
+
+    @app.errorhandler(405)
+    def wrong_method(e):
+        if request.path.startswith("/api/"):
+            return jsonify(error="Method not allowed"), 405
+        else:
+            return render_template("error/405.html"), 405
+
+    @app.errorhandler(429)
+    def rate_limited(e):
+        LOG.w(
+            "Client hit rate limit on path %s, user:%s",
+            request.path,
+            get_current_user(),
+        )
+        if request.path.startswith("/api/"):
+            return jsonify(error="Rate limit exceeded"), 429
+        else:
+            return render_template("error/429.html"), 429
+
+    @app.errorhandler(Exception)
+    def error_handler(e):
+        LOG.e(e)
+        if request.path.startswith("/api/"):
+            return jsonify(error="Internal error"), 500
+        else:
+            return render_template("error/500.html"), 500
 
 
 def setup_favicon_route(app):
