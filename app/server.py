@@ -22,13 +22,15 @@ from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from app.auth.base import auth_bp
+from app.auth.login_utils import login_manager
 from app.config import BaseConfig
 from app.dashboard.base import dashboard_bp
 from app.database.models import Session, db
 from app.sentry_utils import sentry_before_send
 from app.storage.storage import storage
 from flask_migrate import Migrate
-from app.auth.auth import login_manager, oauth
+
+# from app.auth.auth import oauth
 from app.limiter import limiter
 from app.log import LOG
 
@@ -202,7 +204,7 @@ def init_storage():
 
 def init_extensions(app: Flask):
     login_manager.init_app(app)
-    oauth.init_app(app)
+    # oauth.init_app(app)
 
 
 def setup_mail(app):

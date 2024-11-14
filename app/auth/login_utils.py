@@ -1,9 +1,18 @@
 from time import time
 
 from flask import session, redirect, url_for
-from flask_login import login_user
+from flask_login import login_user, LoginManager
+from app.database.models import db, User
 
 from app.log import LOG
+
+
+login_manager = LoginManager()
+
+
+@login_manager.user_loader
+def load_user(id):
+    return db.session.query(User).get(id)
 
 
 def after_login(user, next_url, login_from_oidc: bool = False):
@@ -15,9 +24,13 @@ def after_login(user, next_url, login_from_oidc: bool = False):
     """
     # TODO: Implement OTP and possibly FIDO2
 
-    LOG.d("Log user %s in", user)
+    LOG.d("Log user %s in", user.username)
     login_user(user)
     session["sudo_time"] = int(time())
+
+    if not user.recruit_application():
+        LOG.d("User has no recruit application")
+        return redirect(url_for("application.expectation"))
 
     # User comes to login page from another page
     if next_url:
