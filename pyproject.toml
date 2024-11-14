@@ -76,7 +76,15 @@ pre-commit = "^3.7.1"
 djlint = "^1.34.1"
 ruff = "^0.5.1"
 python-dotenv = "^1.0.1"
+taskipy = "^1.14.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.taskipy.tasks]
+lint = "pre-commit run --all-files"
+precommit = "pre-commit install"
+migrate = "flask db migrate"
+upgrade = "flask db upgrade"
+seed = "flask seed"
