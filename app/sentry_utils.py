@@ -16,6 +16,6 @@ def _should_send(_event: Event, hint: Hint) -> bool:
 
 
 def sentry_before_send(event: Event, hint: Hint) -> Optional[Event]:
-    if not _should_send(event, hint):
+    if _should_send(event, hint):
         return event
     return None

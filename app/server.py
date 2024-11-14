@@ -38,6 +38,8 @@ if BaseConfig.SENTRY_DSN:
     LOG.d("Enable Sentry")
     sentry_sdk.init(
         dsn=BaseConfig.SENTRY_DSN,
+        environment=BaseConfig.ENVIRONMENT,
+        release=BaseConfig.RELEASE,
         integrations=[FlaskIntegration(), SqlalchemyIntegration()],
         before_send=sentry_before_send,
     )
@@ -132,7 +134,6 @@ def set_index_page(app):
         if (
             not request.path.startswith("/static")
             and not request.path.startswith("/admin/static")
-            and not request.path.startswith("/git")
             and not request.path.startswith("/favicon.ico")
             and not request.path.startswith("/health")
         ):

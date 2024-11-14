@@ -49,4 +49,4 @@ logging.Logger.w = logging.Logger.warning
 logging.Logger.e = logging.Logger.error
 logging.Logger.c = logging.Logger.critical
 
-LOG = _get_logger("BWC")
+LOG = _get_logger("OpServ")

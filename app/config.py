@@ -75,6 +75,8 @@ class ImagePaths:
 class BaseConfig:
     # Base
     ENVIRONMENT = os.environ.get("FLASK_ENV", "development")
+    RELEASE = os.environ.get("RELEASE", "development")
+
     ROOT_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
     FLASK_SECRET = os.environ.get("FLASK_SECRET", "my-secret-key")
     URL = os.environ.get("URL", "http://127.0.0.1:5000")
