@@ -8427,4 +8427,18 @@ body {
   margin-right: -50%;
 }
 
+.text-muted li p {
+  color: var(--bs-secondary-color);
+}
+
+.text-muted li p b {
+  color: var(--bs-body-color);
+}
+
+.form-group.required .form-label:after {
+  content: "*";
+  color: red;
+  margin-left: 4px;
+}
+
 /*# sourceMappingURL=main.css.map */

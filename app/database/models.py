@@ -171,6 +171,8 @@ class User(UserMixin, ModelBase):
         back_populates="users", foreign_keys="User.rank_id"
     )
     email_verified: Mapped[bool] = mapped_column(Boolean, default=0)
+    signed_sop: Mapped[bool] = mapped_column(Boolean, default=0)
+    referred_by: Mapped[str] = mapped_column(String(255), nullable=True)
     date_activated: Mapped[arrow.Arrow] = mapped_column(ArrowType, nullable=True)
     date_discharged: Mapped[arrow.Arrow] = mapped_column(ArrowType, nullable=True)
 
@@ -198,6 +200,9 @@ class User(UserMixin, ModelBase):
             user.set_password(password)
 
         return user
+
+    def recruit_application(self):
+        return EnlistmentApplication.get_by(user_id=self.id)
 
 
 def _expiration_1h():
@@ -346,6 +351,47 @@ class Billet(ModelBase):
     retired: Mapped[bool] = mapped_column(Boolean, default=0)
 
     rank: Mapped["Rank"] = relationship(back_populates="billets")
+
+
+class EnlistmentApplication(ModelBase):
+    __tablename__ = "enlistment_applications"
+
+    user_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey(User.id, ondelete="cascade"), nullable=False
+    )
+    primary_game_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey(Game.id), nullable=False
+    )
+    referred_by: Mapped[str] = mapped_column(String(255), nullable=True)
+    country: Mapped[str] = mapped_column(String(255), nullable=False)
+    previous_guilds: Mapped[str] = mapped_column(LONGTEXT, nullable=True)
+    why_join: Mapped[str] = mapped_column(LONGTEXT, nullable=False)
+    experience: Mapped[str] = mapped_column(LONGTEXT, nullable=True)
+    other_info: Mapped[str] = mapped_column(LONGTEXT, nullable=True)
+    primary_id: Mapped[str] = mapped_column(String(255), nullable=True)
+    steam_id: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
+    discord_id: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
+    rsi_handle: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
+    status: Mapped[int] = mapped_column(
+        Integer, default=0, nullable=False
+    )  # 0 = Pending, 1 = Accepted, 2 = Denied
+
+    user: Mapped["User"] = relationship(
+        "User", foreign_keys="EnlistmentApplication.user_id"
+    )
+
+    # Check if the user has submitted an application
+    @classmethod
+    def has_application(cls, user_id: int) -> bool:
+        return Session.query(cls).filter(cls.user_id == user_id).first() is not None
+
+    # Get the application status
+    @classmethod
+    def get_application_status(cls, user_id: int) -> str:
+        application = Session.query(cls).filter(cls.user_id == user_id).first()
+        if application is not None:
+            return application.status
+        return "None"
 
 
 class UserAuditLog(ModelBase):

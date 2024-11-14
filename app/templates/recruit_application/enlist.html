@@ -1,0 +1,88 @@
+{% extends 'single-full.html' %}
+
+{% block title %}Enlistment Application{% endblock %}
+{% block single_content %}
+
+  <div class="container h-100">
+    <form method="post">
+      {{ form.csrf_token }}
+      <div class="form-group">
+        <label class="form-label">Primary Game:</label>
+        {{ form.primary_game(class="form-control") }}
+        {{ render_field_errors(form.primary_game) }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">Referred By:</label>
+        {{ form.referred_by(class="form-control") }}
+        {{ render_field_errors(form.referred_by) }}
+      </div>
+      <div class="form-group required">
+        <label class="form-label">Country:</label>
+        {{ form.country(class="form-control") }}
+        {{ render_field_errors(form.country) }}
+      </div>
+      <div class="form-group required">
+        <label class="form-label">Membership in previous/current guild(s) and communities:</label>
+        {{ form.previous_guilds(class="form-control", rows="3") }}
+        {{ render_field_errors(form.previous_guilds) }}
+      </div>
+      <div class="form-group required">
+        <label class="form-label">Why you want to join?</label>
+        {{ form.why_join(class="form-control", rows="3") }}
+        {{ render_field_errors(form.why_join) }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">Experience in:</label>
+        {{ form.experience(class="form-control", rows="3") }}
+        {{ render_field_errors(form.experience) }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">Other information:</label>
+        {{ form.other_info(class="form-control", rows="3") }}
+        {{ render_field_errors(form.other_info) }}
+      </div>
+      <div class="form-group required">
+        <label class="form-label">User ID in Primary Game:</label>
+        {{ form.primary_id(class="form-control") }}
+        {{ render_field_errors(form.primary_id) }}
+      </div>
+      <div class="form-group">
+        <label class="form-label">Steam ID:</label>
+        {{ form.steam_id(class="form-control") }}
+        {{ render_field_errors(form.steam_id) }}
+      </div>
+      <div id="star-citizen" class="mt-5" style="display: none;">
+        <h4>Star Citizen Specific</h4>
+        <div class="form-group required">
+          <label class="form-label">Discord ID:</label>
+          {{ form.discord_id(class="form-control") }}
+          {{ render_field_errors(form.discord_id) }}
+        </div>
+        <div class="form-group required">
+          <label class="form-label">RSI Handle:</label>
+          {{ form.rsi_handle(class="form-control") }}
+          {{ render_field_errors(form.rsi_handle) }}
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <script>
+    $(document).ready(function() {
+      var primary_game = $('#primary_game');
+      var star_citizen = $('#star-citizen');
+
+      if (primary_game[0].value === "16") {
+        star_citizen.show();
+      }
+
+      primary_game.change(function() {
+        if (primary_game[0].value === "16") {
+          star_citizen.show();
+        } else {
+          star_citizen.hide();
+        }
+      });
+    });
+  </script>
+{% endblock %}

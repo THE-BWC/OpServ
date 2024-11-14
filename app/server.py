@@ -26,6 +26,7 @@ from app.auth.base import auth_bp
 from app.auth.login_utils import login_manager
 from app.config import BaseConfig
 from app.dashboard.base import dashboard_bp
+from app.recruit_application.base import application_bp
 from app.database.models import Session, db
 from app.sentry_utils import sentry_before_send
 from app.storage.storage import storage
@@ -127,6 +128,7 @@ def init_database(app, database):
 def register_blueprints(app: Flask):
     app.register_blueprint(auth_bp)
     app.register_blueprint(dashboard_bp)
+    app.register_blueprint(application_bp)
 
 
 def set_index_page(app):

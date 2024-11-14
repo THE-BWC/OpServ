@@ -1,0 +1,23 @@
+{% extends 'single-full.html' %}
+
+{% block title %}Application Status{% endblock %}
+{% block single_content %}
+
+  <div style="margin: 0 auto; padding-bottom: 16em">
+    <h2 class="card-title text-center">Application Status</h2>
+    <div class="card-body text-center mt-4">
+      {% if status == 0 %}
+
+        <div class="text-warning">
+          <h1>Pending</h1>
+          <p>Your application is still pending. Please wait for further instructions.</p>
+        </div>
+      {% elif status == 2 %}
+        <div class="text-danger">
+          <h1>Denied</h1>
+          <p>Your application has been denied. Please check your email for further information.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

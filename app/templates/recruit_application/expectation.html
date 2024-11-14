@@ -1,0 +1,100 @@
+{% extends 'single-full.html' %}
+
+{% block title %}Recruit Expectation{% endblock %}
+{% block single_content %}
+
+  <div class="container h-100">
+    <h2>The BWC Expectations for Recruitment</h2>
+    <p class="text-muted">
+      During your first 2 weeks in BWC, you will go through a "trial period." During this time your rank will be Recruit. Once fully accepted into BWC, you will then become a Private and a full member of BWC.
+      Your recruitment process involves a few tasks that you must complete. You will have 14 days to accomplish the following tasks:
+    </p>
+    <ul class="list-group list-group-flush text-left text-muted">
+      <li class="list-group item">
+        <p>
+          <b>You will read, agree with, and comply with the BWC SOP.</b>
+          <br>
+          It will always be located on the top navigation bar under "SOP".
+        </p>
+      </li>
+      <li class="list-group item">
+        <p>
+          <b>Teamspeak 3 and a functioning microphone are mandatory. Some game companies may require applicants to have Discord as well as Teamspeak.</b>
+          <br>
+          Using the mic isn't mandatory, but it must be available to use if necessary. Additional voice comms discipline will be outlined to you in BWC Onboarding.
+        </p>
+      </li>
+      <li class="list-group item">
+        <p>
+          <b>You must be at least 16 years old to join BWC.</b>
+          <br>
+          This is non-negotiable.
+        </p>
+      </li>
+      <li class="list-group item">
+        <p>
+          <b>We expect our members to participate in PvP in whatever form it takes in-game.</b>
+          <br>
+          Attendance to operations is not required* but highly encouraged. Defence of BWC Assets in-game is an exception, and it's expected that every BWC member will mobilize to protect our assets.
+        </p>
+      </li>
+      <li class="list-group item">
+        <p>
+          <b>Every member moving from pink name to yellow name will do so according to our Admittance Policy.</b>
+          <br>
+          TLDR if you're new, you're going to be an E-1. If you're not new, you're either going to be an E-2 or E-4.
+        </p>
+      </li>
+      <li class="list-group item">
+        <p>
+          <b>Attend one "Live-Fire" operation.</b>
+          <br>
+          Operations are what we call structured gaming sessions in any BWC game. Sometimes multiple operations will be run each day, so keep an eye on Opserv to attend one during your first two weeks.
+        </p>
+      </li>
+      <li class="list-group item">
+        <p>
+          <b>Attend a BWC Onboarding Training.</b>
+          <br>
+          This training takes up to an hour and will give you all the information you'll need about BWC. In Opserv, trainings are coloured red.
+        </p>
+      </li>
+      <li class="list-group item">
+        <p>
+          <b>If you have a question, follow the chain of command and ask the lowest rank member of C&S first.</b>
+          <br>
+          This is also known as following the chain of command. Not every question needs to go to the BWC Commanding Officer. Start low, and continue up until you find the answer you need. Your first contact in your chain of command will be supplied to you upon acceptance of your application -- please work closely with this person for any and all concerns during your recruit period.
+        </p>
+      </li>
+      <li class="list-group item">
+        <p>
+          <b>We do not allow ranks in names.</b>
+          <br>
+          Nobody cares if your gaming handle has been AdmiralGeneralSnuffy since Pong. Here in BWC, your name will be Snuffy.
+        </p>
+      </li>
+      <li class="list-group item">
+        <p>
+          <b>Your name must match up with your in-game name.</b>
+          <br>
+          We don't have time to sit here and genuflect on the fact that "hotsnugglez4u" is the name for "1337-k1lla".
+        </p>
+      </li>
+      <li class="list-group item">
+        <p>
+          <b>Once admitted, read your game's master thread or forums.</b>
+          <br>
+          The game Master Thread will have all the information that you will require to get started in that game with BWC. If a game does not have a master thread built, the information you're looking for is likely in their forum.
+        </p>
+      </li>
+    </ul>
+    <form method="post">
+      {{ form.csrf_token }}
+      <div class="form-group">
+        {{ form.accept_sop }}
+        <label for="accept">I have read and agree to the BWC Expectations for Recruitment.</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Accept</button>
+    </form>
+  </div>
+{% endblock %}
