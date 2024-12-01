@@ -68,6 +68,14 @@ def create_app() -> Flask:
         app.config["SESSION_COOKIE_SECURE"] = True
     app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 
+    if BaseConfig.ENVIRONMENT == "development":
+        from flask_debugtoolbar import DebugToolbarExtension
+
+        app.debug = True
+        app.config["DEBUG_TB_PROFILER_ENABLED"] = True
+        app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
+        DebugToolbarExtension(app)
+
     limiter.init_app(app)
 
     setup_error_page(app)
@@ -325,7 +333,6 @@ def local_main():
     if BaseConfig.ENVIRONMENT == "development":
         debug = True
 
-    app.debug = debug
     app.run(debug=debug, port=5000, host="0.0.0.0")
 
     # LOG.d("Enable HTTPS")
