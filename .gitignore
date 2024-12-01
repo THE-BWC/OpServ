@@ -250,3 +250,6 @@ ruff-report.json
 
 # Local Files
 local_data/
+
+# Node Modules
+node_modules/
