@@ -92,7 +92,7 @@ def create_app() -> Flask:
     @app.before_request
     def make_session_permanent():
         session.permanent = True
-        app.permenant_session_lifetime = timedelta(days=7)
+        app.permanent_session_lifetime = timedelta(days=7)
 
     @app.teardown_appcontext
     def cleanup(resp_or_exc):
