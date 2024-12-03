@@ -113,6 +113,18 @@ class BaseConfig:
         "DB_URI", f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
     )
 
+    # Redis
+    REDIS_HOST = os.environ.get("REDIS_HOST", "localhost")
+    REDIS_PORT = os.environ.get("REDIS_PORT", 6379)
+    REDIS_USER = os.environ.get("REDIS_USER")
+    REDIS_PASS = os.environ.get("REDIS_PASS")
+    if REDIS_USER and REDIS_PASS:
+        REDIS_URI = os.environ.get(
+            "REDIS_URI", f"redis://{REDIS_USER}:{REDIS_PASS}@{REDIS_HOST}:{REDIS_PORT}"
+        )
+    else:
+        REDIS_URI = os.environ.get("REDIS_URI", f"redis://{REDIS_HOST}:{REDIS_PORT}")
+
     # domains that can be present in the &next= section when using absolute urls
     ALLOWED_REDIRECT_DOMAINS = []
 

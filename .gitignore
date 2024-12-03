@@ -253,3 +253,6 @@ local_data/
 
 # Node Modules
 node_modules/
+
+# Don't ignore files inside app directory
+!app/**/*
