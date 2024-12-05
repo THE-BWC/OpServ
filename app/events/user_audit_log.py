@@ -1,6 +1,6 @@
 from enum import Enum
 
-from app.database.models import User, UserAuditLog
+from app.model import User, UserAuditLog
 
 
 class UserAuditLogAction(Enum):

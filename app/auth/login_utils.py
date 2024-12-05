@@ -2,7 +2,7 @@ from time import time
 
 from flask import session, redirect, url_for
 from flask_login import login_user, LoginManager
-from app.database.models import db, User
+from app.model import db, User
 
 from app.log import LOG
 

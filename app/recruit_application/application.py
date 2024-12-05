@@ -1,7 +1,7 @@
 from flask import render_template, request, flash, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, validators
-from app.database.models import User, Session, EnlistmentApplication, Game
+from app.model import User, Session, EnlistmentApplication, Game
 from flask_login import current_user, login_required
 
 from app.log import LOG

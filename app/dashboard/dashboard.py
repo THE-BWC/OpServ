@@ -1,6 +1,6 @@
 from flask import render_template
 from flask_login import login_required
-from app.database.models import Session, Game
+from app.model import Session, Game
 from app.dashboard.base import dashboard_bp
 
 

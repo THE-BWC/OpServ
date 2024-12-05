@@ -10,7 +10,7 @@ from app.auth.base import auth_bp
 from app.config import BaseConfig
 from app.events.auth_event import RegisterEvent
 from app.log import LOG
-from app.database.models import Session, User, ActivationCode
+from app.model import Session, User, ActivationCode
 from app.mail import mail_sender
 from app.utils import encode_url, random_string
 

@@ -2,7 +2,7 @@ import unicodedata
 import bcrypt
 from typing import Literal, Final
 
-from app.database.models import db, User
+from app.model import db, User
 
 _NORMALIZATION_FORM: Final[Literal["NFKC"]] = "NFKC"
 

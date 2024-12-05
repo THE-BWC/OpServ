@@ -1,4 +1,4 @@
-from app.database.models import EnumE
+from app.model import EnumE
 from app.log import LOG
 
 

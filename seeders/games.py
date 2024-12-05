@@ -1,4 +1,4 @@
-from app.database.models import db, Game, MemberGames
+from app.model import db, Game, MemberGames
 
 
 def seed_games():

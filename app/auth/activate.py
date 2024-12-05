@@ -3,7 +3,7 @@ from flask_login import current_user
 
 from app.auth.base import auth_bp
 from app.auth.login_utils import after_login
-from app.database.models import ActivationCode, Session
+from app.model import ActivationCode, Session
 from app.events.user_audit_log import UserAuditLogAction, emit_user_audit_log
 from app.limiter import limiter
 from app.mail import mail_sender

@@ -9,7 +9,7 @@ from app.config import BaseConfig
 from app.events.auth_event import LoginEvent
 from app.limiter import limiter
 from app.log import LOG
-from app.database.models import User
+from app.model import User
 from app.utils import sanitize_email, sanitize_next_url
 
 

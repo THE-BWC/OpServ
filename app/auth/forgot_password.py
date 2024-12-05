@@ -6,7 +6,7 @@ from app.auth.base import auth_bp
 from app.dashboard.account_setting import send_reset_password_email
 from app.limiter import limiter
 from app.log import LOG
-from app.database.models import User
+from app.model import User
 from app.utils import sanitize_email
 
 

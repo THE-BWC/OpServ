@@ -27,10 +27,9 @@ from app.auth.login_utils import login_manager
 from app.config import BaseConfig
 from app.dashboard.base import dashboard_bp
 from app.recruit_application.base import application_bp
-from app.database.models import Session, db
+from app.model import init_model, Session
 from app.sentry_utils import sentry_before_send
 from app.storage import storage
-from flask_migrate import Migrate
 
 # from app.auth.auth import oauth
 from app.limiter import limiter
@@ -72,7 +71,7 @@ def create_app() -> Flask:
         from flask_debugtoolbar import DebugToolbarExtension
 
         app.debug = True
-        app.config["DEBUG_TB_PROFILER_ENABLED"] = True
+        app.config["DEBUG_TB_PROFILER_ENABLED"] = False
         app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
         DebugToolbarExtension(app)
 
@@ -88,7 +87,7 @@ def create_app() -> Flask:
     setup_favicon_route(app)
 
     init_storage()
-    init_database(app, db)
+    init_model(app)
     setup_mail(app)
     register_custom_commands(app)
 
@@ -125,12 +124,6 @@ def create_app() -> Flask:
         return jsonify(links)
 
     return app
-
-
-def init_database(app, database):
-    db.init_app(app)
-    migrate = Migrate()
-    migrate.init_app(app, database)
 
 
 def register_blueprints(app: Flask):

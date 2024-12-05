@@ -1,7 +1,7 @@
 import secrets
 
 from app.config import BaseConfig
-from app.database.models import Session, ResetPasswordCode
+from app.model import Session, ResetPasswordCode
 from app.mail import mail_sender
 
 

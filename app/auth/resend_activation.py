@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired
 
 from app.auth.base import auth_bp
 from app.auth.register import send_activation_email
-from app.database.models import User
+from app.model import User
 from app.log import LOG
 from app.utils import sanitize_email
 

@@ -1,4 +1,4 @@
-from app.database.models import Session, Rank
+from app.model import Session, Rank
 from sqlalchemy.sql import text
 
 
