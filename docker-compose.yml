@@ -1,0 +1,70 @@
+services:
+  opserv-db:
+    container_name: opserv-db
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: opserv_flask
+      MYSQL_USER: opserv
+      MYSQL_PASSWORD: Development
+    ports:
+      - "3306:3306"
+    volumes:
+      - opserv-db:/var/lib/mysql
+    networks:
+      - opserv-network
+
+  opserv-redis:
+    container_name: opserv-redis
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - opserv-network
+
+  opserv-minio:
+    container_name: opserv-minio
+    image: minio/minio:latest
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - opserv-minio-data:/data
+    command: server /data --console-address ":9001"
+    networks:
+      - opserv-network
+
+  opserv-minio-createbucket:
+    container_name: opserv-minio-createbucket
+    image: minio/mc:latest
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set minio http://opserv-minio:9000 minioadmin minioadmin;
+      mc mb minio/opserv;
+      mc anonymous set public minio/opserv;
+      "
+    networks:
+      - opserv-network
+
+  opserv-mailpit:
+    container_name: opserv-mailpit
+    image: axllent/mailpit:latest
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    environment:
+      MP_SMTP_AUTH_ALLOW_INSECURE: true
+      MP_SMTP_AUTH: opserv:Development
+    networks:
+      - opserv-network
+
+volumes:
+  opserv-db:
+  opserv-minio-data:
+
+networks:
+    opserv-network:
+        driver: bridge

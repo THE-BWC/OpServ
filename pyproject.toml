@@ -88,7 +88,9 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.taskipy.tasks]
 lint = "pre-commit run --all-files"
-precommit = "pre-commit install"
+pre-commit = "pre-commit install"
 migrate = "flask db migrate"
 upgrade = "flask db upgrade"
 seed = "flask seed"
+test-email = "flask test-email"
+create-bucket = "flask create-bucket"
