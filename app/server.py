@@ -29,7 +29,7 @@ from app.dashboard.base import dashboard_bp
 from app.recruit_application.base import application_bp
 from app.database.models import Session, db
 from app.sentry_utils import sentry_before_send
-from app.storage.storage import storage
+from app.storage import storage
 from flask_migrate import Migrate
 
 # from app.auth.auth import oauth
@@ -306,8 +306,8 @@ def register_custom_commands(app):
         operations.seed_operation_types()
         operations.seed_operations()
 
-    @app.cli.command("email")
-    def email():
+    @app.cli.command("test-email")
+    def test_email():
         from flask_mail import Message
         from app.mail.mail_sender import mail
 

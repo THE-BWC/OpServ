@@ -92,7 +92,7 @@ class BaseConfig:
     TURNSTILE_SITEKEY = os.environ.get("TURNSTILE_SITEKEY")
 
     # Storage
-    STORAGE_TYPE = "minio"
+    STORAGE_TYPE = "s3"
     # Local Storage
     LOCAL_STORAGE_PATH = ""
     # Minio/S3 Storage

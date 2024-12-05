@@ -1,6 +1,6 @@
-import logging
 from minio import Minio
 from minio.error import S3Error
+from app.log import LOG
 
 
 class S3Storage:
@@ -12,50 +12,41 @@ class S3Storage:
         secure: bool,
         bucket_name: str,
     ):
-        self.endpoint = endpoint
-        self.access_key = access_key
-        self.secret_key = secret_key
-        self.secure = secure
         self.bucket_name = bucket_name
-
-    def get_client(self):
-        return Minio(
-            self.endpoint,
-            access_key=self.access_key,
-            secret_key=self.secret_key,
-            secure=self.secure,
+        self.client = Minio(
+            endpoint=endpoint,
+            access_key=access_key,
+            secret_key=secret_key,
+            secure=() if secure else False,
         )
 
     def get_bucket(self):
         try:
-            client = self.get_client()
-            if not client.bucket_exists(self.bucket_name):
-                client.make_bucket(self.bucket_name)
-            return client
+            if not self.client.bucket_exists(self.bucket_name):
+                self.client.make_bucket(self.bucket_name)
+            return self.client
         except S3Error as exc:
-            logging.error("Error getting bucket: {}".format(exc))
+            LOG.error("Error getting bucket: {}".format(exc))
             return None
 
     def create_bucket(self):
         try:
-            client = self.get_client()
-            if not client.bucket_exists(self.bucket_name):
-                client.make_bucket(self.bucket_name)
+            if not self.client.bucket_exists(self.bucket_name):
+                self.client.make_bucket(self.bucket_name)
             return self.bucket_name
         except S3Error as exc:
-            logging.error("Error creating bucket: {}".format(exc))
+            LOG.error("Error creating bucket: {}".format(exc))
             return None
 
     def init(self):
         try:
-            client = self.get_client()
-            if client.bucket_exists(self.bucket_name):
+            if self.client.bucket_exists(self.bucket_name):
                 return self.bucket_name
             else:
-                client.make_bucket(self.bucket_name)
+                self.client.make_bucket(self.bucket_name)
                 return self.bucket_name
         except S3Error as exc:
-            logging.error("Error initializing bucket: {}".format(exc))
+            LOG.error("Error initializing bucket: {}".format(exc))
             return None
 
     def upload_file(self, file_path, object_name):
@@ -64,7 +55,7 @@ class S3Storage:
             client.fput_object(self.bucket_name, object_name, file_path)
             return object_name
         except S3Error as exc:
-            logging.error("Error uploading file: {}".format(exc))
+            LOG.error("Error uploading file: {}".format(exc))
             return None
 
     def list_files(self):
@@ -72,7 +63,7 @@ class S3Storage:
             client = self.get_bucket()
             return client.list_objects(self.bucket_name)
         except S3Error as exc:
-            logging.error("Error listing files: {}".format(exc))
+            LOG.error("Error listing files: {}".format(exc))
             return None
 
     def delete_file(self, object_name):
@@ -81,5 +72,5 @@ class S3Storage:
             client.remove_object(self.bucket_name, object_name)
             return object_name
         except S3Error as exc:
-            logging.error("Error deleting file: {}".format(exc))
+            LOG.error("Error deleting file: {}".format(exc))
             return None
