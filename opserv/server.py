@@ -33,7 +33,6 @@ from opserv.model import init_model, Session
 from opserv.sentry_utils import sentry_before_send
 from opserv.storage import storage
 
-# from app.auth.auth import oauth
 from opserv.limiter import limiter
 
 log = logging.getLogger(__name__)
@@ -277,7 +276,6 @@ def init_storage():
 
 def init_extensions(app: Flask):
     login_manager.init_app(app)
-    # oauth.init_app(app)
 
 
 def setup_mail(app):
