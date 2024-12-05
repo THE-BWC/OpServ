@@ -1,5 +1,5 @@
 import arrow
-from app.model import db, Operation, OperationType
+from opserv.model import db, Operation, OperationType
 
 
 def seed_operation_types():

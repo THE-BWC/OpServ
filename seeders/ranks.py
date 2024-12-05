@@ -1,4 +1,4 @@
-from app.model import Session, Rank
+from opserv.model import Session, Rank
 from sqlalchemy.sql import text
 
 
