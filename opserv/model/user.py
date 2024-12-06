@@ -10,22 +10,20 @@ from sqlalchemy import String, Integer, Boolean, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy_utils import ArrowType
 from opserv.utils import sanitize_email
-from opserv.model.base_models import ModelBase
 from opserv.model.enlistment_application import EnlistmentApplication
-from opserv.model.meta import _NORMALIZATION_FORM
+from opserv.model.meta import _NORMALIZATION_FORM, Model
 
 if TYPE_CHECKING:
     from opserv.model.rank import Rank
 
 
-class User(UserMixin, ModelBase):
-    __tablename__ = "users"
-
+class User(UserMixin, Model):
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
     username: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     email: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     password: Mapped[str] = mapped_column(String(128), nullable=True)
     rank_id: Mapped[int] = mapped_column(
-        Integer, ForeignKey("ranks.id"), nullable=False, default=19
+        Integer, ForeignKey("rank.id"), nullable=False, default=19
     )
     timezone: Mapped[str] = mapped_column(
         String(255), nullable=False, default="America/New_York"
@@ -38,6 +36,10 @@ class User(UserMixin, ModelBase):
     referred_by: Mapped[str] = mapped_column(String(255), nullable=True)
     date_activated: Mapped[arrow.Arrow] = mapped_column(ArrowType, nullable=True)
     date_discharged: Mapped[arrow.Arrow] = mapped_column(ArrowType, nullable=True)
+
+    enlistment_applications: Mapped[EnlistmentApplication] = relationship(
+        "EnlistmentApplication", back_populates="user"
+    )
 
     def colorhex(self):
         return self.rank.color_hex

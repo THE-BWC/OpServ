@@ -1,12 +1,11 @@
 from sqlalchemy import String, Integer, Index
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.dialects.mysql import LONGTEXT
-from opserv.model.base_models import ModelBase
+from opserv.model.meta import Model
 
 
-class UserAuditLog(ModelBase):
-    __tablename__ = "user_audit_log"
-
+class UserAuditLog(Model):
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
     user_id: Mapped[int] = mapped_column(Integer, nullable=False)
     username: Mapped[str] = mapped_column(String(255), nullable=False)
     action: Mapped[str] = mapped_column(String(255), nullable=False)

@@ -1,15 +1,14 @@
 from typing import List, TYPE_CHECKING
 from sqlalchemy import String, Integer, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from opserv.model.base_models import ModelBase
+from opserv.model.meta import Model
 
 if TYPE_CHECKING:
     from opserv.model.operation import Operation
 
 
-class Game(ModelBase):
-    __tablename__ = "games"
-
+class Game(Model):
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     tag: Mapped[str] = mapped_column(String(10), nullable=False)
     icon: Mapped[str] = mapped_column(String(255), nullable=False)

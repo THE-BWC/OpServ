@@ -3,21 +3,16 @@ from typing import TYPE_CHECKING
 from sqlalchemy import String, Integer, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.dialects.mysql import LONGTEXT
-from opserv.model.base_models import ModelBase
-from opserv.model.meta import Session
+from opserv.model.meta import Model, Session
 
 if TYPE_CHECKING:
     from opserv.model.user import User
 
 
-class EnlistmentApplication(ModelBase):
-    __tablename__ = "enlistment_applications"
-
-    user_id: Mapped[int] = mapped_column(
-        Integer, ForeignKey("users.id", ondelete="cascade"), nullable=False
-    )
+class EnlistmentApplication(Model):
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
     primary_game_id: Mapped[int] = mapped_column(
-        Integer, ForeignKey("games.id"), nullable=False
+        Integer, ForeignKey("game.id"), nullable=False
     )
     referred_by: Mapped[str] = mapped_column(String(255), nullable=True)
     country: Mapped[str] = mapped_column(String(255), nullable=False)
