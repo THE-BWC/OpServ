@@ -31,7 +31,11 @@ def login():
 
     if current_user.is_authenticated:
         if next_url:
-            log.debug("User is already authenticated, redirecting to %s", next_url)
+            sanitized_next_url = next_url.replace("\r\n", "").replace("\n", "")
+            log.debug(
+                "User is already authenticated, redirecting to %s", sanitized_next_url
+            )
+            next_url = sanitize_next_url(next_url)
             return redirect(next_url)
         else:
             log.debug("User is already authenticated, redirecting to dashboard")

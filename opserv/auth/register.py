@@ -112,7 +112,8 @@ def send_activation_email(user, next_url):
 
     activation_link = f"{BaseConfig.URL}/auth/activate?code={activation.code}"
     if next_url:
-        log.debug("Redirect user to %s after activation", next_url)
+        sanitized_next_url = next_url.replace("\r\n", "").replace("\n", "")
+        log.debug("Redirect user to %s after activation", sanitized_next_url)
         activation_link = activation_link + "&next=" + encode_url(next_url)
 
     mail_sender.send_activation_email(user, activation_link)

@@ -4,6 +4,7 @@ from time import time
 from flask import session, redirect, url_for
 from flask_login import login_user, LoginManager
 from opserv.model import Session, User, UserStatus
+from utils import sanitize_next_url
 
 login_manager = LoginManager()
 
@@ -29,6 +30,7 @@ def after_login(user, next_url, login_from_oidc: bool = False):
 
     if user.state == UserStatus.ACTIVE:
         if next_url:
+            next_url = sanitize_next_url(next_url)
             return redirect(next_url)
         else:
             return redirect(url_for("dashboard.index"))
@@ -45,7 +47,9 @@ def after_login(user, next_url, login_from_oidc: bool = False):
     #
     # # User comes to login page from another page
     # if next_url:
-    #     log.debug("redirect user to %s", next_url)
+    #     sanitized_next_url = next_url.replace('\r\n', '').replace('\n', '')
+    #     log.debug("redirect user to %s", sanitized_next_url)
+    #     next_url = sanitize_next_url(next_url)
     #     return redirect(next_url)
     # else:
     #     log.debug("redirect user to dashboard")

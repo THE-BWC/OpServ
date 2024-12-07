@@ -159,12 +159,22 @@ def set_index_page(app):
             and not request.path.startswith("/health")
         ):
             start_time = g.start_time or time.time()
+            sanitized_remote_addr = request.remote_addr.replace("\r\n", "").replace(
+                "\n", ""
+            )
+            sanitized_method = request.method.replace("\r\n", "").replace("\n", "")
+            sanitized_path = request.path.replace("\r\n", "").replace("\n", "")
+            sanitized_args = {
+                k: v.replace("\r\n", "").replace("\n", "")
+                for k, v in request.args.items()
+            }
+
             log.debug(
                 "%s %s %s %s %s, takes %s",
-                request.remote_addr,
-                request.method,
-                request.path,
-                request.args,
+                sanitized_remote_addr,
+                sanitized_method,
+                sanitized_path,
+                sanitized_args,
                 res.status_code,
                 time.time() - start_time,
             )
