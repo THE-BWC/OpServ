@@ -14,6 +14,7 @@ from opserv.model.member_game import MemberGames
 from opserv.model.audit_user import UserAuditLog
 
 __all__ = [
+    "db",
     "Session",
     "User",
     "ActivationCode",

@@ -1,23 +1,19 @@
-from __future__ import annotations
-
 import arrow
-import bcrypt
-import unicodedata
 
 from typing import TYPE_CHECKING
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import String, Integer, Boolean, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy_utils import ArrowType
-from opserv.utils import sanitize_email
-from opserv.model.meta import _NORMALIZATION_FORM, Model
+from opserv.model.meta import Model
 
 if TYPE_CHECKING:
     from opserv.model.rank import Rank
     from opserv.model.enlistment_application import EnlistmentApplication
 
 
-class User(UserMixin, Model):
+class User(Model, UserMixin):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     username: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     email: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
@@ -37,31 +33,16 @@ class User(UserMixin, Model):
     rank: Mapped["Rank"] = relationship(
         back_populates="users", foreign_keys="User.rank_id"
     )
-    member_applications: Mapped["EnlistmentApplication"] = relationship(
-        "EnlistmentApplication", back_populates="user"
+    applications: Mapped["EnlistmentApplication"] = relationship(
+        "EnlistmentApplication",
+        backref="user",
+        foreign_keys="EnlistmentApplication.user_id",
     )
 
-    def colorhex(self):
-        return self.rank.color_hex
+    def set_password(self, password: str) -> None:
+        self._password = generate_password_hash(password)
 
-    def set_password(self, password):
-        password = unicodedata.normalize(_NORMALIZATION_FORM, password)
-        salt = bcrypt.gensalt()
-        self.password = bcrypt.hashpw(password.encode(), salt).decode()
+    def check_password(self, password: str) -> bool:
+        return check_password_hash(self._password, password)
 
-    def check_password(self, password):
-        if not self.password:
-            return False
-
-        password = unicodedata.normalize(_NORMALIZATION_FORM, password)
-        return bcrypt.checkpw(password.encode(), self.password.encode())
-
-    @classmethod
-    def create(cls, email, username, password=None, **kwargs):
-        email = sanitize_email(email)
-        user: User = super(User, cls).create(email=email, username=username, **kwargs)  # type: ignore
-
-        if password:
-            user.set_password(password)
-
-        return user
+    serialize_rules = "-_password"
