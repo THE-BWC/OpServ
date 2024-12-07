@@ -1,5 +1,8 @@
+import logging
 from opserv.model import Session, Rank
 from sqlalchemy.sql import text
+
+log = logging.getLogger(__name__)
 
 
 def seed_ranks():
@@ -153,4 +156,4 @@ def seed_ranks():
 
     Session.commit()
     Session.execute(text("SET FOREIGN_KEY_CHECKS = 1"))
-    print("Ranks seeded")
+    log.info("Ranks seeded")

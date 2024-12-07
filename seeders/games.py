@@ -1,4 +1,7 @@
+import logging
 from opserv.model import Session, Game, MemberGames
+
+log = logging.getLogger(__name__)
 
 
 def seed_games():
@@ -16,7 +19,7 @@ def seed_games():
             Session.add(game)
 
     Session.commit()
-    print("Games seeded")
+    log.info("Games seeded")
 
 
 def seed_member_games():
@@ -32,4 +35,4 @@ def seed_member_games():
             Session.add(member_game)
 
     Session.commit()
-    print("Member Games seeded")
+    log.info("Member Games seeded")

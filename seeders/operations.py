@@ -1,5 +1,8 @@
+import logging
 import arrow
 from opserv.model import Session, Operation, OperationType
+
+log = logging.getLogger(__name__)
 
 
 def seed_operation_types():
@@ -73,7 +76,7 @@ def seed_operation_types():
             Session.add(operation)
 
     Session.commit()
-    print("Operation Types seeded")
+    log.info("Operation Types seeded")
 
 
 def seed_operations():
@@ -95,4 +98,4 @@ def seed_operations():
             Session.add(operation)
 
     Session.commit()
-    print("Operations seeded")
+    log.info("Operations seeded")
