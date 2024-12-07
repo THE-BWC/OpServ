@@ -218,9 +218,10 @@ def setup_error_page(app):
 
     @app.errorhandler(429)
     def rate_limited(e):
+        sanitized_path = request.path.replace('\r\n', '').replace('\n', '')
         log.warning(
             "Client hit rate limit on path %s, user:%s",
-            request.path,
+            sanitized_path,
             get_current_user(),
         )
         if request.path.startswith("/api/"):
