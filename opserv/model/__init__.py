@@ -1,11 +1,11 @@
 import logging
 
 from opserv.model.meta import Session, db, EnumE
+from opserv.model.activation_code import ActivationCode
+from opserv.model.reset_password import ResetPasswordCode
 from opserv.model.rank import Rank
 from opserv.model.user import User
 from opserv.model.game import Game
-from opserv.model.activation_code import ActivationCode
-from opserv.model.reset_password import ResetPasswordCode
 from opserv.model.enlistment_application import EnlistmentApplication
 from opserv.model.billet import Billet
 from opserv.model.operation_type import OperationType

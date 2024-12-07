@@ -1,16 +1,20 @@
-from typing import TYPE_CHECKING
+import enum
 
-from sqlalchemy import String, Integer, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import String, Integer, ForeignKey, Enum
+from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.dialects.mysql import LONGTEXT
-from opserv.model.meta import Model, Session
+from opserv.model.meta import Model
 
-if TYPE_CHECKING:
-    from opserv.model.user import User
+
+class EnlistmentStatus(enum.Enum):
+    PENDING = 1
+    APPROVED = 2
+    DENIED = 3
 
 
 class EnlistmentApplication(Model):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(Integer, ForeignKey("user.id"), nullable=False)
     primary_game_id: Mapped[int] = mapped_column(
         Integer, ForeignKey("game.id"), nullable=False
     )
@@ -25,22 +29,5 @@ class EnlistmentApplication(Model):
     discord_id: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
     rsi_handle: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
     status: Mapped[int] = mapped_column(
-        Integer, default=0, nullable=False
-    )  # 0 = Pending, 1 = Accepted, 2 = Denied
-
-    user: Mapped["User"] = relationship(
-        "User", foreign_keys="EnlistmentApplication.user_id"
+        Enum(EnlistmentStatus), nullable=False, default=EnlistmentStatus.PENDING
     )
-
-    # Check if the user has submitted an application
-    @classmethod
-    def has_application(cls, user_id: int) -> bool:
-        return Session.query(cls).filter(cls.user_id == user_id).first() is not None
-
-    # Get the application status
-    @classmethod
-    def get_application_status(cls, user_id: int) -> str:
-        application = Session.query(cls).filter(cls.user_id == user_id).first()
-        if application is not None:
-            return application.status
-        return "None"
