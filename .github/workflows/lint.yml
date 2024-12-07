@@ -24,9 +24,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: |
-          poetry lock [--no-update]
-          poetry install --no-interaction
+        run: poetry install --no-interaction
 
       - name: Check formatting & linting
         run: poetry run pre-commit run --all-files -v
