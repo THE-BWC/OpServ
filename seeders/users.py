@@ -6,10 +6,10 @@ log = logging.getLogger(__name__)
 
 
 def seed_users():
-    admin = User(email="admin@example.com", username="Black Widow Company")  # type: ignore[call-arg]
+    admin = User(email="admin@example.com", username="Black Widow Company")
     admin.set_password("admin")
 
-    patrick = User(id=7519, email="patrick@example.com", username="Patrick")  # type: ignore[call-arg]
+    patrick = User(id=7519, email="patrick@example.com", username="Patrick")
     patrick.set_password("patrick")
 
     if not Session.execute(select(User).filter(User.email == admin.email)).scalar():
