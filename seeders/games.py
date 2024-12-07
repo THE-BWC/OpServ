@@ -1,4 +1,4 @@
-from opserv.model import db, Game, MemberGames
+from opserv.model import Session, Game, MemberGames
 
 
 def seed_games():
@@ -12,10 +12,10 @@ def seed_games():
     ]
 
     for game in games:
-        if not db.session.query(Game).get(game.id):
-            db.session.add(game)
+        if not Session.query(Game).get(game.id):
+            Session.add(game)
 
-    db.session.commit()
+    Session.commit()
     print("Games seeded")
 
 
@@ -26,10 +26,10 @@ def seed_member_games():
     ]
 
     for member_game in member_games:
-        if not db.session.query(MemberGames).get(
+        if not Session.query(MemberGames).get(
             (member_game.user_id, member_game.game_id)
         ):
-            db.session.add(member_game)
+            Session.add(member_game)
 
-    db.session.commit()
+    Session.commit()
     print("Member Games seeded")

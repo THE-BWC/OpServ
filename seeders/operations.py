@@ -1,5 +1,5 @@
 import arrow
-from opserv.model import db, Operation, OperationType
+from opserv.model import Session, Operation, OperationType
 
 
 def seed_operation_types():
@@ -69,10 +69,10 @@ def seed_operation_types():
     ]
 
     for operation in operation_type:
-        if not db.session.query(OperationType).get(operation.id):
-            db.session.add(operation)
+        if not Session.query(OperationType).get(operation.id):
+            Session.add(operation)
 
-    db.session.commit()
+    Session.commit()
     print("Operation Types seeded")
 
 
@@ -91,8 +91,8 @@ def seed_operations():
     ]
 
     for operation in operations:
-        if not db.session.query(Operation).get(operation.id):
-            db.session.add(operation)
+        if not Session.query(Operation).get(operation.id):
+            Session.add(operation)
 
-    db.session.commit()
+    Session.commit()
     print("Operations seeded")

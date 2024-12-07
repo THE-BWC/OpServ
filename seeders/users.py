@@ -1,37 +1,19 @@
-import unicodedata
-import bcrypt
-from typing import Literal, Final
-
-from opserv.model import db, User
-
-_NORMALIZATION_FORM: Final[Literal["NFKC"]] = "NFKC"
-
-
-def create_password(password):
-    password = unicodedata.normalize(_NORMALIZATION_FORM, password)
-    salt = bcrypt.gensalt()
-    return bcrypt.hashpw(password.encode(), salt).decode()
+from opserv.model import Session, User
 
 
 def seed_users():
     users = [
-        User(
-            id=1,
-            username="Black Widow Company",
-            email="admin@example.com",
-            password=create_password("admin"),
+        User.create(
+            email="admin@example.com", username="Black Widow Company", password="admin"
         ),
-        User(
-            id=7519,
-            username="Patrick",
-            email="patrick@example.com",
-            password=create_password("patrick"),
+        User.create(
+            email="patrick@example.com", username="Patrick", password="patrick"
         ),
     ]
 
     for user in users:
-        if not db.session.query(User).get(user.id):
-            db.session.add(user)
+        if not Session.query(User).get(user.id):
+            Session.add(user)
 
-    db.session.commit()
+    Session.commit()
     print("Users seeded")
