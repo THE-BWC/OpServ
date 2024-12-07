@@ -17,14 +17,16 @@ jobs:
           python-version: 3.12
           cache: 'poetry'
 
-      - name: Install OS dependcies
+      - name: Install OS dependencies
         run: |
           sudo apt update
           sudo apt install -y libre2-dev libpq-dev
 
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --no-interaction
+        run: |
+          poetry lock [--no-update]
+          poetry install --no-interaction
 
       - name: Check formatting & linting
         run: poetry run pre-commit run --all-files -v
