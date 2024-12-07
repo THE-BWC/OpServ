@@ -1,20 +1,23 @@
-{% extends 'single-full.html' %}
+{% extends 'page.html' %}
 
 {% block title %}Application Status{% endblock %}
-{% block single_content %}
+{% block primary_content %}
 
-  <div style="margin: 0 auto; padding-bottom: 16em">
-    <h2 class="card-title text-center">Application Status</h2>
-    <div class="card-body text-center mt-4">
-      {% if status == 0 %}
+  <div class="card col-sm-8 mx-auto center-card">
+    <div class="card-body text-center">
+      {% if status | enlistment_status == "PENDING" %}
 
         <div class="text-warning">
-          <h1>Pending</h1>
+          <h2 class="text-white">Application Status</h2>
+          <h4>Pending</h4>
           <p>Your application is still pending. Please wait for further instructions.</p>
         </div>
-      {% elif status == 2 %}
+      {% endif %}
+      {% if status | enlistment_status == "DENIED" %}
+
         <div class="text-danger">
-          <h1>Denied</h1>
+          <h2 class="text-white">Application Status</h2>
+          <h4>Denied</h4>
           <p>Your application has been denied. Please check your email for further information.</p>
         </div>
       {% endif %}

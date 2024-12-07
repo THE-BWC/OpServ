@@ -1,7 +1,7 @@
-{% extends "single.html" %}
+{% extends "page.html" %}
 
 {% block title %}Resend activation email{% endblock %}
-{% block single_content %}
+{% block primary_content %}
 
   <form class="card" method="post">
     {{ form.csrf_token }}

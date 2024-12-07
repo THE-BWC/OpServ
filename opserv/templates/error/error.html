@@ -1,0 +1,33 @@
+{% extends "page.html" %}
+
+{% block primary_content %}
+
+  <div class="col-sm-8 mx-auto center-card">
+    <div class="card">
+      <div class="card-body p-5 text-center">
+        <div class="display-3 mb-5">
+          <i class="fa fa-exclamation"></i>
+          {% block error_name %}{% endblock %}
+        </div>
+        <h3 class="h3 mb-4">
+          {% block error_description %}{% endblock %}
+        </h3>
+        {% block suggestion %}
+
+          <a class="btn btn-primary" href="{{ url_for("index") }}">
+            <i class="fe fe-home mr-2"></i>Dashboard
+          </a>
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{#
+Since this is the error page for the whole site.
+We would want to show the footer here, even if we are not signed in.
+#}
+{% block footer %}
+
+  {% include 'footer.html' %}
+
+{% endblock %}

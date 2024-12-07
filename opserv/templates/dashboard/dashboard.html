@@ -1,10 +1,10 @@
-{% extends "default.html" %}
+{% extends "dashboard/base.html" %}
 
 {% block title %}Dashboard{% endblock %}
-{% block default_content %}
+{% block primary_content %}
 
   <section class="gap-4 py-8 pr-4 grid grid-cols-1 2xl:grid-cols-2">
-    {# Insert game dropdown here #}
+    Insert game dropdown here
     <div class="bg-dark rounded-lg shadow h-fit">
       <div class="bg-gradient-to-b from-gradient-dark to-gradient-light rounded-t-lg">
         <h5 class="p-4 text-base font-bold tracking-tight text-gray-900 dark:text-white">Operations Games List</h5>
@@ -38,7 +38,7 @@
                class="hidden pt-2"
                aria-labelledby="accordion-collapse-heading-1">
             <div class="px-1 pb-4">
-              {# Insert game operation list here #}
+              Insert game operation list here
               {% for operation in game.operations %}
 
                 <div class="bg-secondary p-3 mb-3 rounded-lg">
@@ -156,7 +156,7 @@
         {% endfor %}
       </div>
     </div>
-    {# Insert upcoming operations here #}
+    Insert upcoming operations here
     <div class="p-6 h-fit bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
         Noteworthy technology acquisitions 2021

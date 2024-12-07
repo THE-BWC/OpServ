@@ -16,6 +16,9 @@ $gradient-dark: #681000;
 $gradient-light: #8c0902;
 $gradient-border: #ab0900;
 
+// Body
+$body-bg-dark: $dark;
+
 //Sizes
 $xs: 416px;
 
@@ -84,6 +87,8 @@ body {
     height: 100%;
     overflow-y: scroll;
     position: relative;
+    background: url("https://the-bwc.com/PAO/Forum_Header_Background.png") no-repeat fixed center top;
+    background-size: cover
 }
 .page {
     display: flex;
@@ -133,4 +138,36 @@ body {
     content:"*";
     color:red;
     margin-left: 4px;
+}
+
+
+.main {
+  min-height: calc(100vh - 72px);
+
+  .center-card {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+  }
+
+  .form-bg-secondary {
+    background-color: #333333;
+  }
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+}
+
+footer {
+  ul {
+    li {
+      :hover {
+        color: white;
+      }
+    }
+  }
 }

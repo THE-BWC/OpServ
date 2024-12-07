@@ -1,7 +1,8 @@
-{% extends 'single.html' %}
+{% from 'macros/render_field_errors.html' import render_field_errors %}
+{% extends 'page.html' %}
 
 {% block title %}Login{% endblock %}
-{% block single_content %}
+{% block primary_content %}
 
   {% if show_resend_activation %}
 
@@ -10,39 +11,39 @@
       <a href="{{ url_for("auth.resend_activation") }}">Resend</a>
     </div>
   {% endif %}
-  <div class="card">
+  <div class="col-sm-4 mx-auto card">
     <div class="card-body p-5">
-      <h4 class="card-title">Sign in to your account</h4>
+      <div class="card-title mb-4">
+        <img src="https://pao.the-bwc.com/TS_Logo.png"
+             style="background-color: transparent;
+                    width: 100%">
+      </div>
       <form method="post">
         {{ form.csrf_token }}
         <div class="mb-3">
-          <label class="form-label">Email Address</label>
-          {{ form.email(class="form-control", type="email", autofocus=true) }}
+          <label class="form-label">
+            <strong>Email Address</strong>
+          </label>
+          {{ form.email(class="form-control form-bg-secondary", type="email", autofocus=true, placeholder="Email") }}
           {{ render_field_errors(form.email) }}
         </div>
-        <div class="mb-3">
-          <label class="form-label">Password</label>
-          {{ form.password(class="form-control", type="password") }}
+        <div class="mb-4">
+          <label class="form-label">
+            <strong>Password</strong>
+          </label>
+          {{ form.password(class="form-control form-bg-secondary", type="password", placeholder="Password") }}
           {{ render_field_errors(form.password) }}
-          <div class="text-muted">
-            <a href="{{ url_for("auth.forgot_password") }}" class="small">Forgot password?</a>
-          </div>
         </div>
         <div class="d-grid">
-          <button type="submit" class="btn btn-primary btn-block">Log In</button>
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </div>
+        <div class="text-center text-muted mt-3">
+          <a href="{{ url_for("auth.forgot_password") }}" class="small">Forgot password?</a>
+        </div>
+        <div class="text-center text-muted">
+          <a href="{{ url_for("auth.register") }}" class="small">Create new account?</a>
         </div>
       </form>
-      {% if connect_with_oidc %}
-
-        <div class="text-center my-2 text-gray">
-          <span class="horizontal-line">or</span>
-        </div>
-        <a class="btn btn-primary btn-block mt-2 w-100" href="/">Sign in with BWC Auth</a>
-      {% endif %}
     </div>
-  </div>
-  <div class="text-center text-muted mt-2">
-    Don't have an account yet?
-    <a href="{{ url_for("auth.register") }}">Sign up</a>
   </div>
 {% endblock %}

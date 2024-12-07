@@ -1,0 +1,18 @@
+{% extends "page.html" %}
+
+{% if current_user.is_authenticated %}
+
+  {% block header %}
+
+    {% include 'header.html' %}
+
+  {% endblock %}
+{% endif %}
+{% if current_user.is_authenticated %}
+
+  {% block footer %}
+
+    {% include 'footer.html' %}
+
+  {% endblock %}
+{% endif %}

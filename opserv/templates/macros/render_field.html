@@ -13,11 +13,3 @@
     </div>
   </div>
 {% endmacro %}
-{% macro render_field_errors(field) %}
-  {% if field.errors %}
-
-    <ul class="text-red-500">
-      {% for error in field.errors %}<li class="text-danger">{{ error }}</li>{% endfor %}
-    </ul>
-  {% endif %}
-{% endmacro %}

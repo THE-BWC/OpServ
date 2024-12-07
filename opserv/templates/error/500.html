@@ -1,6 +1,6 @@
-{% extends "error.html" %}
+{% extends "error/error.html" %}
 
-{% block error_name %}Server error{% endblock %}
+{% block error_name %}Server Error{% endblock %}
 {% block error_description %}
 
   Looks like we are having some server issues...
@@ -11,6 +11,6 @@
 {% block suggestion %}
 
   <a class="btn btn-primary" href="javascript:history.back()">
-    <i class="fe fe-arrow-left mr-2"></i>Go Back
+    <i class="fa fa-arrow-left me-2"></i>Go Back
   </a>
 {% endblock %}
