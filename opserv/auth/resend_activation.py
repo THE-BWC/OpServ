@@ -4,10 +4,11 @@ from flask import flash, render_template, redirect, url_for, request
 from flask_wtf import FlaskForm
 from wtforms.fields.simple import StringField
 from wtforms.validators import DataRequired
+from sqlalchemy import select
 
 from opserv.auth.base import auth_bp
 from opserv.auth.register import send_activation_email
-from opserv.model import User
+from opserv.model import User, Session
 from opserv.utils import sanitize_email
 
 log = logging.getLogger(__name__)
@@ -24,7 +25,7 @@ def resend_activation():
 
     if form.validate_on_submit():
         email = sanitize_email(form.email.data)
-        user = User.get_by(email=email)
+        user: User = Session.execute(select(User).filter(User.email == email)).first()
 
         if not user:
             flash("There is no such email", "warning")

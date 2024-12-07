@@ -6,6 +6,7 @@ from flask import request, flash, render_template, redirect, url_for
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, validators
+from sqlalchemy import select
 
 from opserv.auth.base import auth_bp
 from opserv.config import BaseConfig
@@ -64,11 +65,9 @@ def register():
                 )
 
         log.debug("Create user %s", form.email.data)
-        user = User.create(
-            email=form.email.data,
-            username=form.username.data,
-            password=form.password.data,
-        )
+        user = User(email=form.email.data, username=form.username.data)
+        user.set_password(form.password.data)
+        Session.add(user)
         Session.commit()
 
         try:
@@ -76,7 +75,10 @@ def register():
             RegisterEvent(RegisterEvent.ActionType.success).send()
             Session.commit()
         except smtplib.SMTPException:
-            Session.query(User).filter(User.id == user.id).delete()
+            user_obj = Session.execute(
+                select(User).where(User.email == form.email.data)
+            ).first()
+            Session.delete(user_obj)
             Session.commit()
             flash(
                 "Could not send activation email. Are you sure the email is correct?",
@@ -97,8 +99,15 @@ def register():
 
 
 def send_activation_email(user, next_url):
-    Session.query(ActivationCode).filter(ActivationCode.user_id == user.id).delete()
-    activation = ActivationCode.create(user_id=user.id, code=random_string(30))
+    code_object = Session.execute(
+        select(ActivationCode).filter(ActivationCode.user_id == user.id)
+    ).first()
+    if code_object:
+        Session.delete(code_object)
+        Session.commit()
+
+    activation = ActivationCode(user_id=user.id, code=random_string(30))
+    Session.add(activation)
     Session.commit()
 
     activation_link = f"{BaseConfig.URL}/auth/activate?code={activation.code}"

@@ -1,5 +1,7 @@
+import logging
 from flask import g, render_template, request, flash
 from flask_login import current_user
+from sqlalchemy import select
 
 from opserv.auth.base import auth_bp
 from opserv.auth.login_utils import after_login
@@ -8,6 +10,8 @@ from opserv.events.user_audit_log import UserAuditLogAction, emit_user_audit_log
 from opserv.limiter import limiter
 from opserv.mail import mail_sender
 from opserv.utils import sanitize_next_url
+
+log = logging.getLogger(__name__)
 
 
 @auth_bp.route("/activate", methods=["GET", "POST"])
@@ -23,8 +27,9 @@ def activate():
 
     code = request.args.get("code")
 
-    activation_code: ActivationCode = ActivationCode.get_by(code=code)
-
+    activation_code: ActivationCode = (
+        Session.execute(select(ActivationCode).filter_by(code=code)).scalars().first()
+    )
     if not activation_code:
         g.deduct_limit = True
         return (
@@ -50,7 +55,7 @@ def activate():
         message=f"User has verified their email: {user.username} ({user.email})",
     )
 
-    ActivationCode.delete(activation_code.id)
+    Session.delete(activation_code)
     Session.commit()
 
     flash("Your email has been verified", "success")

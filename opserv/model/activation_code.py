@@ -21,5 +21,8 @@ class ActivationCode(Model):
     )
     user: Mapped["User"] = relationship("User", foreign_keys="ActivationCode.user_id")
 
+    def __repr__(self):
+        return f"<ActivationCode {self.id}>"
+
     def is_expired(self):
         return self.expired < arrow.now()

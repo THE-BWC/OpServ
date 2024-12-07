@@ -1,6 +1,6 @@
 import time
+import logging.config as loggingConfig
 import logging
-import logging.config
 from datetime import timedelta
 
 import arrow
@@ -29,13 +29,14 @@ from opserv.auth.login_utils import login_manager
 from opserv.config import BaseConfig
 from opserv.dashboard.base import dashboard_bp
 from opserv.recruit_application.base import application_bp
-from opserv.model import init_model, Session
+from opserv.model import init_model, Session, EnlistmentStatus
 from opserv.sentry_utils import sentry_before_send
 from opserv.storage import storage
 
 from opserv.limiter import limiter
 
 log = logging.getLogger(__name__)
+loggingConfig.dictConfig(BaseConfig.LOGGING_CONFIG)
 
 if BaseConfig.SENTRY_DSN:
     log.debug("Enable Sentry")
@@ -76,8 +77,6 @@ def create_app() -> Flask:
         app.config["DEBUG_TB_PROFILER_ENABLED"] = False
         app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
         DebugToolbarExtension(app)
-
-    logging.config.dictConfig(BaseConfig.LOGGING_CONFIG)
 
     limiter.init_app(app)
 
@@ -230,8 +229,8 @@ def setup_error_page(app):
             return render_template("error/429.html"), 429
 
     @app.errorhandler(Exception)
-    def error_handler(e):
-        log.error(e)
+    def error_handler(error):
+        log.exception("Error: %s", error)
         if request.path.startswith("/api/"):
             return jsonify(error="Internal error"), 500
         else:
@@ -250,6 +249,11 @@ def jinja2_filter(app):
         return dt.format("YYYY-MM-DD HH:mm ZZZ")
 
     app.jinja_env.filters["dt"] = format_datetime
+
+    def convert_enlistment_status(value):
+        return EnlistmentStatus(value).name
+
+    app.jinja_env.filters["enlistment_status"] = convert_enlistment_status
 
     @app.context_processor
     def inject_stage_and_region():

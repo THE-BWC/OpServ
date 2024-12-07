@@ -1,9 +1,12 @@
 import enum
-
+from typing import TYPE_CHECKING
 from sqlalchemy import String, Integer, ForeignKey, Enum
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.dialects.mysql import LONGTEXT
 from opserv.model.meta import Model
+
+if TYPE_CHECKING:
+    pass
 
 
 class EnlistmentStatus(enum.Enum):

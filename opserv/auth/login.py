@@ -4,13 +4,14 @@ from flask import request, render_template, redirect, url_for, flash, g
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, validators
+from sqlalchemy import select
 
 from opserv.auth.base import auth_bp
 from opserv.auth.login_utils import after_login
 from opserv.config import BaseConfig
 from opserv.events.auth_event import LoginEvent
 from opserv.limiter import limiter
-from opserv.model import User
+from opserv.model import Session, User
 from opserv.utils import sanitize_email, sanitize_next_url
 
 log = logging.getLogger(__name__)
@@ -42,9 +43,9 @@ def login():
 
     if form.validate_on_submit():
         email = sanitize_email(form.email.data)
-        user = User.get_by(email=email)
+        user: User = Session.execute(select(User).where(User.email == email)).first()
 
-        if not user or not user.check_password(form.password.data):
+        if not user or not user.authenticate(form.password.data):
             # Rate limit login attempts
             g.deduct_limit = True
             form.password.data = None

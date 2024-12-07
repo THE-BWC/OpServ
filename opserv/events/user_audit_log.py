@@ -1,6 +1,6 @@
 from enum import Enum
 
-from opserv.model import User, UserAuditLog
+from opserv.model import User, UserAuditLog, Session
 
 
 class UserAuditLogAction(Enum):
@@ -10,13 +10,9 @@ class UserAuditLogAction(Enum):
     EmailVerified = "email_verified"
 
 
-def emit_user_audit_log(
-    user: User, action: UserAuditLogAction, message: str, commit: bool = False
-):
-    UserAuditLog.create(
-        user_id=user.id,
-        username=user.username,
-        action=action.value,
-        message=message,
-        commit=commit,
+def emit_user_audit_log(user: User, action: UserAuditLogAction, message: str):
+    audit = UserAuditLog(
+        user_id=user.id, username=user.username, action=action.value, message=message
     )
+    Session.add(audit)
+    Session.commit()
