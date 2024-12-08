@@ -4,7 +4,7 @@ from time import time
 from flask import session, redirect, url_for
 from flask_login import login_user, LoginManager
 from opserv.model import Session, User, UserStatus
-from utils import sanitize_next_url
+from opserv.utils import sanitize_next_url
 
 login_manager = LoginManager()
 

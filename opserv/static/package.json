@@ -1,6 +1,6 @@
 {
   "name": "opserv",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Black Widow Company - Operations Server",
   "repository": {
     "type": "git",
@@ -13,7 +13,6 @@
   },
   "homepage": "https://github.com/THE-BWC/opserv#readme",
   "dependencies": {
-    "@sentry/browser": "^8.36.0",
     "bootstrap": "^5.3.3",
     "font-awesome": "^4.7.0",
     "intro.js": "^8.0.0-beta.1",

@@ -281,6 +281,8 @@ def jinja2_filter(app):
             SOCIALS=BaseConfig.SOCIALS,
             IMAGE_URL=BaseConfig.IMAGE_URL,
             IMAGE_PATHS=BaseConfig.IMAGE_PATHS,
+            SENTRY_RELEASE=BaseConfig.RELEASE,
+            SENTRY_ENVIRONMENT=BaseConfig.ENVIRONMENT,
         )
 
 
@@ -340,11 +342,10 @@ def local_main():
     BaseConfig.COLOR_log = True
     app = create_app()
 
-    debug = False
     if BaseConfig.ENVIRONMENT == "development":
-        debug = True
+        app.debug = True
 
-    app.run(debug=debug, port=5000, host="0.0.0.0")
+    app.run(port=5000, host="0.0.0.0")
 
     # log.debug("Enable HTTPS")
     # import ssl

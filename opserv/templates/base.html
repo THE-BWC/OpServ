@@ -36,21 +36,29 @@
           type="text/css"
           href="{{ url_for('static', filename='node_modules/intro.js/minified/introjs.min.css') }}">
     <script src="{{ url_for('static', filename='node_modules/intro.js/minified/intro.min.js') }}"></script>
-    <!-- Sentry -->
-    <script src="{{ url_for('static', filename='node_modules/@sentry/browser/build/bundle.min.js') }}"></script>
     <!-- Toastr -->
     <link rel="stylesheet"
           type="text/css"
           href="{{ url_for('static', filename='node_modules/toastr/build/toastr.min.css') }}">
     <script src="{{ url_for('static', filename='node_modules/toastr/build/toastr.min.js') }}"></script>
     <script>toastr.options.closeButton = true;</script>
+    <!-- Sentry -->
+    <script src="https://js-de.sentry-cdn.com/60ed8ebfa46700b2b584973de4a2473b.min.js"
+            crossorigin="anonymous"></script>
+    <script>
+      window.sentryOnLoad = function () {
+        Sentry.init({
+          release: '{{ SENTRY_RELEASE }}',
+          environment: '{{ SENTRY_ENVIRONMENT }}',
+        })
+      }
+    </script>
     {% block head %}{% endblock %}
   </head>
   <body>
     {%- block page %}
     {% endblock -%}
-    <script src="{{ url_for('static', filename='vendor/bootstrap.bundle.min.js') }}"></script>
-    {#    <script src="{{ url_for('static', filename='assets/js/flowbite-2.4.1.min.js') }}"></script>#}
+    <script src="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.bundle.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
     {% block script %}{% endblock %}
   </body>
