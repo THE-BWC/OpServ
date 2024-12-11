@@ -308,7 +308,15 @@ def setup_mail(app):
 def register_custom_commands(app):
     @app.cli.command("seed")
     def seed():
-        from seeders import ranks, users, games, operations
+        from seeders import (
+            ranks,
+            users,
+            games,
+            operations,
+            permissions,
+            billets,
+            billet_permissions,
+        )
 
         ranks.seed_ranks()
         users.seed_users()
@@ -316,6 +324,9 @@ def register_custom_commands(app):
         games.seed_member_games()
         operations.seed_operation_types()
         operations.seed_operations()
+        permissions.seed_permissions()
+        billets.seed_billets()
+        billet_permissions.seed_billet_permissions()
 
     @app.cli.command("test-email")
     def test_email():

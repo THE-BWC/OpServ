@@ -12,6 +12,8 @@ from opserv.model.operation_type import OperationType
 from opserv.model.operation import Operation
 from opserv.model.member_game import MemberGames
 from opserv.model.audit_user import UserAuditLog
+from opserv.model.permission import Permission
+from opserv.model.billet_permission import BilletPermission
 
 __all__ = [
     "db",
@@ -24,6 +26,8 @@ __all__ = [
     "Game",
     "Rank",
     "Billet",
+    "Permission",
+    "BilletPermission",
     "OperationType",
     "Operation",
     "MemberGames",

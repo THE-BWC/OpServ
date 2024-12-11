@@ -1,4 +1,5 @@
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, List
+from arrow import Arrow
 from sqlalchemy import String, Integer, Boolean, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.dialects.mysql import LONGTEXT
@@ -7,6 +8,7 @@ from opserv.model.meta import Model
 
 if TYPE_CHECKING:
     from opserv.model.rank import Rank
+    from opserv.model.permission import Permission
 
 
 class Billet(Model):
@@ -17,8 +19,11 @@ class Billet(Model):
     office_id: Mapped[int] = mapped_column(Integer, nullable=True)
     taskforce_id: Mapped[int] = mapped_column(Integer, nullable=True)
     rank_id: Mapped[int] = mapped_column(Integer, ForeignKey("rank.id"), nullable=False)
-    last_filled_date = mapped_column(ArrowType, nullable=True)
+    last_filled_date: Mapped[Arrow] = mapped_column(ArrowType, nullable=True)
     # ts3_perms: Mapped[str] = mapped_column(String(255), nullable=True)
     retired: Mapped[bool] = mapped_column(Boolean, default=0)
 
     rank: Mapped["Rank"] = relationship(back_populates="billets")
+    permissions: Mapped[List["Permission"]] = relationship(
+        "Permission", secondary="billet_permission", back_populates="billets"
+    )
