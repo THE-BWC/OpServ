@@ -31,7 +31,7 @@ from opserv.dashboard.base import dashboard_bp
 from opserv.recruit_application.base import application_bp
 from opserv.model import init_model, Session, EnlistmentStatus
 from opserv.utils import sentry_before_send, limiter
-from opserv.storage import storage
+from opserv.storage import StorageFactory
 
 log = logging.getLogger(__name__)
 loggingConfig.dictConfig(BaseConfig.LOGGING_CONFIG)
@@ -87,7 +87,7 @@ def create_app() -> Flask:
 
     setup_favicon_route(app)
 
-    init_storage()
+    init_storage(app)
     init_model(app)
     setup_mail(app)
     register_custom_commands(app)
@@ -284,9 +284,8 @@ def jinja2_filter(app):
         )
 
 
-def init_storage():
-    stor = storage(BaseConfig.STORAGE_TYPE)
-    stor.init()
+def init_storage(app):
+    app.storage = StorageFactory.create(BaseConfig.STORAGE_TYPE)
 
 
 def init_extensions(app: Flask):
