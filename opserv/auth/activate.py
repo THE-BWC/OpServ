@@ -7,9 +7,8 @@ from opserv.auth.base import auth_bp
 from opserv.auth.login_utils import after_login
 from opserv.model import ActivationCode, Session
 from opserv.events.user_audit_log import UserAuditLogAction, emit_user_audit_log
-from opserv.limiter import limiter
 from opserv.mail import mail_sender
-from opserv.utils import sanitize_next_url
+from opserv.utils import sanitize_next_url, limiter
 
 log = logging.getLogger(__name__)
 

@@ -10,9 +10,8 @@ from opserv.auth.base import auth_bp
 from opserv.auth.login_utils import after_login
 from opserv.config import BaseConfig
 from opserv.events.auth_event import LoginEvent
-from opserv.limiter import limiter
 from opserv.model import Session, User
-from opserv.utils import sanitize_email, sanitize_next_url
+from opserv.utils import sanitize_email, sanitize_next_url, limiter
 
 log = logging.getLogger(__name__)
 

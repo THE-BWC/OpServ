@@ -9,7 +9,7 @@ from sqlalchemy import select
 from opserv.auth.base import auth_bp
 from opserv.auth.register import send_activation_email
 from opserv.model import User, Session
-from opserv.utils import sanitize_email
+from opserv.utils import sanitize_email, limiter
 
 log = logging.getLogger(__name__)
 
@@ -19,7 +19,7 @@ class ResendActivationForm(FlaskForm):
 
 
 @auth_bp.route("/resend_activation", methods=["GET", "POST"])
-# @limiter.limit("10/hour")
+@limiter.limit("10/hour")
 def resend_activation():
     form = ResendActivationForm(request.form)
 

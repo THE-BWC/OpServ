@@ -30,10 +30,8 @@ from opserv.config import BaseConfig
 from opserv.dashboard.base import dashboard_bp
 from opserv.recruit_application.base import application_bp
 from opserv.model import init_model, Session, EnlistmentStatus
-from opserv.sentry_utils import sentry_before_send
+from opserv.utils import sentry_before_send, limiter
 from opserv.storage import storage
-
-from opserv.limiter import limiter
 
 log = logging.getLogger(__name__)
 loggingConfig.dictConfig(BaseConfig.LOGGING_CONFIG)

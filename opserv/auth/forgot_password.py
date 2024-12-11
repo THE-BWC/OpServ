@@ -6,9 +6,8 @@ from wtforms import StringField, validators
 
 from opserv.auth.base import auth_bp
 from opserv.dashboard.account_setting import send_reset_password_email
-from opserv.limiter import limiter
+from opserv.utils import limiter, sanitize_email
 from opserv.model import User
-from opserv.utils import sanitize_email
 
 log = logging.getLogger(__name__)
 

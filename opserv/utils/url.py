@@ -1,17 +1,7 @@
-import secrets
-import string
 import urllib.parse
 from typing import List, Optional
 
 from opserv.config import BaseConfig
-
-
-def sanitize_email(email_address: str, not_lower=False) -> str:
-    if email_address:
-        email_address = email_address.strip().replace(" ", "").replace("\n", " ")
-        if not not_lower:
-            email_address = email_address.lower()
-    return email_address.replace("\u200f", "")
 
 
 class NextUrlSanitizer:
@@ -40,11 +30,3 @@ def sanitize_next_url(url: Optional[str]) -> Optional[str]:
 
 def encode_url(url: str) -> str:
     return urllib.parse.quote(url, safe="")
-
-
-def random_string(length=10, include_digits=False):
-    letters = string.ascii_lowercase
-    if include_digits:
-        letters += string.digits
-
-    return "".join(secrets.choice(letters) for _ in range(length))
