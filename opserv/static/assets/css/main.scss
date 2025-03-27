@@ -44,81 +44,89 @@ $xs: 416px;
 @import "../../node_modules/bootstrap/scss/card";
 @import "../../node_modules/bootstrap/scss/forms";
 @import "../../node_modules/bootstrap/scss/buttons";
+@import "../../node_modules/bootstrap/scss/dropdown";
+@import "../../node_modules/bootstrap/scss/alert";
 
 
 // 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
 @import "../../node_modules/bootstrap/scss/utilities/api";
 
 // 8. Add additional custom code here
+@each $color, $value in $grays {
+  .text-gray-#{$color} {
+    color: $value;
+  }
+}
+
 * {
   scrollbar-color: #901919 #212121;
 }
 ::-webkit-scrollbar {
-    width: 12px
+  width: 12px
 }
 ::-webkit-scrollbar-button {
-    display: none
+  display: none
 }
 ::-webkit-scrollbar-track {
-    background: #2d2d2d
+  background: #2d2d2d
 }
 ::-webkit-scrollbar-track-piece {
-    background: #2d2d2d
+  background: #2d2d2d
 }
 ::-webkit-scrollbar-thumb {
-    background: #810900
+  background: #810900
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #ab0900
+  background: #ab0900
 }
 ::-webkit-scrollbar-corner {
-    background: #2d2d2d
+  background: #2d2d2d
 }
 ::-webkit-resizer {
-    background: #2d2d2d
+  background: #2d2d2d
 }
 html {
-    font-size: 16px;
-    height: 100%;
-    direction: ltr;
+  font-size: 16px;
+  height: 100%;
+  direction: ltr;
 }
 body {
-    direction: ltr;
-    height: 100%;
-    overflow-y: scroll;
-    position: relative;
-    background: url("https://the-bwc.com/PAO/Forum_Header_Background.png") no-repeat fixed center top;
-    background-size: cover
+  direction: ltr;
+  height: 100%;
+  overflow-y: scroll;
+  position: relative;
+  background: url("https://the-bwc.com/PAO/Forum_Header_Background.png") no-repeat fixed center top;
+  background-size: cover
 }
 .page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
 }
 .page-single {
-    flex: 1 1 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 0;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
 }
 .form-group {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 .horizontal-line {
-    overflow: hidden;
-    text-align: center;
+  overflow: hidden;
+  text-align: center;
 }
 .horizontal-line::before,
 .horizontal-line::after {
-    content: "";
-    background-color: var(--bs-border-color-translucent);
-    display: inline-block;
-    height: 1px;
-    position: relative;
-    vertical-align: middle;
-    width: 50%;
+  content: "";
+  background-color: var(--bs-border-color-translucent);
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
 }
 .horizontal-line::before {
   right: 0.5em;
@@ -129,20 +137,79 @@ body {
   margin-right: -50%;
 }
 .text-muted li p {
-    color: var(--bs-secondary-color);
+  color: var(--bs-secondary-color);
 }
 .text-muted li p b {
-    color: var(--bs-body-color);
+  color: var(--bs-body-color);
 }
 .form-group.required .form-label:after {
-    content:"*";
-    color:red;
-    margin-left: 4px;
+  content:"*";
+  color:red;
+  margin-left: 4px;
+}
+.text-small {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.success {
+  color: $success-text-emphasis;
+  background: $success-bg-subtle;
+  border-color: $success-border-subtle;
+  border-radius: $alert-border-radius;
+}
+.danger {
+  color: $danger-text-emphasis;
+  background: $danger-bg-subtle;
+  border-color: $danger-border-subtle;
+  border-radius: $alert-border-radius;
+}
+.warning {
+  color: $warning-text-emphasis;
+  background: $warning-bg-subtle;
+  border-color: $warning-border-subtle;
+  border-radius: $alert-border-radius;
+}
+.info {
+  color: $info-text-emphasis;
+  background: $info-bg-subtle;
+  border: 2px solid $info-border-subtle;
+  border-radius: $alert-border-radius;
 }
 
+aside {
+  #member-information {
+    .avatar {
+      display: block;
+      overflow: hidden;
+    }
+
+    div p {
+      margin: 0;
+    }
+  }
+}
+
+.main-header {
+  position: relative;
+  z-index: 1050;
+  background-color: $dark;
+
+  .navbar {
+    min-height: 50px;
+    margin-bottom: 0;
+  }
+}
 
 .main {
-  min-height: calc(100vh - 72px);
+  min-height: calc(100vh - 132px);
+
+  #login-box {
+    width: 400px;
+  }
 
   .center-card {
     margin: 0;

@@ -181,7 +181,7 @@ class BaseConfig:
                 "propagate": False,
             },
             "opserv": {
-                "level": "INFO",
+                "level": "DEBUG",
                 "handlers": ["console"],
                 "qualname": "opserv",
                 "propagate": False,

@@ -8,13 +8,19 @@
   #}
   {%- block header %}
   {% endblock -%}
+  {# The navigation block allows you to replace the navigation aside of the page if needed #}
+  {% block navigation %}
+
+    {% include 'snippets/navigation.html' %}
+
+  {% endblock %}
   {# The content block allows you to replace the content of the page if needed #}
   {%- block content %}
     {% block maintag %}
 
       <div class="main">
       {% endblock maintag %}
-      <div id="content" class="container">
+      <div id="content">
         {% block main_content %}
           {% block flash %}
 
@@ -23,7 +29,19 @@
               <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
               {% if messages %}
 
-                {% for category, message in messages %}<script>toastr.{{category}}("{{message}}");</script>{% endfor %}
+                {% for category, message in messages %}
+
+                  <script>
+                  Toastify({
+                    text: "{{message}}",
+                    duration: 3000,
+                    className: "alert alert-{{category}}",
+                    gravity: "top",
+                    position: "right",
+                    stopOnFocus: true
+                  }).showToast();
+                  </script>
+                {% endfor %}
               {% endif %}
             {% endwith %}
           {% endblock flash %}

@@ -46,9 +46,9 @@ def login():
 
     if form.validate_on_submit():
         email = sanitize_email(form.email.data)
-        user: User = Session.execute(select(User).where(User.email == email)).first()
+        user: User = Session.execute(select(User).where(User.email == email)).scalar()
 
-        if not user or not user.authenticate(form.password.data):
+        if not user or not user.check_password(form.password.data):
             # Rate limit login attempts
             g.deduct_limit = True
             form.password.data = None

@@ -24,8 +24,6 @@
     </title>
     <link rel="stylesheet"
           href="{{ url_for('static', filename='node_modules/font-awesome/css/font-awesome.css') }}">
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='assets/css/main.css') }}">
     <!-- Jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
             integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -41,6 +39,10 @@
           type="text/css"
           href="{{ url_for('static', filename='node_modules/toastr/build/toastr.min.css') }}">
     <script src="{{ url_for('static', filename='node_modules/toastr/build/toastr.min.js') }}"></script>
+    <link rel="stylesheet"
+          type="text/css"
+          href="{{ url_for('static', filename='node_modules/toastify-js/src/toastify.css') }}">
+    <script src="{{ url_for('static', filename='node_modules/toastify-js/src/toastify.js') }}"></script>
     <script>toastr.options.closeButton = true;</script>
     <!-- Sentry -->
     <script src="https://js-de.sentry-cdn.com/60ed8ebfa46700b2b584973de4a2473b.min.js"
@@ -53,6 +55,8 @@
         })
       }
     </script>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='assets/css/main.css') }}">
     {% block head %}{% endblock %}
   </head>
   <body>

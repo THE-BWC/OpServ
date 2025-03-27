@@ -1,158 +1,174 @@
-<div class="flex space-x-1 w-full p-1 pl-5 bg-dark shadow">
-  {% for social in SOCIALS %}
-
-    <a href="{{ social.url }}"
-       data-tooltip-target="tooltip-{{ social.icon }}"
-       class="inline-flex justify-center p-2 text-gray-200 rounded-lg cursor-pointer dark:hover:text-white hover:text-gray-900 hover:bg-secondary">
-      <i class="fa-brands fa-{{ social.icon }}"></i>
-      <span class="sr-only">{{ social.name }}</span>
-    </a>
-    <div id="tooltip-{{ social.icon }}"
-         role="tooltip"
-         class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
-      {{ social.tooltip }}
-      <div class="tooltip-arrow" data-popper-arrow></div>
-    </div>
-  {% endfor %}
-</div>
-<header class="relative px-5 md:my-0 md:mx-auto w-full bg-forum-header bg-fixed bg-no-repeat bg-top bg-cover">
-  <div class="py-5 flex flex-wrap justify-between items-center max-w-full">
-    <a href="{{ CANONICAL_URL }}" class="">
-      <img src="https://pao.the-bwc.com/BannerStandard.png"
-           class="max-h-[200px]"
-           alt="Flowbite Logo" />
-    </a>
-  </div>
-</header>
-<nav class="sticky top-0 bg-gradient-to-b from-gradient-dark to-gradient-light border-t border-gray-200 dark:border-gradient-border">
-  <div class="flex items-end px-5 m-0 mr-auto text-sm">
-    <div>
-      <ul class="flex flex-row uppercase">
-        <li>
-          <button id="drawer-navigation-toggle"
-                  class="p-2 mr-2 text-white cursor-pointer lg:hidden hover:bg-secondary focus:bg-secondary dark:focus:bg-secondary focus:ring-2 focus:ring-gray-100">
-            <svg aria-hidden="true"
-                 class="w-6 h-6"
-                 fill="currentColor"
-                 viewBox="0 0 20 20"
-                 xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd">
-              </path>
-            </svg>
-            <span class="sr-only">Toggle sidebar</span>
-          </button>
-        </li>
-        <li class="align-bottom text-white leading-10">
-          <a class="inline-block h-10 px-4 hover:bg-secondary hover:px-4" href="">
-            <i class="fa-solid fa-house"></i>
-          </a>
-        </li>
-        <li class="align-bottom text-white leading-10">
-          <a class="inline-block h-10 px-4 hover:bg-secondary hover:px-4" href="">Forums</a>
-        </li>
-        <li class="align-bottom text-white leading-10">
-          <a class="inline-block h-10 px-4 bg-secondary font-bold" href="">OpServ</a>
-        </li>
-        <li class="align-bottom text-white leading-10">
-          <a class="inline-block h-10 px-4 hover:bg-secondary hover:px-4" href="">SOP</a>
-        </li>
-        <li class="align-bottom text-white leading-10">
-          <a class="inline-block h-10 px-4 hover:bg-secondary hover:px-4" href="">About Us</a>
-        </li>
-        <li class="align-bottom text-white leading-10">
-          <a class="inline-block h-10 px-4 hover:bg-secondary hover:px-4" href="">Status</a>
-        </li>
-      </ul>
-    </div>
-    <div class="flex items-center ml-auto">
-      {# Notifications #}
-      <div class="align-bottom text-white leading-10">
-        <button class="inline-block h-10 px-2.5 hover:bg-secondary hover:px-2.5"
-                data-dropdown-toggle="notification-dropdown">
-          <span class="sr-only">Notifications</span>
-          <i class="fa-solid fa-bell fa-lg"></i>
-        </button>
-      </div>
-      <div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white divide-y divide-gray-100 shadow-lg dark:divide-gray-600 dark:bg-gray-700 rounded-xl"
-           id="notification-dropdown">
-        <div class="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-600 dark:text-gray-300">
-          Notifications
-        </div>
-        <div>
-          <a href="#"
-             class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
-            <div class="flex-shrink-0">
-              <img class="w-11 h-11 rounded-full" src="" alt="Bonnie Green avatar" />
-              <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 rounded-full border border-white bg-primary-700 dark:border-gray-700">
-                <svg aria-hidden="true"
-                     class="w-3 h-3 text-white"
-                     fill="currentColor"
-                     viewBox="0 0 20 20"
-                     xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z">
-                  </path>
-                  <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z">
-                  </path>
-                </svg>
-              </div>
-            </div>
-            <div class="pl-3 w-full">
-              <div class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">
-                New message from
-                <span class="font-semibold text-gray-900 dark:text-white">Bonnie Green</span>: "Hey, what's up? All set for the presentation?"
-              </div>
-              <div class="text-xs font-medium text-primary-600 dark:text-primary-500">a few moments ago</div>
-            </div>
-          </a>
-        </div>
-        <a href="#"
-           class="block py-2 text-md font-medium text-center text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-600 dark:text-white dark:hover:underline">
-          <div class="inline-flex items-center">
-            <svg aria-hidden="true"
-                 class="mr-2 w-4 h-4 text-gray-500 dark:text-gray-400"
-                 fill="currentColor"
-                 viewBox="0 0 20 20"
-                 xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
-              <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd">
-              </path>
-            </svg>
-            View all
-          </div>
+<header class="main-header p-2">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <div class="d-flex align-items-center link-body-emphasis text-decoration-none me-lg-auto mb-1">
+        <a class="navbar-brand" href="{{ CANONICAL_URL }}">
+          <img src="https://pao.the-bwc.com/BannerStandard.png"
+               alt="BWC Logo"
+               height="40px" />
         </a>
       </div>
-      {# Search #}
-      <div class="align-bottom text-white leading-10">
-        <button class="inline-block h-10 px-2.5 hover:bg-secondary hover:px-2.5"
-                data-dropdown-toggle="search-dropdown">
-          <span class="sr-only">Search</span>
-          <i class="fa-solid fa-search fa-lg"></i>
-        </button>
-      </div>
-      <div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white divide-y divide-gray-100 shadow-lg dark:divide-gray-600 dark:bg-gray-700 rounded-xl"
-           id="search-dropdown">
-        <form class="max-w-md mx-auto">
-          <label for="default-search"
-                 class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-          <div class="relative">
-            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                   aria-hidden="true"
-                   xmlns="http://www.w3.org/2000/svg"
-                   fill="none"
-                   viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z">
-                </path>
-              </svg>
-            </div>
-            <input type="search"
-                   id="default-search"
-                   class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                   placeholder="Search"
-                   required />
-          </div>
-        </form>
+      <form class="col-12 col-lg-auto me-lg-3 mb-1" role="search">
+        <input class="form-control"
+               type="search"
+               placeholder="Search..."
+               aria-label="search">
+      </form>
+      <div class="dropdown text-end">
+        <a class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+           href="#"
+           data-bs-toggle="dropdown"
+           aria-expanded="false">
+          <img class="rounded-circle"
+               src="https://github.com/mdo.png"
+               alt="{{ current_user.username }}"
+               width="32"
+               height="32">
+        </a>
+        <ul class="dropdown-menu text-small">
+          <li>
+            <a class="dropdown-item" href="#">Settings</a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li>
+            <a class="dropdown-item" href="{{ url_for("auth.logout") }}">Sign out</a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-</nav>
+</header>
+{#<nav class="sticky top-0 bg-gradient-to-b from-gradient-dark to-gradient-light border-t border-gray-200 dark:border-gradient-border">#}
+{#  <div class="flex items-end px-5 m-0 mr-auto text-sm">#}
+{#    <div>#}
+{#      <ul class="flex flex-row uppercase">#}
+{#        <li>#}
+{#          <button id="drawer-navigation-toggle"#}
+{#                  class="p-2 mr-2 text-white cursor-pointer lg:hidden hover:bg-secondary focus:bg-secondary dark:focus:bg-secondary focus:ring-2 focus:ring-gray-100">#}
+{#            <svg aria-hidden="true"#}
+{#                 class="w-6 h-6"#}
+{#                 fill="currentColor"#}
+{#                 viewBox="0 0 20 20"#}
+{#                 xmlns="http://www.w3.org/2000/svg">#}
+{#              <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd">#}
+{#              </path>#}
+{#            </svg>#}
+{#            <span class="sr-only">Toggle sidebar</span>#}
+{#          </button>#}
+{#        </li>#}
+{#        <li class="align-bottom text-white leading-10">#}
+{#          <a class="inline-block h-10 px-4 hover:bg-secondary hover:px-4" href="">#}
+{#            <i class="fa-solid fa-house"></i>#}
+{#          </a>#}
+{#        </li>#}
+{#        <li class="align-bottom text-white leading-10">#}
+{#          <a class="inline-block h-10 px-4 hover:bg-secondary hover:px-4" href="">Forums</a>#}
+{#        </li>#}
+{#        <li class="align-bottom text-white leading-10">#}
+{#          <a class="inline-block h-10 px-4 bg-secondary font-bold" href="">OpServ</a>#}
+{#        </li>#}
+{#        <li class="align-bottom text-white leading-10">#}
+{#          <a class="inline-block h-10 px-4 hover:bg-secondary hover:px-4" href="">SOP</a>#}
+{#        </li>#}
+{#        <li class="align-bottom text-white leading-10">#}
+{#          <a class="inline-block h-10 px-4 hover:bg-secondary hover:px-4" href="">About Us</a>#}
+{#        </li>#}
+{#        <li class="align-bottom text-white leading-10">#}
+{#          <a class="inline-block h-10 px-4 hover:bg-secondary hover:px-4" href="">Status</a>#}
+{#        </li>#}
+{#      </ul>#}
+{#    </div>#}
+{#    <div class="flex items-center ml-auto">#}
+{# Notifications #}
+{#      <div class="align-bottom text-white leading-10">#}
+{#        <button class="inline-block h-10 px-2.5 hover:bg-secondary hover:px-2.5"#}
+{#                data-dropdown-toggle="notification-dropdown">#}
+{#          <span class="sr-only">Notifications</span>#}
+{#          <i class="fa-solid fa-bell fa-lg"></i>#}
+{#        </button>#}
+{#      </div>#}
+{#      <div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white divide-y divide-gray-100 shadow-lg dark:divide-gray-600 dark:bg-gray-700 rounded-xl"#}
+{#           id="notification-dropdown">#}
+{#        <div class="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-600 dark:text-gray-300">#}
+{#          Notifications#}
+{#        </div>#}
+{#        <div>#}
+{#          <a href="#"#}
+{#             class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">#}
+{#            <div class="flex-shrink-0">#}
+{#              <img class="w-11 h-11 rounded-full" src="" alt="Bonnie Green avatar" />#}
+{#              <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 rounded-full border border-white bg-primary-700 dark:border-gray-700">#}
+{#                <svg aria-hidden="true"#}
+{#                     class="w-3 h-3 text-white"#}
+{#                     fill="currentColor"#}
+{#                     viewBox="0 0 20 20"#}
+{#                     xmlns="http://www.w3.org/2000/svg">#}
+{#                  <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z">#}
+{#                  </path>#}
+{#                  <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z">#}
+{#                  </path>#}
+{#                </svg>#}
+{#              </div>#}
+{#            </div>#}
+{#            <div class="pl-3 w-full">#}
+{#              <div class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">#}
+{#                New message from#}
+{#                <span class="font-semibold text-gray-900 dark:text-white">Bonnie Green</span>: "Hey, what's up? All set for the presentation?"#}
+{#              </div>#}
+{#              <div class="text-xs font-medium text-primary-600 dark:text-primary-500">a few moments ago</div>#}
+{#            </div>#}
+{#          </a>#}
+{#        </div>#}
+{#        <a href="#"#}
+{#           class="block py-2 text-md font-medium text-center text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-600 dark:text-white dark:hover:underline">#}
+{#          <div class="inline-flex items-center">#}
+{#            <svg aria-hidden="true"#}
+{#                 class="mr-2 w-4 h-4 text-gray-500 dark:text-gray-400"#}
+{#                 fill="currentColor"#}
+{#                 viewBox="0 0 20 20"#}
+{#                 xmlns="http://www.w3.org/2000/svg">#}
+{#              <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>#}
+{#              <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd">#}
+{#              </path>#}
+{#            </svg>#}
+{#            View all#}
+{#          </div>#}
+{#        </a>#}
+{#      </div>#}
+{# Search #}
+{#      <div class="align-bottom text-white leading-10">#}
+{#        <button class="inline-block h-10 px-2.5 hover:bg-secondary hover:px-2.5"#}
+{#                data-dropdown-toggle="search-dropdown">#}
+{#          <span class="sr-only">Search</span>#}
+{#          <i class="fa-solid fa-search fa-lg"></i>#}
+{#        </button>#}
+{#      </div>#}
+{#      <div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white divide-y divide-gray-100 shadow-lg dark:divide-gray-600 dark:bg-gray-700 rounded-xl"#}
+{#           id="search-dropdown">#}
+{#        <form class="max-w-md mx-auto">#}
+{#          <label for="default-search"#}
+{#                 class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>#}
+{#          <div class="relative">#}
+{#            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">#}
+{#              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"#}
+{#                   aria-hidden="true"#}
+{#                   xmlns="http://www.w3.org/2000/svg"#}
+{#                   fill="none"#}
+{#                   viewBox="0 0 20 20">#}
+{#                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z">#}
+{#                </path>#}
+{#              </svg>#}
+{#            </div>#}
+{#            <input type="search"#}
+{#                   id="default-search"#}
+{#                   class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"#}
+{#                   placeholder="Search"#}
+{#                   required />#}
+{#          </div>#}
+{#        </form>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#</nav>#}

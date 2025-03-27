@@ -77,7 +77,7 @@ def register():
         except smtplib.SMTPException:
             user_obj = Session.execute(
                 select(User).where(User.email == form.email.data)
-            ).first()
+            ).scalar()
             Session.delete(user_obj)
             Session.commit()
             flash(
@@ -101,7 +101,7 @@ def register():
 def send_activation_email(user, next_url):
     code_object = Session.execute(
         select(ActivationCode).filter(ActivationCode.user_id == user.id)
-    ).first()
+    ).scalar()
     if code_object:
         Session.delete(code_object)
         Session.commit()

@@ -25,7 +25,7 @@ def resend_activation():
 
     if form.validate_on_submit():
         email = sanitize_email(form.email.data)
-        user: User = Session.execute(select(User).filter(User.email == email)).first()
+        user: User = Session.execute(select(User).filter(User.email == email)).scalar()
 
         if not user:
             flash("There is no such email", "warning")
